@@ -1,5 +1,8 @@
 extends CharacterBody3D
 
+enum Estado { QUIETO, CAMINAR, EN_COMBATE }
+const RAPIDEZ_ESTADO = [0.0, 4.0, 0.0] # Rapidez máxima en cada estado (m/s)
+
 @export var camara: Camera3D
 @export var speed_caminar = 4.0
 @export var speed_correr = 4.0
@@ -11,6 +14,9 @@ var empuje = Vector3.ZERO
 var accion = ""
 var avance = Vector3.ZERO
 
+var estado = Estado.QUIETO
+var rapidez_max_estado = 0.0
+
 func _physics_process(delta):
 	velocity += get_gravity() * delta
 	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -19,33 +25,50 @@ func _physics_process(delta):
 	var giro_cam = camara.global_rotation.y
 	var direction = entrada.rotated(Vector3.UP, giro_cam).normalized()
 
-	# En nuestro juego, mantener C (acción "combate") frena a Velam a 0
-	var en_combate = Input.is_action_pressed("combate") if InputMap.has_action("combate") else false
-	var mult_efectivo = 0.0 if en_combate else multiplicador
+	var peleando = Input.is_action_pressed("combate") if InputMap.has_action("combate") else false
+	var mult_actual = 0.0 if peleando else multiplicador
 
 	var corre = Input.is_action_pressed("correr")
 	var speed = speed_correr if corre else speed_caminar
-	var objetivo = direction * speed * mult_efectivo
+	var objetivo = direction * speed * mult_actual
 	var paso = speed / tiempo_arranque * delta
 
 	avance = avance.move_toward(objetivo, paso)
 	velocity.x = avance.x + empuje.x
 	velocity.z = avance.z + empuje.z
 
-	if direction.length() > 0:
+	if direction.length() > 0 and not peleando:
 		basis = Basis.looking_at(direction)
 
+	move_and_slide()
+
+	var antes = estado
+	estado = elegir_estado()
+	rapidez_max_estado = RAPIDEZ_ESTADO[estado]
+	if estado != antes:
+		print("estado ", Estado.keys()[estado], " rapidez ", rapidez_max_estado, " m/s")
+	animar()
+	_prueba()
+
+func elegir_estado():
+	if InputMap.has_action("combate") and Input.is_action_pressed("combate"):
+		return Estado.EN_COMBATE
+	var rapidez = Vector2(velocity.x, velocity.z).length()
+	if rapidez < 0.1:
+		return Estado.QUIETO
+	return Estado.CAMINAR
+
+func animar():
 	if accion != "":
 		anim.play(accion)
-	elif avance.length() > speed_caminar + 0.1:
-		anim.play("sprint")
-	elif avance.length() > 0.1:
-		anim.play("walk")
-	else:
-		anim.play("idle")
-
-	move_and_slide()
-	_prueba()
+		return
+	match estado:
+		Estado.QUIETO:
+			anim.play("idle")
+		Estado.CAMINAR:
+			anim.play("walk")
+		Estado.EN_COMBATE:
+			anim.play("idle")
 
 
 # ---------------------------------------------------------------------------
