@@ -1,13 +1,15 @@
 extends CharacterBody3D
 
 @export var camara: Camera3D
-@export var speed_caminar = 3.0
-@export var speed_correr = 6.0
+@export var speed_caminar = 4.0
+@export var speed_correr = 4.0
+@export var tiempo_arranque = 0.20
 @onready var anim = $Modelo/AnimationPlayer
 
 var multiplicador = 1.0
 var empuje = Vector3.ZERO
 var accion = ""
+var avance = Vector3.ZERO
 
 func _physics_process(delta):
 	velocity += get_gravity() * delta
@@ -17,20 +19,27 @@ func _physics_process(delta):
 	var giro_cam = camara.global_rotation.y
 	var direction = entrada.rotated(Vector3.UP, giro_cam).normalized()
 
+	# En nuestro juego, mantener C (acción "combate") frena a Velam a 0
+	var en_combate = Input.is_action_pressed("combate") if InputMap.has_action("combate") else false
+	var mult_efectivo = 0.0 if en_combate else multiplicador
+
 	var corre = Input.is_action_pressed("correr")
 	var speed = speed_correr if corre else speed_caminar
+	var objetivo = direction * speed * mult_efectivo
+	var paso = speed / tiempo_arranque * delta
 
-	velocity.x = direction.x * speed * multiplicador + empuje.x
-	velocity.z = direction.z * speed * multiplicador + empuje.z
+	avance = avance.move_toward(objetivo, paso)
+	velocity.x = avance.x + empuje.x
+	velocity.z = avance.z + empuje.z
 
 	if direction.length() > 0:
 		basis = Basis.looking_at(direction)
 
 	if accion != "":
 		anim.play(accion)
-	elif direction.length() > 0 and corre:
+	elif avance.length() > speed_caminar + 0.1:
 		anim.play("sprint")
-	elif direction.length() > 0:
+	elif avance.length() > 0.1:
 		anim.play("walk")
 	else:
 		anim.play("idle")
