@@ -60,14 +60,18 @@ func elegir_estado():
 
 func animar():
 	if accion != "":
+		anim.speed_scale = 1.0
 		anim.play(accion)
 		return
 	match estado:
 		Estado.QUIETO:
+			anim.speed_scale = 1.0
 			anim.play("idle")
 		Estado.CAMINAR:
+			anim.speed_scale = avance.length() / speed_caminar
 			anim.play("walk")
 		Estado.EN_COMBATE:
+			anim.speed_scale = 1.0
 			anim.play("idle")
 
 
