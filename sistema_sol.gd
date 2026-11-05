@@ -1,6 +1,8 @@
 class_name SistemaSol
 extends Node
 
+signal cambio_noche(es_noche: bool)
+
 @export var sol: DirectionalLight3D
 @export var entorno: WorldEnvironment
 @export var energia_sol := 1.0
@@ -9,15 +11,20 @@ extends Node
 @export var ambiente_noche := 0.02
 
 @onready var ciclo: CicloDia = $CicloDia
+var era_noche := false
 
 func _ready() -> void:
 	aplicar_hora()
-	print(CicloDia.elevacion(9.0), " ", CicloDia.factor_sol(9.0), " ", CicloDia.factor_sol(20.0))
-	print("Zona A (8h): ", sol.light_energy, " ", sol.light_color)
+	era_noche = CicloDia.factor_sol(ciclo.hora) <= 0.0
+	cambio_noche.connect(func(n: bool) -> void: print("noche: ", n, " a las ", snappedf(ciclo.hora, 0.1)))
 
 func _process(delta: float) -> void:
 	ciclo.avanzar(delta)
 	aplicar_hora()
+	var es_noche := CicloDia.factor_sol(ciclo.hora) <= 0.0
+	if es_noche != era_noche:
+		era_noche = es_noche
+		cambio_noche.emit(es_noche)
 
 func aplicar_hora() -> void:
 	var h := ciclo.hora
