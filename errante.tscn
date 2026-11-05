@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dg84m1v6b8q3e"]
+
+[ext_resource type="Script" uid="uid://cnnt7wud4jvbs" path="res://errante.gd" id="1_458f2"]
+[ext_resource type="PackedScene" uid="uid://btbidf61ylt57" path="res://personaje/character-male-d.glb" id="2_dp6ho"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uxa2c"]
+radius = 0.35
+height = 1.75
+
+[node name="Errante" type="CharacterBody3D" unique_id=705784812]
+script = ExtResource("1_458f2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=808504580]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.875, 0, 0)
+shape = SubResource("CapsuleShape3D_uxa2c")
+
+[node name="Modelo" parent="." unique_id=318469135 instance=ExtResource("2_dp6ho")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)

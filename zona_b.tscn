@@ -39,3 +39,6 @@ script = ExtResource("2_7ursy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Disparador" unique_id=475158526]
 shape = SubResource("BoxShape3D_r6318")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=264395860]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.991459, 6.1586876, 21.708643)

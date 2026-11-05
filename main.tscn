@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://h24dlci7t2hg"]
 
 [ext_resource type="Script" uid="uid://kakar0kwcpkg" path="res://camara_sigue.gd" id="1_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://dg84m1v6b8q3e" path="res://errante.tscn" id="1_lquwl"]
 [ext_resource type="Script" uid="uid://cchv43eug6720" path="res://personaje.gd" id="1_pj"]
 [ext_resource type="PackedScene" uid="uid://bkmexfnojlmxi" path="res://personaje/character-male-a.glb" id="2_modelo"]
 [ext_resource type="Script" uid="uid://67g8ul8ywidy" path="res://rodar.gd" id="3_h2yge"]
@@ -32,6 +33,8 @@ radius = 0.35
 height = 1.75
 
 [node name="Main" type="Node3D" unique_id=857024996]
+
+[node name="Errante" parent="." unique_id=705784812 instance=ExtResource("1_lquwl")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=186748938]
 environment = SubResource("Entorno")
@@ -86,7 +89,7 @@ transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 
 script = ExtResource("1_1bvp3")
 objetivo = NodePath("../Personaje")
 
-[node name="Personaje" type="CharacterBody3D" parent="." unique_id=1290957985 node_paths=PackedStringArray("camara")]
+[node name="Personaje" type="CharacterBody3D" parent="." unique_id=1290957985 node_paths=PackedStringArray("camara") groups=["jugador"]]
 script = ExtResource("1_pj")
 camara = NodePath("../Camera3D")
 
