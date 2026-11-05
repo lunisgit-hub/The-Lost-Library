@@ -8,21 +8,13 @@ radius = 0.35
 height = 1.75
 
 [node name="Errante" type="CharacterBody3D" unique_id=705784812]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 script = ExtResource("1_458f2")
-velocidad = null
-aceleracion = null
-rango_vision = null
-rango_ataque = null
-vida = null
-vida_huida = null
-altura_ojos = null
-ruta = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=808504580]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.875, 0, 0)
 shape = SubResource("CapsuleShape3D_uxa2c")
 
 [node name="Modelo" parent="." unique_id=318469135 instance=ExtResource("2_dp6ho")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1.5, 0, -1.3113416e-07, 0, 1.5, 0, 1.3113416e-07, 0, -1.5, 0, -0.5, 0)
 
 [node name="Vision" type="RayCast3D" parent="." unique_id=219323924]
