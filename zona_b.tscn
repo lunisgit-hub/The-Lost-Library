@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://biyljgujvggl4"]
 
 [ext_resource type="Script" uid="uid://dfube0o7q837r" path="res://luz_parpadeante.gd" id="1_pjwgy"]
+[ext_resource type="Script" uid="uid://dithiye6ynd0n" path="res://disparador.gd" id="2_7ursy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_272bh"]
 albedo_color = Color(0.40069774, 0.40069774, 0.40069768, 1)
@@ -12,14 +13,16 @@ size = Vector3(30, 1, 30)
 [sub_resource type="BoxShape3D" id="BoxShape3D_hchaj"]
 size = Vector3(30, 1, 30)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_r6318"]
+
 [node name="zona_b" type="Node3D" unique_id=1561083163]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1897034510]
+[node name="suelo" type="StaticBody3D" parent="." unique_id=1897034510]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=34700367]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="suelo" unique_id=34700367]
 mesh = SubResource("BoxMesh_r6318")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1767870149]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="suelo" unique_id=1767870149]
 shape = SubResource("BoxShape3D_hchaj")
 debug_color = Color(0.7109369, 0.43890822, 0.56127, 0.41960785)
 
@@ -30,3 +33,9 @@ light_energy = 50.0
 omni_range = 14.351
 omni_attenuation = 0.0
 script = ExtResource("1_pjwgy")
+
+[node name="Disparador" type="Area3D" parent="." unique_id=1204570423]
+script = ExtResource("2_7ursy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Disparador" unique_id=475158526]
+shape = SubResource("BoxShape3D_r6318")

@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://cchv43eug6720" path="res://personaje.gd" id="1_pj"]
 [ext_resource type="PackedScene" uid="uid://bkmexfnojlmxi" path="res://personaje/character-male-a.glb" id="2_modelo"]
 [ext_resource type="Script" uid="uid://67g8ul8ywidy" path="res://rodar.gd" id="3_h2yge"]
-[ext_resource type="PackedScene" uid="uid://biyljgujvggl4" path="res://zona_b.tscn" id="5_lquwl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="CieloMat"]
 
@@ -100,6 +99,3 @@ transform = Transform3D(-2.6, 0, 0, 0, 2.6, 0, 0, 0, -2.6, 0, 0, 0)
 
 [node name="Rodar" type="Node" parent="Personaje" unique_id=1737267633]
 script = ExtResource("3_h2yge")
-
-[node name="zona_b" parent="." unique_id=1561083163 instance=ExtResource("5_lquwl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.558426, -0.74067116, -16.956972)
