@@ -34,3 +34,13 @@ func aplicar_hora() -> void:
 	sol.light_color = CicloDia.color_sol(h)
 	if entorno and entorno.environment:
 		entorno.environment.ambient_light_energy = lerpf(ambiente_noche, ambiente_dia, f)
+		
+		
+static func lambert(normal: Vector3, hacia_luz: Vector3) -> float:
+	var n := normal.normalized()
+	var l := hacia_luz.normalized()
+	return maxf(0.0, n.dot(l))
+
+func prediccion_piso() -> float:
+	var hacia_luz := sol.global_transform.basis.z
+	return sol.light_energy * sol.light_color.r * lambert(Vector3.UP, hacia_luz)

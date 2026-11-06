@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://67g8ul8ywidy" path="res://rodar.gd" id="5_tm4ya"]
 [ext_resource type="Script" uid="uid://cww17g15bkaci" path="res://sistema_sol.gd" id="6_evii1"]
 [ext_resource type="Script" uid="uid://cumamnolawmcs" path="res://ciclo_dia.gd" id="6_o0wp1"]
+[ext_resource type="Script" uid="uid://cgjsgybs03e66" path="res://fotometro.gd" id="8_cbh0l"]
 
 [sub_resource type="ProceduralSkyMaterial" id="CieloMat"]
 
@@ -119,3 +120,10 @@ entorno = NodePath("../WorldEnvironment")
 script = ExtResource("6_o0wp1")
 duracion_dia = 12.0
 pausado = false
+
+[node name="Fotometro" type="Node" parent="." unique_id=1988460552 node_paths=PackedStringArray("sistema", "camara", "superficie")]
+process_mode = 4
+script = ExtResource("8_cbh0l")
+sistema = NodePath("../SistemaSol")
+camara = NodePath("../Camera3D")
+superficie = NodePath("../Suelo/MeshInstance3D")
