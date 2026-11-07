@@ -4,6 +4,9 @@
 [ext_resource type="Script" uid="uid://cchv43eug6720" path="res://personaje.gd" id="1_pj"]
 [ext_resource type="PackedScene" uid="uid://bkmexfnojlmxi" path="res://personaje/character-male-a.glb" id="2_modelo"]
 [ext_resource type="Script" uid="uid://67g8ul8ywidy" path="res://rodar.gd" id="3_h2yge"]
+[ext_resource type="PackedScene" path="res://archivista.tscn" id="4_arch"]
+[ext_resource type="Script" path="res://apuntar.gd" id="5_apu"]
+[ext_resource type="Script" path="res://diana.gd" id="6_dia"]
 
 [sub_resource type="ProceduralSkyMaterial" id="CieloMat"]
 
@@ -53,6 +56,7 @@ shape = SubResource("PisoForma")
 
 [node name="Caja1" type="StaticBody3D" parent="Cajas" unique_id=1877730721]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.5, -4)
+script = ExtResource("6_dia")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Cajas/Caja1" unique_id=212380103]
 mesh = SubResource("CajaMalla")
@@ -99,3 +103,15 @@ transform = Transform3D(-2.6, 0, 0, 0, 2.6, 0, 0, 0, -2.6, 0, 0, 0)
 
 [node name="Rodar" type="Node" parent="Personaje" unique_id=1737267633]
 script = ExtResource("3_h2yge")
+
+[node name="Apuntar" type="Node" parent="Personaje"]
+script = ExtResource("5_apu")
+tecla = "elegir"
+alcance = 30.0
+desde = 2
+danio = 1
+cadencia = 0.5
+
+[node name="Archivista" parent="." node_paths=PackedStringArray("objetivo") instance=ExtResource("4_arch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 1)
+objetivo = NodePath("../Personaje")
