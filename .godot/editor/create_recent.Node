@@ -1,1 +1,9 @@
+RayCast3D
+CollisionShape3D
+CharacterBody3D
+Camera3D
+Area3D
+OmniLight3D
+MeshInstance3D
+StaticBody3D
 Node

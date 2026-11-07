@@ -1,2 +1,7 @@
+res://personaje.gd
+res://zona_b.tscn
 res://main.tscn
-res://rodar.gd
+res://luz_parpadeante.gd
+res://disparador.gd
+res://errante.gd
+res://errante.tscn
