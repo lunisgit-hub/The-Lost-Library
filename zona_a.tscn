@@ -23,6 +23,7 @@
 [ext_resource type="Script" path="res://lectura.gd" id="23_lectura"]
 [ext_resource type="Script" path="res://oculto_a_camara.gd" id="24_oculto"]
 [ext_resource type="Script" path="res://luminaria.gd" id="25_lum"]
+[ext_resource type="Script" path="res://colision_cajas.gd" id="31_col"]
 [ext_resource type="PackedScene" path="res://modelos_zona_A/candelabro_pie.glb" id="26_cand"]
 [ext_resource type="PackedScene" path="res://modelos_zona_A/lampara_colgante.glb" id="27_lamp"]
 [ext_resource type="PackedScene" path="res://modelos_zona_A/farol_pared.glb" id="28_farol"]
@@ -857,8 +858,8 @@ current = true
 script = ExtResource("5_v0myi")
 objetivo = NodePath("..")
 cull_mask = 1048573
-limite_min = Vector2(-10, 10)
-limite_max = Vector2(10, 36)
+limite_min = Vector2(-13.5, 6)
+limite_max = Vector2(13.5, 34)
 
 [node name="Luz_Pluma" type="OmniLight3D" parent="Personaje"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 1.4, 0.2)
@@ -2274,7 +2275,12 @@ transform = Transform3D(32.41547, 0, 0, 0, 10.684694, 0, 0, 0, 66.58239, 0.09213
 
 [node name="OcultoACamara" type="Node" parent="."]
 script = ExtResource("24_oculto")
-objetivos = Array[NodePath]([NodePath("../Estructura/Techo"), NodePath("../techogood"), NodePath("../techogood2"), NodePath("../techogood3"), NodePath("../techogood4"), NodePath("../techogood5"), NodePath("../Estructura/Muro_entrada_0"), NodePath("../Estructura/Muro_entrada_1"), NodePath("../Estructura/Muro_entrada_2"), NodePath("../Estructura/Muro_entrada_3"), NodePath("../Estructura/Muro_entrada_4")])
+objetivos = Array[NodePath]([NodePath("../Estructura/Techo"), NodePath("../techogood"), NodePath("../techogood2"), NodePath("../techogood3"), NodePath("../techogood4"), NodePath("../techogood5")])
+
+[node name="ColisionCajas" type="Node3D" parent="."]
+script = ExtResource("31_col")
+objetivos = Array[NodePath]([NodePath("../Nivel_ZonaA/Props/IN_ArcoEntrada"), NodePath("../Luces/Luminarias/Brasero_E2_izq"), NodePath("../Luces/Luminarias/Brasero_E2_der"), NodePath("../Luces/Luminarias/Velas_Libros_D1"), NodePath("../Luces/Luminarias/Candelabro_Entrada_izq"), NodePath("../Luces/Luminarias/Candelabro_Entrada_der")])
+hijos_de = Array[NodePath]([NodePath("../estanterias")])
 
 [node name="estanterias" type="Node" parent="." unique_id=1768488177]
 
