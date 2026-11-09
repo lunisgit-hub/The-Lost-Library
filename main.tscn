@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" path="res://ataque_enemigo.tscn" id="7_atq"]
 [ext_resource type="Script" path="res://salud.gd" id="8_sal"]
 [ext_resource type="PackedScene" path="res://hud.tscn" id="9_hud"]
+[ext_resource type="Script" path="res://partida.gd" id="10_par"]
 
 [sub_resource type="ProceduralSkyMaterial" id="CieloMat"]
 
@@ -130,3 +131,7 @@ objetivo = NodePath("../Personaje")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 6)
 
 [node name="HUD" parent="." instance=ExtResource("9_hud")]
+
+[node name="Partida" type="Node" parent="."]
+script = ExtResource("10_par")
+metas = 0
