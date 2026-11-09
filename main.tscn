@@ -35,7 +35,7 @@ height = 1.75
 [node name="Main" type="Node3D" unique_id=857024996]
 
 [node name="Errante" parent="." unique_id=705784812 instance=ExtResource("1_lquwl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.3112297)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8384099, -7.3112297)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=186748938]
 environment = SubResource("Entorno")
