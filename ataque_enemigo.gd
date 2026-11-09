@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-enum Estado { ACERCARSE, AVISO, GOLPE, RECARGA }
+enum Estado { ACERCARSE, AVISO, GOLPE, RECARGA, HUIR }
 
 @export var rapidez = 2.0
 @export var rango_ataque = 1.5
@@ -8,6 +8,9 @@ enum Estado { ACERCARSE, AVISO, GOLPE, RECARGA }
 @export var tiempo_recarga = 1.0
 @export var alcance_golpe = 1.8
 @export var danio = 1
+@export var vida = 100.0
+@export var vida_huida = 30.0
+@export var danio_prueba = 25.0
 
 var estado = Estado.ACERCARSE
 var reloj = 0.0
@@ -35,10 +38,15 @@ func _physics_process(delta):
 			golpear()
 		Estado.RECARGA:
 			frenar("idle")
+		Estado.HUIR:
+			var lejos = global_position - jugador.global_position
+			ir_a(global_position + lejos)
 	move_and_slide()
 
 
 func decidir():
+	if vida <= vida_huida:
+		return Estado.HUIR
 	match estado:
 		Estado.ACERCARSE:
 			if distancia() <= rango_ataque:
@@ -72,6 +80,14 @@ func golpear():
 	var salud = jugador.get_node_or_null("Salud")
 	if salud != null:
 		salud.recibir_golpe(danio)
+
+
+func recibir_golpe(cuanto):
+	vida -= cuanto
+	print(name, " vida ", vida)
+	if vida <= 0:
+		print(name, " vencido")
+		queue_free()
 
 
 func ir_a(destino):
