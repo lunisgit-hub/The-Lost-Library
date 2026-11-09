@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://apuntar.gd" id="5_apu"]
 [ext_resource type="Script" path="res://diana.gd" id="6_dia"]
 [ext_resource type="PackedScene" path="res://ataque_enemigo.tscn" id="7_atq"]
+[ext_resource type="Script" path="res://salud.gd" id="8_sal"]
 
 [sub_resource type="ProceduralSkyMaterial" id="CieloMat"]
 
@@ -116,6 +117,9 @@ alcance = 30.0
 desde = 2
 danio = 1
 cadencia = 0.5
+
+[node name="Salud" type="Node" parent="Personaje"]
+script = ExtResource("8_sal")
 
 [node name="Archivista" parent="." node_paths=PackedStringArray("objetivo") instance=ExtResource("4_arch")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 1)
