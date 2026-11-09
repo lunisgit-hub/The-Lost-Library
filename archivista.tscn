@@ -1,0 +1,18 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://archivista.gd" id="1_arch"]
+[ext_resource type="PackedScene" uid="uid://btbidf61ylt57" path="res://personaje/character-male-d.glb" id="2_modelo"]
+
+[sub_resource type="CapsuleShape3D" id="Capsula"]
+radius = 0.35
+height = 1.75
+
+[node name="Archivista" type="CharacterBody3D" groups=["enemigos"]]
+script = ExtResource("1_arch")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+shape = SubResource("Capsula")
+
+[node name="Modelo" parent="." instance=ExtResource("2_modelo")]
+transform = Transform3D(-2.6, 0, 0, 0, 2.6, 0, 0, 0, -2.6, 0, 0, 0)
