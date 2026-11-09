@@ -1,71 +1,39 @@
 [gd_scene format=3 uid="uid://b2i7bsna5aq1o"]
 
 [ext_resource type="PackedScene" uid="uid://dg84m1v6b8q3e" path="res://errante.tscn" id="1_57wwi"]
+[ext_resource type="PackedScene" uid="uid://d3bgnvswryoeg" path="res://modelos_zona_A/linterna.glb" id="3_5owue"]
 [ext_resource type="Script" uid="uid://cchv43eug6720" path="res://personaje.gd" id="3_evii1"]
 [ext_resource type="PackedScene" uid="uid://bkmexfnojlmxi" path="res://personaje/character-male-a.glb" id="4_cbh0l"]
 [ext_resource type="Script" uid="uid://67g8ul8ywidy" path="res://rodar.gd" id="5_tm4ya"]
 [ext_resource type="Script" uid="uid://c43r45xkk1kmo" path="res://camera_sigue.gd" id="5_v0myi"]
-[ext_resource type="Script" uid="uid://cww17g15bkaci" path="res://sistema_sol.gd" id="6_evii1"]
-[ext_resource type="Script" uid="uid://cumamnolawmcs" path="res://ciclo_dia.gd" id="6_o0wp1"]
-[ext_resource type="Script" uid="uid://cgjsgybs03e66" path="res://fotometro.gd" id="8_cbh0l"]
+[ext_resource type="Script" uid="uid://clxqrfqd6endu" path="res://sistema_sol.gd" id="6_evii1"]
+[ext_resource type="Script" uid="uid://dcotlb3vuliv2" path="res://ciclo_dia.gd" id="6_o0wp1"]
+[ext_resource type="Script" uid="uid://dbo5p8hudao3i" path="res://fotometro.gd" id="8_cbh0l"]
 [ext_resource type="Script" uid="uid://dfube0o7q837r" path="res://luz_parpadeante.gd" id="10_lp"]
 [ext_resource type="PackedScene" uid="uid://dgqxnukdip61o" path="res://modelos_zona_A/puerta.glb" id="12_arch"]
 [ext_resource type="PackedScene" uid="uid://bn2xii0n4nd31" path="res://modelos_zona_A/libro_mesa.glb" id="13_lect"]
 [ext_resource type="PackedScene" uid="uid://c5t1s685hqs36" path="res://modelos_zona_A/estanteria.glb" id="14_shelf"]
 [ext_resource type="PackedScene" uid="uid://vd5upj1g2bm1" path="res://modelos_zona_A/lampara.glb" id="15_candle"]
+[ext_resource type="PackedScene" uid="uid://dj3ch1c1k6ubu" path="res://modelos_zona_A/mancha.glb" id="16_ptl27"]
 [ext_resource type="PackedScene" uid="uid://ddppmb8y2mc1v" path="res://modelos_zona_A/mesa.glb" id="16_table"]
 [ext_resource type="PackedScene" uid="uid://dupq0rswjd113" path="res://modelos_zona_A/monster.glb" id="17_book"]
+[ext_resource type="PackedScene" uid="uid://dyja15rvyyavx" path="res://modelos_zona_A/pasto.glb" id="18_inamy"]
 [ext_resource type="PackedScene" uid="uid://q7ksqnpfyyon" path="res://modelos_zona_A/ventana.glb" id="18_w0rip"]
 [ext_resource type="Script" uid="uid://bylh5217rak2e" path="res://herramientas/techo_oculta_cerca.gd" id="20_1isfj"]
 [ext_resource type="PackedScene" uid="uid://b8wdrhbatx6mb" path="res://modelos_zona_A/muro.glb" id="20_em801"]
 [ext_resource type="PackedScene" uid="uid://cg16o6i2l2ro8" path="res://modelos_zona_A/techogood.glb" id="21_1isfj"]
 [ext_resource type="PackedScene" uid="uid://byu6eegfbr4iu" path="res://modelos_zona_A/techo.glb" id="22_e30ne"]
-[ext_resource type="Script" path="res://lectura.gd" id="23_lectura"]
-[ext_resource type="Script" path="res://oculto_a_camara.gd" id="24_oculto"]
-[ext_resource type="Script" path="res://luminaria.gd" id="25_lum"]
-[ext_resource type="Script" path="res://colision_cajas.gd" id="31_col"]
-[ext_resource type="PackedScene" path="res://modelos_zona_A/candelabro_pie.glb" id="26_cand"]
-[ext_resource type="PackedScene" path="res://modelos_zona_A/lampara_colgante.glb" id="27_lamp"]
-[ext_resource type="PackedScene" path="res://modelos_zona_A/farol_pared.glb" id="28_farol"]
-[ext_resource type="PackedScene" path="res://modelos_zona_A/velas_libros.glb" id="29_velas"]
-[ext_resource type="PackedScene" path="res://modelos_zona_A/brasero_violeta.glb" id="30_bras"]
-
-[sub_resource type="FastNoiseLite" id="RuidoLosas"]
-noise_type = 2
-frequency = 0.018
-cellular_distance_function = 1
-cellular_return_type = 4
-
-[sub_resource type="Gradient" id="RampaLosas"]
-offsets = PackedFloat32Array(0, 0.06, 0.3, 1)
-colors = PackedColorArray(0.05, 0.045, 0.05, 1, 0.3, 0.27, 0.27, 1, 0.42, 0.38, 0.36, 1, 0.5, 0.46, 0.43, 1)
-
-[sub_resource type="NoiseTexture2D" id="TexLosas"]
-width = 256
-height = 256
-seamless = true
-color_ramp = SubResource("RampaLosas")
-noise = SubResource("RuidoLosas")
-
-[sub_resource type="NoiseTexture2D" id="NormalLosas"]
-width = 256
-height = 256
-seamless = true
-as_normal_map = true
-bump_strength = 6.0
-noise = SubResource("RuidoLosas")
-
-[sub_resource type="StandardMaterial3D" id="MatLosas"]
-albedo_color = Color(0.62, 0.55, 0.52, 1)
-albedo_texture = SubResource("TexLosas")
-roughness = 0.82
-normal_enabled = true
-normal_scale = 0.8
-normal_texture = SubResource("NormalLosas")
-
-[sub_resource type="PlaneMesh" id="MallaLosa"]
-material = SubResource("MatLosas")
-size = Vector2(5, 5)
+[ext_resource type="Script" uid="uid://dyl6mfsyr3j5o" path="res://lectura.gd" id="23_lectura"]
+[ext_resource type="PackedScene" uid="uid://cwg01j32i8xh2" path="res://modelos_zona_A/Meshy_AI_Gothic_Ceiling_Chande_1109160622_texture.glb" id="24_iwpmq"]
+[ext_resource type="Script" uid="uid://bgqmjkormhvwj" path="res://oculto_a_camara.gd" id="24_oculto"]
+[ext_resource type="Script" uid="uid://cpf7lkne21qto" path="res://luminaria.gd" id="25_lum"]
+[ext_resource type="PackedScene" uid="uid://cenackal8rlyc" path="res://modelos_zona_A/candelabro_pie.glb" id="26_cand"]
+[ext_resource type="PackedScene" uid="uid://bl4kfodr6tabc" path="res://modelos_zona_A/lampara_colgante.glb" id="27_lamp"]
+[ext_resource type="PackedScene" uid="uid://dyb2hnlweyccl" path="res://modelos_zona_A/farol_pared.glb" id="28_farol"]
+[ext_resource type="PackedScene" uid="uid://dfnwketm11mwh" path="res://modelos_zona_A/velas_libros.glb" id="29_velas"]
+[ext_resource type="PackedScene" uid="uid://ck1wtf2olddg2" path="res://modelos_zona_A/brasero_violeta.glb" id="30_bras"]
+[ext_resource type="Script" uid="uid://dfuyom5t84bes" path="res://colision_cajas.gd" id="31_col"]
+[ext_resource type="PackedScene" uid="uid://b726q84gckgwm" path="res://modelos_zona_A/escalera.glb" id="32_g5tc1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="CieloMat"]
 sky_top_color = Color(0.03, 0.04, 0.09, 1)
@@ -87,10 +55,7 @@ tonemap_exposure = 1.15
 tonemap_white = 6.0
 glow_enabled = true
 glow_intensity = 1.2
-glow_strength = 1.0
-glow_bloom = 0.0
 glow_blend_mode = 0
-glow_hdr_threshold = 1.0
 fog_enabled = true
 fog_light_color = Color(0.11, 0.13, 0.26, 1)
 fog_light_energy = 0.8
@@ -281,10 +246,6 @@ material = SubResource("StandardMaterial3D_05bvt")
 radius = 0.03
 height = 0.06
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c07pn"]
-albedo_color = Color(0.039215688, 0.039215688, 0.07058824, 1)
-roughness = 0.05
-
 [sub_resource type="Gradient" id="TintaColor"]
 offsets = PackedFloat32Array(0, 0.55, 0.72, 0.84, 1)
 colors = PackedColorArray(0.02, 0.01, 0.04, 0.85, 0.04, 0.02, 0.07, 0.8, 0.45, 0.2, 0.65, 0.85, 0.3, 0.12, 0.45, 0.4, 0.26, 0.11, 0.37, 0)
@@ -298,8 +259,8 @@ fill_to = Vector2(0.5, 0)
 [sub_resource type="StandardMaterial3D" id="TintaMat"]
 transparency = 1
 albedo_texture = SubResource("TintaTex")
-roughness = 0.25
 metallic_specular = 0.8
+roughness = 0.25
 
 [sub_resource type="PlaneMesh" id="CylinderMesh_rhyi6"]
 material = SubResource("TintaMat")
@@ -369,93 +330,42 @@ size = Vector3(16, 1, 30)
 [sub_resource type="BoxShape3D" id="BoxShape3D_3oh8n"]
 size = Vector3(16, 1, 30)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ikj6"]
-albedo_color = Color(0.9098039, 0.8627451, 0.7529412, 1)
+[sub_resource type="Gradient" id="RampaLosas"]
+offsets = PackedFloat32Array(0, 0.06, 0.3, 1)
+colors = PackedColorArray(0.05, 0.045, 0.05, 1, 0.3, 0.27, 0.27, 1, 0.42, 0.38, 0.36, 1, 0.5, 0.46, 0.43, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qeyce"]
-shading_mode = 0
-albedo_color = Color(1, 0.7019608, 0.2784314, 1)
+[sub_resource type="FastNoiseLite" id="RuidoLosas"]
+noise_type = 2
+frequency = 0.018
+cellular_distance_function = 1
+cellular_return_type = 4
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mjiy3"]
-albedo_color = Color(0.9098039, 0.8627451, 0.7529412, 1)
+[sub_resource type="NoiseTexture2D" id="TexLosas"]
+width = 256
+height = 256
+noise = SubResource("RuidoLosas")
+color_ramp = SubResource("RampaLosas")
+seamless = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3moi4"]
-shading_mode = 0
-albedo_color = Color(1, 0.7019608, 0.2784314, 1)
+[sub_resource type="NoiseTexture2D" id="NormalLosas"]
+width = 256
+height = 256
+noise = SubResource("RuidoLosas")
+seamless = true
+as_normal_map = true
+bump_strength = 6.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8x41b"]
-albedo_color = Color(0.9098039, 0.8627451, 0.7529412, 1)
+[sub_resource type="StandardMaterial3D" id="MatLosas"]
+albedo_color = Color(0.62, 0.55, 0.52, 1)
+albedo_texture = SubResource("TexLosas")
+roughness = 0.82
+normal_enabled = true
+normal_scale = 0.8
+normal_texture = SubResource("NormalLosas")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tj34j"]
-shading_mode = 0
-albedo_color = Color(1, 0.7019608, 0.2784314, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f0tmp"]
-albedo_color = Color(0.9098039, 0.8627451, 0.7529412, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4rdwo"]
-shading_mode = 0
-albedo_color = Color(1, 0.7019608, 0.2784314, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o2bgu"]
-albedo_color = Color(0.9098039, 0.8627451, 0.7529412, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ipvl"]
-shading_mode = 0
-albedo_color = Color(1, 0.7019608, 0.2784314, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r0w0q"]
-albedo_color = Color(0.9098039, 0.8627451, 0.7529412, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a31qj"]
-shading_mode = 0
-albedo_color = Color(1, 0.7019608, 0.2784314, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2hblf"]
-albedo_color = Color(0.9098039, 0.8627451, 0.7529412, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m2sj4"]
-shading_mode = 0
-albedo_color = Color(1, 0.7019608, 0.2784314, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iqpd3"]
-albedo_color = Color(0.9098039, 0.8627451, 0.7529412, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ryxds"]
-shading_mode = 0
-albedo_color = Color(1, 0.7019608, 0.2784314, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ahdh"]
-albedo_color = Color(0.9098039, 0.8627451, 0.7529412, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xa8j"]
-shading_mode = 0
-albedo_color = Color(1, 0.7019608, 0.2784314, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dn1pd"]
-albedo_color = Color(0.039215688, 0.039215688, 0.07058824, 1)
-roughness = 0.05
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fqix4"]
-albedo_color = Color(0.9098039, 0.8627451, 0.7529412, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y8ejx"]
-shading_mode = 0
-albedo_color = Color(1, 0.7019608, 0.2784314, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wwx7j"]
-albedo_color = Color(0.9098039, 0.8627451, 0.7529412, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_30ryt"]
-shading_mode = 0
-albedo_color = Color(1, 0.7019608, 0.2784314, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c3gj6"]
-albedo_color = Color(0.9098039, 0.8627451, 0.7529412, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_66kbk"]
-shading_mode = 0
-albedo_color = Color(1, 0.7019608, 0.2784314, 1)
+[sub_resource type="PlaneMesh" id="MallaLosa"]
+material = SubResource("MatLosas")
+size = Vector2(5, 5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a536p"]
 albedo_color = Color(0.09803922, 0.12941177, 0.24313726, 1)
@@ -849,19 +759,20 @@ shape = SubResource("Capsula")
 [node name="Modelo" parent="Personaje" unique_id=922134230 instance=ExtResource("4_cbh0l")]
 transform = Transform3D(-2.6, 0, 0, 0, 2.6, 0, 0, 0, -2.6, 0, 0, 0)
 
+[node name="linterna" parent="Personaje/Modelo" unique_id=286372243 instance=ExtResource("3_5owue")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6051021, 0.2390852)
+
 [node name="Rodar" type="Node" parent="Personaje" unique_id=1737267633]
 script = ExtResource("5_tm4ya")
 
 [node name="Camera3D" type="Camera3D" parent="Personaje" unique_id=27293227 node_paths=PackedStringArray("objetivo")]
 transform = Transform3D(1, 0, 0, 0, 0.9659259, 0.25881907, 0, -0.25881907, 0.9659258, 0, 1.8, 0)
+cull_mask = 1048573
 current = true
 script = ExtResource("5_v0myi")
 objetivo = NodePath("..")
-cull_mask = 1048573
-limite_min = Vector2(-13.5, 6)
-limite_max = Vector2(13.5, 34)
 
-[node name="Luz_Pluma" type="OmniLight3D" parent="Personaje"]
+[node name="Luz_Pluma" type="OmniLight3D" parent="Personaje" unique_id=419784018]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 1.4, 0.2)
 light_color = Color(1, 0.78, 0.5, 1)
 light_energy = 1.1
@@ -880,7 +791,6 @@ ambiente_noche = 0.35
 script = ExtResource("6_o0wp1")
 hora = 7.0
 duracion_dia = 12.0
-pausado = true
 
 [node name="Fotometro" type="Node" parent="." unique_id=1988460552 node_paths=PackedStringArray("sistema", "camara", "superficie")]
 process_mode = 4
@@ -906,7 +816,7 @@ transform = Transform3D(1, 0, 0, 0, 0.9998759, 0.015752371, 0, -0.015752371, 0.9
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 28.4)
 
 [node name="puerta" parent="Nivel_ZonaA/Props/IN_ArcoEntrada" unique_id=731630473 instance=ExtResource("12_arch")]
-transform = Transform3D(4.867501, 0, 0, 0, 4.867501, 0, 0, 0, 4.867501, 0, 2.3184783, -0.0023777247)
+transform = Transform3D(4.867501, 0, 0, 0, 4.867501, 0, 0, 0, 4.867501, 0.16928625, 2.3184783, 8.068762)
 
 [node name="R0_Atril" type="StaticBody3D" parent="Nivel_ZonaA/Props" unique_id=1165896453]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 24)
@@ -914,18 +824,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 24)
 [node name="libro_mesa" parent="Nivel_ZonaA/Props/R0_Atril" unique_id=736301580 instance=ExtResource("13_lect")]
 transform = Transform3D(1.363235, 0, 0, 0, 1.363235, 0, 0, 0, 1.363235, 0.0006652561, 0.65, -0.004992153)
 
+[node name="libro_mesa2" parent="Nivel_ZonaA/Props/R0_Atril" unique_id=1371491376 instance=ExtResource("13_lect")]
+transform = Transform3D(1.363235, 0, 0, 0, 1.363235, 0, 0, 0, 1.363235, -7.673891, 0.65, 4.535616)
+
+[node name="libro_mesa3" parent="Nivel_ZonaA/Props/R0_Atril" unique_id=1537005631 instance=ExtResource("13_lect")]
+transform = Transform3D(1.363235, 0, 0, 0, 1.363235, 0, 0, 0, 1.363235, 15.713894, 0.65, 4.535616)
+
 [node name="@CollisionShape3D@28376" type="CollisionShape3D" parent="Nivel_ZonaA/Props/R0_Atril" unique_id=1589642794]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
 shape = SubResource("BoxShape3D_8bhdq")
 
 [node name="R0_Luz" type="OmniLight3D" parent="Nivel_ZonaA/Props/R0_Atril" unique_id=197512564]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3201127, 0.8128946, -16.115086)
 light_color = Color(0.83137256, 0.6392157, 0.34901962, 1)
 light_energy = 2.0
 shadow_enabled = true
 omni_range = 4.0
 
-[node name="Lectura" type="Node3D" parent="Nivel_ZonaA/Props/R0_Atril"]
+[node name="Lectura" type="Node3D" parent="Nivel_ZonaA/Props/R0_Atril" unique_id=387226198]
+visible = false
 script = ExtResource("23_lectura")
 
 [node name="A1_Aviso" type="Marker3D" parent="Nivel_ZonaA/Props" unique_id=1191335907]
@@ -939,6 +856,14 @@ transform = Transform3D(0.90630776, 0, 0.42261827, 0, 1, 0, -0.42261827, 0, 0.90
 
 [node name="mesa" parent="Nivel_ZonaA/Props/O1_MesaCaida" unique_id=82042853 instance=ExtResource("16_table")]
 transform = Transform3D(2.3105628, 0, -5.9604645e-08, 0, 2.3105626, 0, 5.9604645e-08, 0, 2.3105628, -7.076478, 0.65377665, -3.818452)
+
+[node name="mesa2" parent="Nivel_ZonaA/Props/O1_MesaCaida" unique_id=1278437917 instance=ExtResource("16_table")]
+transform = Transform3D(2.3105628, 0, -5.9604645e-08, 0, 2.3105626, 0, 5.9604645e-08, 0, 2.3105628, 9.859605, 0.65377665, 12.24413)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Nivel_ZonaA/Props/O1_MesaCaida/mesa2" unique_id=388138470]
+transform = Transform3D(0.43279505, 0, 1.4901161e-08, 0, 0.43279502, 0, -1.4901161e-08, 0, 0.43279505, -0.37966204, 0, -0.17703915)
+light_color = Color(1, 0.436, 0.27999997, 1)
+light_energy = 2.645
 
 [node name="@CollisionShape3D@28377" type="CollisionShape3D" parent="Nivel_ZonaA/Props/O1_MesaCaida" unique_id=385832223]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42589673, 0)
@@ -960,7 +885,8 @@ light_color = Color(0.83137256, 0.6392157, 0.34901962, 1)
 light_energy = 2.0
 omni_range = 4.0
 
-[node name="Lectura" type="Node3D" parent="Nivel_ZonaA/Props/R1_AtrilLectura"]
+[node name="Lectura" type="Node3D" parent="Nivel_ZonaA/Props/R1_AtrilLectura" unique_id=1011656895]
+visible = false
 script = ExtResource("23_lectura")
 
 [node name="R1_Velas_1" type="Node3D" parent="Nivel_ZonaA/Props" unique_id=1429781657]
@@ -1029,7 +955,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.13, 0.15)
 mesh = SubResource("SphereMesh_xega3")
 
 [node name="Luz" type="OmniLight3D" parent="Nivel_ZonaA/Props/R1_Velas_2" unique_id=2002516457]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.869719, 0)
 light_color = Color(1, 0.7058824, 0.3529412, 1)
 light_energy = 0.8
 omni_range = 2.5
@@ -1079,6 +1005,7 @@ semilla = 37
 
 [node name="A2_Tinta" type="MeshInstance3D" parent="Nivel_ZonaA/Props" unique_id=1069679878]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.011, 14)
+visible = false
 mesh = SubResource("CylinderMesh_rhyi6")
 
 [node name="R2_Respiro" type="Node3D" parent="Nivel_ZonaA/Props" unique_id=832091867]
@@ -1133,8 +1060,8 @@ transform = Transform3D(2.312936, 0, 0, 0, 2.312936, 0, 0, 0, 2.312936, 0.004517
 
 [node name="Luz" type="OmniLight3D" parent="Nivel_ZonaA/Props/A3_Antorcha_izq" unique_id=496673592]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 0)
-omni_range = 6.0
 light_color = Color(0.56, 0.26, 0.82, 1)
+omni_range = 6.0
 script = ExtResource("10_lp")
 energia_base = 2.6
 amplitud = 0.9
@@ -1149,8 +1076,8 @@ transform = Transform3D(2.312936, 0, 0, 0, 2.312936, 0, 0, 0, 2.312936, 0.004517
 
 [node name="Luz" type="OmniLight3D" parent="Nivel_ZonaA/Props/A3_Antorcha_der" unique_id=1204893842]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 0)
-omni_range = 6.0
 light_color = Color(0.56, 0.26, 0.82, 1)
+omni_range = 6.0
 script = ExtResource("10_lp")
 energia_base = 2.6
 amplitud = 0.9
@@ -1193,247 +1120,278 @@ mesh = SubResource("BoxMesh_qtcqp")
 [node name="@CollisionShape3D@28334" type="CollisionShape3D" parent="Nivel_ZonaA/Suelo" unique_id=1509053006]
 shape = SubResource("BoxShape3D_3oh8n")
 
-[node name="Baldosas" type="Node3D" parent="Nivel_ZonaA"]
+[node name="Baldosas" type="Node3D" parent="Nivel_ZonaA" unique_id=2030514717]
 
-[node name="Losa_0_0" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_0_0" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=114641920]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 0.002, -2.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_1_0" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_1_0" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=435394087]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.002, -2.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_2_0" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_2_0" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=134294464]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.002, -2.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_3_0" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_3_0" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=547957033]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.002, -2.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_4_0" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_4_0" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1771234662]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0.002, -2.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_5_0" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_5_0" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=903740433]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0.002, -2.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_0_1" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_0_1" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=486640248]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 0.002, 2.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_1_1" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_1_1" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1136164838]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.002, 2.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_2_1" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_2_1" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=424582546]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.002, 2.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_3_1" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_3_1" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1706937104]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.002, 2.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_4_1" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_4_1" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=496322009]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0.002, 2.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_5_1" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_5_1" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=2038686587]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0.002, 2.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_0_2" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_0_2" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1617726624]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 0.002, 7.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_1_2" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_1_2" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=494055509]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.002, 7.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_2_2" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_2_2" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=3249636]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.002, 7.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_3_2" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_3_2" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=108836714]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.002, 7.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_4_2" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_4_2" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1137570316]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0.002, 7.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_5_2" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_5_2" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=635188200]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0.002, 7.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_0_3" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_0_3" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=2116623893]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 0.002, 12.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_1_3" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_1_3" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1168907866]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.002, 12.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_2_3" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_2_3" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=177332087]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.002, 12.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_3_3" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_3_3" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1459860942]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.002, 12.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_4_3" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_4_3" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=2040829973]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0.002, 12.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_5_3" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_5_3" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1713117242]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0.002, 12.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_0_4" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_0_4" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1300715269]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 0.002, 17.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_1_4" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_1_4" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1266868566]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.002, 17.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_2_4" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_2_4" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1303911050]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.002, 17.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_3_4" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_3_4" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1751148657]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.002, 17.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_4_4" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_4_4" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=745670]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0.002, 17.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_5_4" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_5_4" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1522726274]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0.002, 17.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_0_5" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_0_5" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1398799055]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 0.002, 22.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_1_5" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_1_5" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1898737312]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.002, 22.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_2_5" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_2_5" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1698696823]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.002, 22.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_3_5" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_3_5" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=2102646344]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.002, 22.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_4_5" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_4_5" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=2070120916]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0.002, 22.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_5_5" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_5_5" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1504537441]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0.002, 22.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_0_6" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_0_6" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=753503441]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 0.002, 27.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_1_6" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_1_6" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1174359116]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.002, 27.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_2_6" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_1_10" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=535489352]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.002, 27.5)
+mesh = SubResource("MallaLosa")
+
+[node name="Losa_2_6" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1424877637]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.002, 27.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_3_6" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_3_6" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=94388149]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.002, 27.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_4_6" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_4_6" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1808384775]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0.002, 27.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_5_6" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_5_6" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1649443345]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0.002, 27.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_0_7" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_0_7" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=730296216]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 0.002, 32.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_1_7" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_1_7" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1914671533]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.002, 32.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_2_7" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_2_7" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=396104384]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.002, 32.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_3_7" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_3_7" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1838530320]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.002, 32.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_4_7" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_4_7" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=943261583]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0.002, 32.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_5_7" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_5_7" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1705910809]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0.002, 32.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_0_8" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_0_8" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1078166194]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 0.002, 37.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_1_8" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_1_8" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=272330644]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.002, 37.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_2_8" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_2_8" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1924368248]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.002, 37.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_3_8" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_3_8" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=810329172]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.002, 37.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_4_8" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_4_8" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=565619871]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0.002, 37.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_5_8" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_5_8" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1950807814]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0.002, 37.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_0_9" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_0_9" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=2127074817]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 0.002, 42.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_1_9" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_1_9" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=993133236]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.002, 42.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_2_9" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_2_9" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=2023845978]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.002, 42.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_3_9" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_3_9" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1033150682]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.002, 42.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_4_9" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_4_9" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1698340727]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0.002, 42.5)
 mesh = SubResource("MallaLosa")
 
-[node name="Losa_5_9" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas"]
+[node name="Losa_5_9" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=714662283]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0.002, 42.5)
 mesh = SubResource("MallaLosa")
+
+[node name="mancha" parent="Nivel_ZonaA/Baldosas" unique_id=1873074187 instance=ExtResource("16_ptl27")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -7.0648823, 0.010498477, 21.153708)
+
+[node name="mancha6" parent="Nivel_ZonaA/Baldosas" unique_id=1763056527 instance=ExtResource("16_ptl27")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -7.0648823, 0.010498477, 26.799576)
+
+[node name="mancha7" parent="Nivel_ZonaA/Baldosas" unique_id=1364990909 instance=ExtResource("16_ptl27")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -0.03954792, 0.010498477, 24.178173)
+
+[node name="mancha3" parent="Nivel_ZonaA/Baldosas" unique_id=1244461540 instance=ExtResource("16_ptl27")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -7.0648823, 0.010498477, 11.281557)
+
+[node name="mancha2" parent="Nivel_ZonaA/Baldosas" unique_id=2108535037 instance=ExtResource("16_ptl27")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 7.968916, 0.010498477, 20.081255)
+
+[node name="mancha4" parent="Nivel_ZonaA/Baldosas" unique_id=587497233 instance=ExtResource("16_ptl27")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 7.968916, 0.010498477, 11.494247)
+
+[node name="mancha5" parent="Nivel_ZonaA/Baldosas" unique_id=408571065 instance=ExtResource("16_ptl27")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 10.620071, 0.010498477, 26.273523)
+
+[node name="pasto" parent="Nivel_ZonaA/Baldosas" unique_id=311048400 instance=ExtResource("18_inamy")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -11.114104, 0.6467391, 36.21274)
+
+[node name="pasto2" parent="Nivel_ZonaA/Baldosas" unique_id=1120108418 instance=ExtResource("18_inamy")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 11.979348, 0.26375973, 38.47155)
 
 [node name="Luces" type="Node3D" parent="." unique_id=1720392760]
 
@@ -1865,122 +1823,137 @@ light_energy = 1.6
 omni_range = 7.0
 script = ExtResource("10_lp")
 
-[node name="Luminarias" type="Node3D" parent="Luces"]
+[node name="Luminarias" type="Node3D" parent="Luces" unique_id=604692362]
 
-[node name="Candelabro_Entrada_izq" type="Node3D" parent="Luces/Luminarias"]
-transform = Transform3D(1.0, 0, 0.0, 0, 1, 0, -0.0, 0, 1.0, -2.6, 0, 27.4)
+[node name="Candelabro_Entrada_izq" type="Node3D" parent="Luces/Luminarias" unique_id=1211165834]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, 27.4)
 script = ExtResource("25_lum")
-color = Color(1, 0.68, 0.36, 1)
 energia = 1.5
 rango = 6.5
+puntos_llama = Array[Vector3]([Vector3(0, 1.8, 0), Vector3(-0.162, 1.656, 0), Vector3(0.162, 1.656, 0)])
+tam_llama = 0.09
 semilla = 10
-tam_llama = 0.09
-puntos_llama = Array[Vector3]([Vector3(0, 1.8, 0), Vector3(-0.162, 1.656, 0), Vector3(0.162, 1.656, 0)])
 
-[node name="Modelo" parent="Luces/Luminarias/Candelabro_Entrada_izq" instance=ExtResource("26_cand")]
+[node name="Modelo" parent="Luces/Luminarias/Candelabro_Entrada_izq" unique_id=1266272740 instance=ExtResource("26_cand")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 0, 0.9, 0)
 
-[node name="Candelabro_Entrada_der" type="Node3D" parent="Luces/Luminarias"]
-transform = Transform3D(1.0, 0, 0.0, 0, 1, 0, -0.0, 0, 1.0, 2.6, 0, 27.4)
+[node name="Candelabro_Entrada_der" type="Node3D" parent="Luces/Luminarias" unique_id=1583721705]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 0, 27.4)
 script = ExtResource("25_lum")
-color = Color(1, 0.68, 0.36, 1)
 energia = 1.5
 rango = 6.5
-semilla = 11
-tam_llama = 0.09
 puntos_llama = Array[Vector3]([Vector3(0, 1.8, 0), Vector3(-0.162, 1.656, 0), Vector3(0.162, 1.656, 0)])
+tam_llama = 0.09
+semilla = 11
 
-[node name="Modelo" parent="Luces/Luminarias/Candelabro_Entrada_der" instance=ExtResource("26_cand")]
-transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 0, 0.9, 0)
+[node name="Modelo" parent="Luces/Luminarias/Candelabro_Entrada_der" unique_id=1427931327 instance=ExtResource("26_cand")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 2.7528515, 0.9, 0)
 
-[node name="Lampara_Central" type="Node3D" parent="Luces/Luminarias"]
-transform = Transform3D(1.0, 0, 0.0, 0, 1, 0, -0.0, 0, 1.0, 0, 3.8, 20)
+[node name="Lampara_Central" type="Node3D" parent="Luces/Luminarias" unique_id=1033566310]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.8, 20)
 script = ExtResource("25_lum")
-color = Color(1, 0.68, 0.36, 1)
 energia = 2.4
 rango = 11.0
 atenuacion = 1.1
 sombra = true
-semilla = 20
+puntos_llama = Array[Vector3]([Vector3(0.52, -0.13, 0), Vector3(0.26, -0.13, 0.45), Vector3(-0.26, -0.13, 0.45), Vector3(-0.52, -0.13, 0), Vector3(-0.26, -0.13, -0.45), Vector3(0.26, -0.13, -0.45)])
+tam_llama = 0.1
 amplitud = 0.15
 velocidad = 2.5
-tam_llama = 0.1
-puntos_llama = Array[Vector3]([Vector3(0.52, -0.13, 0.0), Vector3(0.26, -0.13, 0.45), Vector3(-0.26, -0.13, 0.45), Vector3(-0.52, -0.13, 0.0), Vector3(-0.26, -0.13, -0.45), Vector3(0.26, -0.13, -0.45)])
+semilla = 20
 
-[node name="Modelo" parent="Luces/Luminarias/Lampara_Central" instance=ExtResource("27_lamp")]
-transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 0, 0, 0)
+[node name="Modelo" parent="Luces/Luminarias/Lampara_Central" unique_id=1280232871 instance=ExtResource("27_lamp")]
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 8.556618, 0.9255402, 5.211176)
 
-[node name="Velas_Libros_D1" type="Node3D" parent="Luces/Luminarias"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Luces/Luminarias/Lampara_Central/Modelo" unique_id=225878818]
+light_color = Color(0.81960785, 0.4509804, 0.07058824, 1)
+light_energy = 13.88
+
+[node name="Modelo2" parent="Luces/Luminarias/Lampara_Central" unique_id=1480627875 instance=ExtResource("27_lamp")]
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 7.7133236, 0.9255402, 12.700233)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Luces/Luminarias/Lampara_Central/Modelo2" unique_id=1967190104]
+light_color = Color(0.81960785, 0.4509804, 0.07058824, 1)
+light_energy = 13.88
+
+[node name="Velas_Libros_D1" type="Node3D" parent="Luces/Luminarias" unique_id=2015149160]
 transform = Transform3D(0.906308, 0, 0.422618, 0, 1, 0, -0.422618, 0, 0.906308, -2.2, 0, 16.6)
 script = ExtResource("25_lum")
 color = Color(1, 0.7, 0.35, 1)
 energia = 1.3
 rango = 4.0
-semilla = 30
-velocidad = 7.0
-amplitud = 0.35
-tam_llama = 0.07
 puntos_llama = Array[Vector3]([Vector3(0, 0.582, 0)])
+tam_llama = 0.07
+amplitud = 0.35
+velocidad = 7.0
+semilla = 30
 
-[node name="Modelo" parent="Luces/Luminarias/Velas_Libros_D1" instance=ExtResource("29_velas")]
+[node name="Modelo" parent="Luces/Luminarias/Velas_Libros_D1" unique_id=2144634789 instance=ExtResource("29_velas")]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.3, 0)
 
-[node name="Farol_Salida_izq" type="Node3D" parent="Luces/Luminarias"]
-transform = Transform3D(0.0, 0, 1.0, 0, 1, 0, -1.0, 0, 0.0, -6.5, 2.3, 6.05)
+[node name="Farol_Salida_izq" type="Node3D" parent="Luces/Luminarias" unique_id=1050230268]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -6.5, 2.3, 6.05)
 script = ExtResource("25_lum")
 color = Color(1, 0.62, 0.3, 1)
 energia = 1.4
-rango = 6.0
+puntos_llama = Array[Vector3]([Vector3(-0.045, -0.072, 0)])
+tam_llama = 0.08
 semilla = 40
-tam_llama = 0.08
-puntos_llama = Array[Vector3]([Vector3(-0.045, -0.072, 0)])
 
-[node name="Modelo" parent="Luces/Luminarias/Farol_Salida_izq" instance=ExtResource("28_farol")]
+[node name="Modelo" parent="Luces/Luminarias/Farol_Salida_izq" unique_id=1262451667 instance=ExtResource("28_farol")]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0)
 
-[node name="Farol_Salida_der" type="Node3D" parent="Luces/Luminarias"]
-transform = Transform3D(0.0, 0, 1.0, 0, 1, 0, -1.0, 0, 0.0, 6.5, 2.3, 6.05)
+[node name="OmniLight3D2" type="OmniLight3D" parent="Luces/Luminarias/Farol_Salida_izq/Modelo" unique_id=775344073]
+transform = Transform3D(1.1111112, 0, 0, 0, 1.1111112, 0, 0, 0, 1.1111112, 0, 0, -0.023406506)
+light_color = Color(0.84379095, 0.4751463, 0.11750699, 1)
+light_energy = 12.215
+
+[node name="Farol_Salida_der" type="Node3D" parent="Luces/Luminarias" unique_id=523076883]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 6.5, 2.3, 6.05)
 script = ExtResource("25_lum")
 color = Color(1, 0.62, 0.3, 1)
 energia = 1.4
-rango = 6.0
-semilla = 41
-tam_llama = 0.08
 puntos_llama = Array[Vector3]([Vector3(-0.045, -0.072, 0)])
+tam_llama = 0.08
+semilla = 41
 
-[node name="Modelo" parent="Luces/Luminarias/Farol_Salida_der" instance=ExtResource("28_farol")]
+[node name="Modelo" parent="Luces/Luminarias/Farol_Salida_der" unique_id=1880489657 instance=ExtResource("28_farol")]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0)
 
-[node name="Brasero_E2_izq" type="Node3D" parent="Luces/Luminarias"]
-transform = Transform3D(1.0, 0, 0.0, 0, 1, 0, -0.0, 0, 1.0, -4.2, 0, 9.6)
+[node name="OmniLight3D" type="OmniLight3D" parent="Luces/Luminarias/Farol_Salida_der/Modelo" unique_id=1850444874]
+light_color = Color(0.84379095, 0.4751463, 0.11750699, 1)
+light_energy = 12.215
+
+[node name="Brasero_E2_izq" type="Node3D" parent="Luces/Luminarias" unique_id=2011329895]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2, 0, 9.6)
 script = ExtResource("25_lum")
 color = Color(0.62, 0.3, 0.9, 1)
 energia = 1.8
 rango = 5.0
-semilla = 50
-amplitud = 0.45
-velocidad = 8.0
+puntos_llama = Array[Vector3]([Vector3(0, 0.702, 0)])
 tam_llama = 0.3
 brillo_llama = 3.0
-puntos_llama = Array[Vector3]([Vector3(0, 0.702, 0)])
+amplitud = 0.45
+velocidad = 8.0
+semilla = 50
 
-[node name="Modelo" parent="Luces/Luminarias/Brasero_E2_izq" instance=ExtResource("30_bras")]
+[node name="Modelo" parent="Luces/Luminarias/Brasero_E2_izq" unique_id=1019377936 instance=ExtResource("30_bras")]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0.45, 0)
 
-[node name="Brasero_E2_der" type="Node3D" parent="Luces/Luminarias"]
-transform = Transform3D(1.0, 0, 0.0, 0, 1, 0, -0.0, 0, 1.0, 2.2, 0, 9.6)
+[node name="Brasero_E2_der" type="Node3D" parent="Luces/Luminarias" unique_id=319430313]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2, 0, 9.6)
 script = ExtResource("25_lum")
 color = Color(0.62, 0.3, 0.9, 1)
 energia = 1.8
 rango = 5.0
-semilla = 51
-amplitud = 0.45
-velocidad = 8.0
+puntos_llama = Array[Vector3]([Vector3(0, 0.702, 0)])
 tam_llama = 0.3
 brillo_llama = 3.0
-puntos_llama = Array[Vector3]([Vector3(0, 0.702, 0)])
+amplitud = 0.45
+velocidad = 8.0
+semilla = 51
 
-[node name="Modelo" parent="Luces/Luminarias/Brasero_E2_der" instance=ExtResource("30_bras")]
+[node name="Modelo" parent="Luces/Luminarias/Brasero_E2_der" unique_id=447314684 instance=ExtResource("30_bras")]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0.45, 0)
 
 [node name="Luna" type="Node3D" parent="Luces" unique_id=253716302]
@@ -2145,13 +2118,14 @@ transform = Transform3D(6.1127853, 0, 0, 0, 6.2854214, 0, 0, 0, 2.879438, 0, 2.9
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5.68, -0.5, 34.6)
 
 [node name="muro" parent="Estructura/Muro_entrada_1" unique_id=7207579 instance=ExtResource("20_em801")]
-transform = Transform3D(8.204751, 0, 0, 0, 6.2854214, 0, -5.684342e-14, 0, 2.879438, 0, 2.996933, -0.0014038086)
+transform = Transform3D(9.8722925, 0, 0, 0, 6.2854214, 0, -5.684342e-14, 0, 2.879438, -0.29941177, 2.8260584, -0.0014038086)
 
 [node name="Muro_entrada_2" type="Node3D" parent="Estructura" unique_id=1377332022]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.5, 34.6)
 
 [node name="muro" parent="Estructura/Muro_entrada_2" unique_id=870632106 instance=ExtResource("20_em801")]
 transform = Transform3D(6.1127853, 0, 0, 0, 6.2854214, 0, 0, 0, 2.879438, 0, 2.996933, -0.0014051603)
+visible = false
 
 [node name="Muro_entrada_3" type="Node3D" parent="Estructura" unique_id=373003863]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5.68, -0.5, 34.6)
@@ -2169,7 +2143,7 @@ transform = Transform3D(6.1127853, 0, 0, 0, 6.2854214, 0, 0, 0, 2.879438, -0.707
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.275, -0.5, 5.4)
 
 [node name="muro" parent="Estructura/Muro_salida_izq_0" unique_id=546064657 instance=ExtResource("20_em801")]
-transform = Transform3D(6.295738, 0, 0, 0, 6.2854214, 0, 0, 0, 2.879438, 0, 2.996933, -0.0014051603)
+transform = Transform3D(7.514519, 0, 0, 0, 6.2854214, 0, 0, 0, 2.879438, 0, 2.996933, -0.0014052391)
 
 [node name="Muro_salida_izq_1" type="Node3D" parent="Estructura" unique_id=1151092064]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.425, -0.5, 5.4)
@@ -2181,7 +2155,59 @@ transform = Transform3D(6.295738, 0, 0, 0, 6.2854214, 0, 0, 0, 2.879438, 0, 2.99
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.425, -0.5, 5.4)
 
 [node name="muro" parent="Estructura/Muro_salida_der_0" unique_id=1531899687 instance=ExtResource("20_em801")]
-transform = Transform3D(6.295738, 0, 0, 0, 6.2854214, 0, 0, 0, 2.879438, 0, 2.996933, -0.0014051603)
+transform = Transform3D(7.9490385, 0, 0, 0, 6.2854214, 0, 0, 0, 2.879438, 0, 2.996933, -0.0014052391)
+
+[node name="Meshy_AI_Gothic_Ceiling_Chande_1109160622_texture" parent="Estructura/Muro_salida_der_0" unique_id=283948940 instance=ExtResource("24_iwpmq")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -0.94691753, 5.9833803, 24.396837)
+
+[node name="Meshy_AI_Gothic_Ceiling_Chande_1109160622_texture5" parent="Estructura/Muro_salida_der_0" unique_id=1711881458 instance=ExtResource("24_iwpmq")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -12.704202, 5.9833803, 27.627787)
+
+[node name="Meshy_AI_Gothic_Ceiling_Chande_1109160622_texture4" parent="Estructura/Muro_salida_der_0" unique_id=1414150281 instance=ExtResource("24_iwpmq")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 4.354867, 5.9833803, 16.396431)
+visible = false
+
+[node name="Meshy_AI_Gothic_Ceiling_Chande_1109160622_texture2" parent="Estructura/Muro_salida_der_0" unique_id=1246284162 instance=ExtResource("24_iwpmq")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -12.858105, 5.9833803, 13.96879)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Estructura/Muro_salida_der_0/Meshy_AI_Gothic_Ceiling_Chande_1109160622_texture2" unique_id=213688562]
+transform = Transform3D(0.33333334, 0, 0, 0, 0.33333334, 0, 0, 0, 0.33333334, -0.55947113, -0.1790613, -0.8120475)
+light_color = Color(1, 0.6745098, 0.41568628, 1)
+light_energy = 6.513
+
+[node name="Meshy_AI_Gothic_Ceiling_Chande_1109160622_texture6" parent="Estructura/Muro_salida_der_0" unique_id=548177388 instance=ExtResource("24_iwpmq")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -11.399872, 5.9833803, 21.410671)
+
+[node name="Meshy_AI_Gothic_Ceiling_Chande_1109160622_texture3" parent="Estructura/Muro_salida_der_0" unique_id=357510799 instance=ExtResource("24_iwpmq")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.33813572, 5.9833803, 11.766148)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Estructura/Muro_salida_der_0/Meshy_AI_Gothic_Ceiling_Chande_1109160622_texture3" unique_id=1903015369]
+transform = Transform3D(0.33333334, 0, 0, 0, 0.33333334, 0, 0, 0, 0.33333334, -5.4001808e-05, -0.13654268, 0.14463997)
+light_color = Color(1, 0.6745098, 0.41568628, 1)
+light_energy = 8.906
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Estructura/Muro_salida_der_0/Meshy_AI_Gothic_Ceiling_Chande_1109160622_texture3" unique_id=1818752677]
+transform = Transform3D(0.33333334, 0, 0, 0, 0.33333334, 0, 0, 0, 0.33333334, -4.300543, -0.13654268, 1.043756)
+light_color = Color(1, 0.6745098, 0.41568628, 1)
+light_energy = 8.906
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Estructura/Muro_salida_der_0/Meshy_AI_Gothic_Ceiling_Chande_1109160622_texture3" unique_id=1900920087]
+transform = Transform3D(0.33333334, 0, 0, 0, 0.33333334, 0, 0, 0, 0.33333334, -3.8798826, -0.13654268, 3.4251828)
+light_color = Color(1, 0.6745098, 0.41568628, 1)
+light_energy = 8.906
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Estructura/Muro_salida_der_0/Meshy_AI_Gothic_Ceiling_Chande_1109160622_texture3" unique_id=652782423]
+transform = Transform3D(0.33333334, 0, 0, 0, 0.33333334, 0, 0, 0, 0.33333334, -0.47756004, -0.13654268, 4.3228583)
+light_color = Color(1, 0.6745098, 0.41568628, 1)
+light_energy = 8.158
+light_indirect_energy = 1.08
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="Estructura/Muro_salida_der_0/Meshy_AI_Gothic_Ceiling_Chande_1109160622_texture3" unique_id=1365897031]
+transform = Transform3D(0.33333334, 0, 0, 0, 0.33333334, 0, 0, 0, 0.33333334, -4.3141003, -0.13654268, 5.596275)
+light_color = Color(1, 0.6745098, 0.41568628, 1)
+light_energy = 13.691
+light_indirect_energy = 1.08
+light_volumetric_fog_energy = 2.944
 
 [node name="Muro_salida_der_1" type="Node3D" parent="Estructura" unique_id=1754009044]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.275, -0.5, 5.4)
@@ -2273,11 +2299,11 @@ transform = Transform3D(32.41547, 0, 0, 0, 10.684694, 0, 0, 0, 98.52311, 0.09213
 [node name="techogood3" parent="." unique_id=2024897677 instance=ExtResource("21_1isfj")]
 transform = Transform3D(32.41547, 0, 0, 0, 10.684694, 0, 0, 0, 66.58239, 0.09213257, 7.5989714, 30.526583)
 
-[node name="OcultoACamara" type="Node" parent="."]
+[node name="OcultoACamara" type="Node" parent="." unique_id=2116259108]
 script = ExtResource("24_oculto")
 objetivos = Array[NodePath]([NodePath("../Estructura/Techo"), NodePath("../techogood"), NodePath("../techogood2"), NodePath("../techogood3"), NodePath("../techogood4"), NodePath("../techogood5")])
 
-[node name="ColisionCajas" type="Node3D" parent="."]
+[node name="ColisionCajas" type="Node3D" parent="." unique_id=1217943392]
 script = ExtResource("31_col")
 objetivos = Array[NodePath]([NodePath("../Nivel_ZonaA/Props/IN_ArcoEntrada"), NodePath("../Luces/Luminarias/Brasero_E2_izq"), NodePath("../Luces/Luminarias/Brasero_E2_der"), NodePath("../Luces/Luminarias/Velas_Libros_D1"), NodePath("../Luces/Luminarias/Candelabro_Entrada_izq"), NodePath("../Luces/Luminarias/Candelabro_Entrada_der")])
 hijos_de = Array[NodePath]([NodePath("../estanterias")])
@@ -2290,11 +2316,53 @@ transform = Transform3D(-1.0069997, 0, 6.9271894, 0, 3.9852815, 0, -6.9271894, 0
 [node name="estanteria4" parent="estanterias" unique_id=499313320 instance=ExtResource("14_shelf")]
 transform = Transform3D(-1.0069997, 0, 6.9271894, 0, 3.9852815, 0, -6.9271894, 0, -1.0069997, -12.980094, 2.0632753, 18.085976)
 
+[node name="OmniLight3D" type="OmniLight3D" parent="estanterias/estanteria4" unique_id=1677812249]
+transform = Transform3D(0.14285713, 0, 1.8626451e-09, 0, 0.25092328, 0, -1.8626451e-09, 0, 0.14285713, -0.011191845, 0, 0.076989174)
+light_color = Color(0.98, 0.47285002, 0.30380002, 1)
+light_energy = 8.327
+omni_range = 3.664
+omni_attenuation = 0.813
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="estanterias/estanteria4" unique_id=748000111]
+transform = Transform3D(0.14285713, 0, 1.8626451e-09, 0, 0.25092328, 0, -1.8626451e-09, 0, 0.14285713, -1.0398958, 0.98378754, 1.8029625)
+light_color = Color(0.98, 0.47285002, 0.30380002, 1)
+light_energy = 8.327
+omni_range = 3.664
+omni_attenuation = 0.813
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="estanterias/estanteria4" unique_id=990516950]
+transform = Transform3D(0.14285713, 0, 1.8626451e-09, 0, 0.25092328, 0, -1.8626451e-09, 0, 0.14285713, -0.17042923, 0.98378754, 1.929356)
+light_color = Color(0.98, 0.47285002, 0.30380002, 1)
+light_energy = 8.327
+omni_range = 3.664
+omni_attenuation = 0.813
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="estanterias/estanteria4" unique_id=1047654176]
+transform = Transform3D(0.14285713, 0, 1.8626451e-09, 0, 0.25092328, 0, -1.8626451e-09, 0, 0.14285713, 0.54061675, 0.98378754, 2.0327199)
+light_color = Color(0.98, 0.47285002, 0.30380002, 1)
+light_energy = 8.327
+omni_range = 3.664
+omni_attenuation = 0.813
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="estanterias/estanteria4" unique_id=1124591501]
+transform = Transform3D(0.14285713, 0, 1.8626451e-09, 0, 0.25092328, 0, -1.8626451e-09, 0, 0.14285713, -1.9362602, 0.98378754, 1.672658)
+light_color = Color(0.98, 0.47285002, 0.30380002, 1)
+light_energy = 8.327
+omni_range = 3.664
+omni_attenuation = 0.813
+
 [node name="estanteria5" parent="estanterias" unique_id=2110058218 instance=ExtResource("14_shelf")]
 transform = Transform3D(-1.0069997, 0, 6.9271894, 0, 3.9852815, 0, -6.9271894, 0, -1.0069997, -13.76958, 1.9560637, 14.122799)
 
 [node name="estanteria10" parent="estanterias" unique_id=1017838573 instance=ExtResource("14_shelf")]
 transform = Transform3D(-0.7197383, -0.0011585575, -6.962899, -0.23890619, 3.9829388, 0.022650557, 6.9588003, 0.1366205, -0.7193846, 13.581813, 1.9560637, 7.9107876)
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="estanterias/estanteria10" unique_id=489897767]
+transform = Transform3D(-0.1384261, -0.004875636, -0.034965813, -0.008502003, 0.2507758, -0.0013096415, 0.034970712, 0.00046225623, -0.13850993, 0.034194708, 0.027996242, 0.1710763)
+light_color = Color(0.98, 0.47285002, 0.30380002, 1)
+light_energy = 8.327
+omni_range = 3.664
+omni_attenuation = 0.813
 
 [node name="estanteria11" parent="estanterias" unique_id=1161366016 instance=ExtResource("14_shelf")]
 transform = Transform3D(-0.7197383, -0.0011585575, -6.962899, -0.23890619, 3.9829388, 0.022650557, 6.9588003, 0.1366205, -0.7193846, 13.581813, 1.9560637, 11.191491)
@@ -2317,14 +2385,35 @@ transform = Transform3D(-0.7197383, -0.0011585575, -6.962899, -0.23890619, 3.982
 [node name="estanteria18" parent="estanterias" unique_id=250983926 instance=ExtResource("14_shelf")]
 transform = Transform3D(-0.7197383, -0.0011585575, -6.962899, -0.23890619, 3.9829388, 0.022650557, 6.9588003, 0.1366205, -0.7193846, 13.3844, 1.9560637, 31.896587)
 
+[node name="OmniLight3D4" type="OmniLight3D" parent="estanterias/estanteria18" unique_id=1298112409]
+transform = Transform3D(-0.1384261, -0.004875636, -0.034965813, -0.008502003, 0.2507758, -0.0013096415, 0.034970712, 0.00046225623, -0.13850993, 0.0093483925, 0.026129484, 0.23723912)
+light_color = Color(0.98, 0.47285002, 0.30380002, 1)
+light_energy = 8.327
+omni_range = 3.664
+omni_attenuation = 0.813
+
 [node name="estanteria13" parent="estanterias" unique_id=1007327913 instance=ExtResource("14_shelf")]
 transform = Transform3D(-0.7197383, -0.0011585575, -6.962899, -0.23890619, 3.9829388, 0.022650557, 6.9588003, 0.1366205, -0.7193846, 13.597028, 1.9560637, 18.669544)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="estanterias/estanteria13" unique_id=1166790508]
+transform = Transform3D(-0.1384261, -0.004875636, -0.034965813, -0.008502003, 0.2507758, -0.0013096414, 0.034970712, 0.00046225626, -0.13850993, -0.07452917, 0.021910429, 0.09442568)
+light_color = Color(0.98, 0.47285002, 0.30380002, 1)
+light_energy = 8.327
+omni_range = 3.664
+omni_attenuation = 0.813
 
 [node name="estanteria6" parent="estanterias" unique_id=1263581059 instance=ExtResource("14_shelf")]
 transform = Transform3D(-1.0069997, 0, 6.9271894, 0, 3.9852815, 0, -6.9271894, 0, -1.0069997, -14.462626, 1.914906, 10.205172)
 
 [node name="estanteria7" parent="estanterias" unique_id=731528817 instance=ExtResource("14_shelf")]
 transform = Transform3D(-1.0069997, 0, 6.9271894, 0, 3.9852815, 0, -6.9271894, 0, -1.0069997, -14.4189205, 1.914906, 7.5677586)
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="estanterias/estanteria7" unique_id=1731110215]
+transform = Transform3D(0.14285713, -1.9125372e-10, 1.8626451e-09, 3.3593012e-10, 0.25092328, 4.168315e-12, -1.8626451e-09, -2.373126e-12, 0.14285713, 0.14961338, 0.03722942, 0.104551554)
+light_color = Color(0.98, 0.47285002, 0.30380002, 1)
+light_energy = 8.327
+omni_range = 3.664
+omni_attenuation = 0.813
 
 [node name="estanteria2" parent="estanterias" unique_id=1468324267 instance=ExtResource("14_shelf")]
 transform = Transform3D(-1.0069997, 0, 6.9271894, 0, 3.9852815, 0, -6.9271894, 0, -1.0069997, -12.069177, 1.8772087, 25.117771)
@@ -2335,5 +2424,25 @@ transform = Transform3D(-1.0069997, 0, 6.9271894, 0, 3.9852815, 0, -6.9271894, 0
 [node name="estanteria8" parent="estanterias" unique_id=953731935 instance=ExtResource("14_shelf")]
 transform = Transform3D(-1.0069997, 0, 6.9271894, 0, 3.9852815, 0, -6.9271894, 0, -1.0069997, -11.921939, 1.8772087, 30.454245)
 
+[node name="OmniLight3D4" type="OmniLight3D" parent="estanterias/estanteria8" unique_id=74156900]
+transform = Transform3D(0.14285713, -1.9125372e-10, 1.8626451e-09, 3.3593012e-10, 0.25092328, 4.168315e-12, -1.8626451e-09, -2.373126e-12, 0.14285713, 0.037645817, 0.046688557, 0.104516506)
+light_color = Color(0.98, 0.47285002, 0.30380002, 1)
+light_energy = 8.327
+omni_range = 3.664
+omni_attenuation = 0.813
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="estanterias/estanteria8" unique_id=1675606609]
+transform = Transform3D(0.14285713, -1.9125372e-10, 1.8626451e-09, 3.3593012e-10, 0.25092328, 4.168315e-12, -1.8626451e-09, -2.373126e-12, 0.14285713, -0.9306617, 0.70301294, 1.5998552)
+light_color = Color(0.98, 0.47285002, 0.30380002, 1)
+light_energy = 9.822
+omni_range = 3.664
+omni_attenuation = 0.813
+
 [node name="estanteria9" parent="estanterias" unique_id=1924052876 instance=ExtResource("14_shelf")]
 transform = Transform3D(-1.0069997, 0, 6.9271894, 0, 3.9852815, 0, -6.9271894, 0, -1.0069997, -11.921939, 1.8772087, 32.447205)
+
+[node name="escalera" parent="." unique_id=1660413111 instance=ExtResource("32_g5tc1")]
+transform = Transform3D(-0.51234305, -1.2686813, 3.2214825, -0.19926643, 3.26197, 1.2529349, -3.4565597, -3.4257926e-07, -0.5497296, -11.63325, 1.8168254, 21.0969)
+
+[node name="escalera2" parent="." unique_id=1012708777 instance=ExtResource("32_g5tc1")]
+transform = Transform3D(-0.51234305, -1.2686813, 3.2214825, -0.19926643, 3.26197, 1.2529349, -3.4565597, -3.4257926e-07, -0.5497296, -13.241724, 1.8168254, 7.723957)
