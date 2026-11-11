@@ -35,6 +35,14 @@
 [ext_resource type="Script" uid="uid://dfuyom5t84bes" path="res://colision_cajas.gd" id="31_col"]
 [ext_resource type="PackedScene" uid="uid://b726q84gckgwm" path="res://modelos_zona_A/escalera.glb" id="32_g5tc1"]
 
+[ext_resource type="Script" path="res://partida.gd" id="40_partida"]
+[ext_resource type="Script" path="res://salud.gd" id="41_salud"]
+[ext_resource type="PackedScene" path="res://hud.tscn" id="42_hudvida"]
+[ext_resource type="Script" path="res://combate_manager.gd" id="43_combate"]
+[ext_resource type="PackedScene" path="res://hud_trivia.tscn" id="44_trivia"]
+[ext_resource type="Script" path="res://hud_combate.gd" id="45_hudcomb"]
+[ext_resource type="Script" path="res://enemigo_combate.gd" id="46_enemigo"]
+
 [sub_resource type="ProceduralSkyMaterial" id="CieloMat"]
 sky_top_color = Color(0.03, 0.04, 0.09, 1)
 sky_horizon_color = Color(0.06, 0.07, 0.14, 1)
@@ -772,12 +780,33 @@ current = true
 script = ExtResource("5_v0myi")
 objetivo = NodePath("..")
 
+[node name="Salud" type="Node" parent="Personaje"]
+process_mode = 3
+script = ExtResource("41_salud")
+vida = 100
+invulnerable = 0.3
+reapariciones = 0
+
 [node name="Luz_Pluma" type="OmniLight3D" parent="Personaje" unique_id=419784018]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 1.4, 0.2)
 light_color = Color(1, 0.78, 0.5, 1)
 light_energy = 1.1
 omni_range = 4.5
 omni_attenuation = 1.6
+
+[node name="Partida" type="Node" parent="."]
+script = ExtResource("40_partida")
+metas = 3
+
+[node name="HUD" parent="." instance=ExtResource("42_hudvida")]
+
+[node name="Combate" type="Node" parent="."]
+script = ExtResource("43_combate")
+
+[node name="HudTrivia" parent="Combate" instance=ExtResource("44_trivia")]
+
+[node name="HudCombate" type="CanvasLayer" parent="Combate"]
+script = ExtResource("45_hudcomb")
 
 [node name="SistemaSol" type="Node" parent="." unique_id=1465283060 node_paths=PackedStringArray("sol", "entorno")]
 script = ExtResource("6_evii1")
@@ -1109,6 +1138,40 @@ metadata/hp = 50
 [node name="monster" parent="Nivel_ZonaA/Enemigos/E3_GuardianTinta" unique_id=619524932 instance=ExtResource("17_book")]
 transform = Transform3D(2.31175, 0, 0, 0, 2.31175, 0, 0, 0, 2.31175, 0.004516032, 1.0999999, 0.007901558)
 
+[node name="Combate" type="Node" parent="Nivel_ZonaA/Enemigos/E1_LibroDebil"]
+script = ExtResource("46_enemigo")
+nombre = "Libro débil"
+vida = 25
+pesos = Array[int]([70, 20, 10])
+semilla = 3
+ritmo = 1.2
+habilidad = "hoja"
+lore = "Un herbario olvidado: sus hojas aún recuerdan qué plantas respiraban la tinta de los lectores."
+punto = NodePath("../monster")
+
+[node name="Combate" type="Node" parent="Nivel_ZonaA/Enemigos/E2_LibroCorrupto"]
+script = ExtResource("46_enemigo")
+nombre = "Libro corrupto"
+vida = 50
+semilla = 7
+ritmo = 1.0
+habilidad = "escudo"
+lore = "Un tratado de astronomía manchado de violeta: alguien tachó las estrellas una por una."
+punto = NodePath("..")
+
+[node name="Combate" type="Node" parent="Nivel_ZonaA/Enemigos/E3_GuardianTinta"]
+script = ExtResource("46_enemigo")
+nombre = "Guardián de tinta"
+vida = 50
+pesos = Array[int]([45, 35, 20])
+curas = 1
+vida_baja = 15
+semilla = 11
+ritmo = 0.85
+habilidad = "llama"
+lore = "El diario del último bibliotecario: «Si alguien llega hasta aquí, que no queme lo que no entiende»."
+punto = NodePath("../monster")
+
 [node name="Suelo" type="StaticBody3D" parent="Nivel_ZonaA" unique_id=1048279986]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 14)
 
@@ -1389,6 +1452,24 @@ transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 10.620071, 0.010498477, 26.27
 
 [node name="pasto" parent="Nivel_ZonaA/Baldosas" unique_id=311048400 instance=ExtResource("18_inamy")]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -11.114104, 0.6467391, 36.21274)
+
+[node name="pasto4" parent="Nivel_ZonaA/Baldosas" unique_id=859896298 instance=ExtResource("18_inamy")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -4.7277746, 0.6467391, 36.21274)
+
+[node name="pasto5" parent="Nivel_ZonaA/Baldosas" unique_id=1710964668 instance=ExtResource("18_inamy")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -4.7277746, 0.6467391, 41.411404)
+
+[node name="pasto6" parent="Nivel_ZonaA/Baldosas" unique_id=2114379883 instance=ExtResource("18_inamy")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -10.320747, 0.6467391, 41.411404)
+
+[node name="pasto3" parent="Nivel_ZonaA/Baldosas" unique_id=459657653 instance=ExtResource("18_inamy")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 5.1629505, 0.6029111, 38.498554)
+
+[node name="pasto7" parent="Nivel_ZonaA/Baldosas" unique_id=1681923732 instance=ExtResource("18_inamy")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 5.1629505, 0.6029111, 41.94341)
+
+[node name="pasto8" parent="Nivel_ZonaA/Baldosas" unique_id=393452119 instance=ExtResource("18_inamy")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 11.498488, 0.6029111, 41.94341)
 
 [node name="pasto2" parent="Nivel_ZonaA/Baldosas" unique_id=1120108418 instance=ExtResource("18_inamy")]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 11.979348, 0.26375973, 38.47155)

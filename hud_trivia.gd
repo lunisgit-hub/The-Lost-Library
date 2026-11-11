@@ -73,7 +73,8 @@ func _ready() -> void:
 
 # ---------------------------------------------------------------- uso
 
-func preguntar(p: Dictionary = {}) -> void:
+## quitar_falsas: cuántas opciones incorrectas se tachan (acción Analizar).
+func preguntar(p: Dictionary = {}, quitar_falsas := 0) -> void:
 	if p.is_empty():
 		p = _siguiente()
 	if p.is_empty():
@@ -91,6 +92,16 @@ func preguntar(p: Dictionary = {}) -> void:
 			b.text = str(p.opciones[orden[i]])
 		b.disabled = false
 		_pintar(b, "normal")
+	# Analizar: tacha opciones falsas al azar (nunca la correcta).
+	var falsas := []
+	for i in orden.size():
+		if i != correcta:
+			falsas.append(i)
+	falsas.shuffle()
+	for k in mini(quitar_falsas, falsas.size() - 1):
+		var b := botones[falsas[k]]
+		b.disabled = true
+		_pintar(b, "tachada")
 	total = Lectura.reloj_trivia()
 	restante = total
 	var bono := total - Lectura.RELOJ_BASE
@@ -127,7 +138,7 @@ func _input(event: InputEvent) -> void:
 	var k: int = event.physical_keycode
 	for i in 4:
 		if k == KEY_1 + i or k == KEY_KP_1 + i:
-			if i < botones.size() and botones[i].visible:
+			if i < botones.size() and botones[i].visible and not botones[i].disabled:
 				get_viewport().set_input_as_handled()
 				_resolver(i)
 			return
@@ -359,12 +370,17 @@ func _pintar(b: Button, estado: String) -> void:
 			fondo = c_error.darkened(0.6)
 			borde = c_error
 			insignia = c_error
+		"tachada":
+			fondo = Color(0.08, 0.07, 0.1)
+			borde = Color(0.25, 0.22, 0.3)
+			insignia = Color(0.3, 0.27, 0.35)
+	var color_letra := c_texto if estado != "tachada" else Color(0.4, 0.37, 0.45)
 	for nombre in ["normal", "disabled", "focus"]:
 		b.add_theme_stylebox_override(nombre, _caja_boton(fondo, borde))
 	b.add_theme_stylebox_override("hover", _caja_boton(fondo.lightened(0.08), c_magia))
 	b.add_theme_stylebox_override("pressed", _caja_boton(fondo.lightened(0.12), c_magia))
 	for nombre in ["font_color", "font_hover_color", "font_pressed_color", "font_disabled_color"]:
-		b.add_theme_color_override(nombre, c_texto)
+		b.add_theme_color_override(nombre, color_letra)
 	var ins: Panel = b.get_node("Insignia")
 	(ins.get_theme_stylebox("panel") as StyleBoxFlat).bg_color = insignia
 
