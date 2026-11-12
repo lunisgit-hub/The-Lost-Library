@@ -1,9 +1,11 @@
-CollisionShape3D
+AudioStreamPlayer
+Node3D
 OmniLight3D
+Area3D
+CollisionShape3D
 Camera3D
 RayCast3D
 CharacterBody3D
-Area3D
 MeshInstance3D
 StaticBody3D
 Node

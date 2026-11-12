@@ -1,1 +1,4 @@
 res://zona_b.tscn
+res://personaje.gd
+res://archivista.gd
+res://disparador.gd

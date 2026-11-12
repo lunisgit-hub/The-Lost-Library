@@ -1,0 +1,14 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://hud.gd" id="1_hud"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_hud")
+
+[node name="Texto" type="Label" parent="."]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 216.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 24
+text = "Vida: 100"

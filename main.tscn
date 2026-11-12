@@ -8,6 +8,10 @@
 [ext_resource type="PackedScene" path="res://archivista.tscn" id="4_arch"]
 [ext_resource type="Script" path="res://apuntar.gd" id="5_apu"]
 [ext_resource type="Script" path="res://diana.gd" id="6_dia"]
+[ext_resource type="PackedScene" path="res://ataque_enemigo.tscn" id="7_atq"]
+[ext_resource type="Script" path="res://salud.gd" id="8_sal"]
+[ext_resource type="PackedScene" path="res://hud.tscn" id="9_hud"]
+[ext_resource type="Script" path="res://partida.gd" id="10_par"]
 
 [sub_resource type="ProceduralSkyMaterial" id="CieloMat"]
 
@@ -116,6 +120,18 @@ desde = 2
 danio = 1
 cadencia = 0.5
 
+[node name="Salud" type="Node" parent="Personaje"]
+script = ExtResource("8_sal")
+
 [node name="Archivista" parent="." node_paths=PackedStringArray("objetivo") instance=ExtResource("4_arch")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 1)
 objetivo = NodePath("../Personaje")
+
+[node name="Atacante" parent="." instance=ExtResource("7_atq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 6)
+
+[node name="HUD" parent="." instance=ExtResource("9_hud")]
+
+[node name="Partida" type="Node" parent="."]
+script = ExtResource("10_par")
+metas = 0
