@@ -1,3 +1,6 @@
-res://errante.tscn
+res://hud.tscn
+res://hud.gd
 res://zona_a.tscn
-res://sistema_sol.gd
+res://combate_manager.gd
+res://hud_combate.gd
+res://hud_trivia.gd

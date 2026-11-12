@@ -10,16 +10,25 @@
 [ext_resource type="Script" uid="uid://dcotlb3vuliv2" path="res://ciclo_dia.gd" id="6_o0wp1"]
 [ext_resource type="Script" uid="uid://dbo5p8hudao3i" path="res://fotometro.gd" id="8_cbh0l"]
 [ext_resource type="Script" uid="uid://dfube0o7q837r" path="res://luz_parpadeante.gd" id="10_lp"]
+[ext_resource type="Texture2D" uid="uid://boye42marj3xf" path="res://assets/wmremove-transformed (1).jpeg" id="11_annt8"]
+[ext_resource type="FontFile" uid="uid://dvh1um7a5e84r" path="res://assets/Cinzel-VariableFont_wght.ttf" id="12_8oax3"]
 [ext_resource type="PackedScene" uid="uid://dgqxnukdip61o" path="res://modelos_zona_A/puerta.glb" id="12_arch"]
+[ext_resource type="Texture2D" uid="uid://dqt6b7fgd2al1" path="res://assets/Hexagonal Shape Cleanup (2).png" id="12_kud2r"]
+[ext_resource type="Texture2D" uid="uid://f13sqpilalwt" path="res://assets/Captura de pantalla 2026-11-12 083257.png" id="13_enw75"]
 [ext_resource type="PackedScene" uid="uid://bn2xii0n4nd31" path="res://modelos_zona_A/libro_mesa.glb" id="13_lect"]
+[ext_resource type="Texture2D" uid="uid://det2ay6qfeaj5" path="res://assets/Hexagonal_Shape_Cleanup-removebg-preview.png" id="14_32pep"]
 [ext_resource type="PackedScene" uid="uid://c5t1s685hqs36" path="res://modelos_zona_A/estanteria.glb" id="14_shelf"]
+[ext_resource type="Texture2D" uid="uid://b6tq8ejpbdlap" path="res://assets/image-removebg-preview (1).png" id="15_8oax3"]
 [ext_resource type="PackedScene" uid="uid://vd5upj1g2bm1" path="res://modelos_zona_A/lampara.glb" id="15_candle"]
+[ext_resource type="Texture2D" uid="uid://csu24ouogdot4" path="res://assets/image-removebg-preview (2).png" id="16_enw75"]
 [ext_resource type="PackedScene" uid="uid://dj3ch1c1k6ubu" path="res://modelos_zona_A/mancha.glb" id="16_ptl27"]
 [ext_resource type="PackedScene" uid="uid://ddppmb8y2mc1v" path="res://modelos_zona_A/mesa.glb" id="16_table"]
 [ext_resource type="PackedScene" uid="uid://dupq0rswjd113" path="res://modelos_zona_A/monster.glb" id="17_book"]
+[ext_resource type="Texture2D" uid="uid://bno6h4bb2arot" path="res://assets/upscalemedia-transformed.png" id="17_vt0wd"]
 [ext_resource type="PackedScene" uid="uid://dyja15rvyyavx" path="res://modelos_zona_A/pasto.glb" id="18_inamy"]
 [ext_resource type="PackedScene" uid="uid://q7ksqnpfyyon" path="res://modelos_zona_A/ventana.glb" id="18_w0rip"]
 [ext_resource type="Script" uid="uid://bylh5217rak2e" path="res://herramientas/techo_oculta_cerca.gd" id="20_1isfj"]
+[ext_resource type="Texture2D" uid="uid://7o3v8isfk1se" path="res://assets/wmremove-transformed.webp" id="20_3nh0d"]
 [ext_resource type="PackedScene" uid="uid://b8wdrhbatx6mb" path="res://modelos_zona_A/muro.glb" id="20_em801"]
 [ext_resource type="PackedScene" uid="uid://cg16o6i2l2ro8" path="res://modelos_zona_A/techogood.glb" id="21_1isfj"]
 [ext_resource type="PackedScene" uid="uid://byu6eegfbr4iu" path="res://modelos_zona_A/techo.glb" id="22_e30ne"]
@@ -34,14 +43,13 @@
 [ext_resource type="PackedScene" uid="uid://ck1wtf2olddg2" path="res://modelos_zona_A/brasero_violeta.glb" id="30_bras"]
 [ext_resource type="Script" uid="uid://dfuyom5t84bes" path="res://colision_cajas.gd" id="31_col"]
 [ext_resource type="PackedScene" uid="uid://b726q84gckgwm" path="res://modelos_zona_A/escalera.glb" id="32_g5tc1"]
-
-[ext_resource type="Script" path="res://partida.gd" id="40_partida"]
-[ext_resource type="Script" path="res://salud.gd" id="41_salud"]
-[ext_resource type="PackedScene" path="res://hud.tscn" id="42_hudvida"]
-[ext_resource type="Script" path="res://combate_manager.gd" id="43_combate"]
+[ext_resource type="Script" uid="uid://bedyj56pipani" path="res://partida.gd" id="40_partida"]
+[ext_resource type="Script" uid="uid://bp17ynum7alra" path="res://salud.gd" id="41_salud"]
+[ext_resource type="PackedScene" uid="uid://bejrng75pgwqi" path="res://hud.tscn" id="42_hudvida"]
+[ext_resource type="Script" uid="uid://drqvtol6v0bg2" path="res://combate_manager.gd" id="43_combate"]
 [ext_resource type="PackedScene" path="res://hud_trivia.tscn" id="44_trivia"]
-[ext_resource type="Script" path="res://hud_combate.gd" id="45_hudcomb"]
-[ext_resource type="Script" path="res://enemigo_combate.gd" id="46_enemigo"]
+[ext_resource type="Script" uid="uid://hikg2st0bjcs" path="res://hud_combate.gd" id="45_hudcomb"]
+[ext_resource type="Script" uid="uid://d2oc7cwtpawe4" path="res://enemigo_combate.gd" id="46_enemigo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="CieloMat"]
 sky_top_color = Color(0.03, 0.04, 0.09, 1)
@@ -82,6 +90,9 @@ size = Vector3(30, 1, 42)
 [sub_resource type="CapsuleShape3D" id="Capsula"]
 radius = 0.35
 height = 1.75
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_32pep"]
+load_path = "res://.godot/imported/wmremove-transformed.webp-72d8ecf5adf2e470c9027bd5dc7214ad.ctex"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8bhdq"]
 size = Vector3(0.60639966, 1.3, 0.40604225)
@@ -780,7 +791,7 @@ current = true
 script = ExtResource("5_v0myi")
 objetivo = NodePath("..")
 
-[node name="Salud" type="Node" parent="Personaje"]
+[node name="Salud" type="Node" parent="Personaje" unique_id=1684236008]
 process_mode = 3
 script = ExtResource("41_salud")
 vida = 100
@@ -794,19 +805,44 @@ light_energy = 1.1
 omni_range = 4.5
 omni_attenuation = 1.6
 
-[node name="Partida" type="Node" parent="."]
+[node name="Partida" type="Node" parent="." unique_id=1781402432]
 script = ExtResource("40_partida")
-metas = 3
 
-[node name="HUD" parent="." instance=ExtResource("42_hudvida")]
+[node name="HUD" parent="." unique_id=1201245542 instance=ExtResource("42_hudvida")]
 
-[node name="Combate" type="Node" parent="."]
+[node name="Combate" type="Node" parent="." unique_id=73887599]
 script = ExtResource("43_combate")
 
-[node name="HudTrivia" parent="Combate" instance=ExtResource("44_trivia")]
+[node name="HudTrivia" parent="Combate" unique_id=845689773 instance=ExtResource("44_trivia")]
+tex_barra_fondo = ExtResource("14_32pep")
+tex_barra_relleno = ExtResource("12_kud2r")
+fuente_trivia = ExtResource("12_8oax3")
+tex_fondo = ExtResource("11_annt8")
+tex_marco = SubResource("CompressedTexture2D_32pep")
+quitar_fondo_negro_marco = false
+tex_sello = null
+tex_boton = ExtResource("14_32pep")
+alto_barra = 26.0
+tam_tarjeta = Vector2(800, 589)
+escala_marco_extra = Vector2(1.25, 1.25)
+tam_sello = Vector2(200, 118)
 
-[node name="HudCombate" type="CanvasLayer" parent="Combate"]
+[node name="HudCombate" type="CanvasLayer" parent="Combate" unique_id=1383513333]
 script = ExtResource("45_hudcomb")
+tex_barra_enemigo_fondo = ExtResource("15_8oax3")
+tex_barra_enemigo_relleno = ExtResource("17_vt0wd")
+alto_barra_enemigo = 75.0
+fuente_combate = ExtResource("12_8oax3")
+tex_boton_normal = ExtResource("13_enw75")
+tex_boton_hover = ExtResource("14_32pep")
+usar_tex_panel_dilema = true
+tex_panel_dilema = ExtResource("11_annt8")
+quitar_fondo_negro_dilema = true
+tex_boton_leer = ExtResource("14_32pep")
+tex_boton_quemar = ExtResource("13_enw75")
+tam_panel_dilema = Vector2(800, 230)
+tex_divisor = ExtResource("16_enw75")
+tex_sello = ExtResource("20_3nh0d")
 
 [node name="SistemaSol" type="Node" parent="." unique_id=1465283060 node_paths=PackedStringArray("sol", "entorno")]
 script = ExtResource("6_evii1")
@@ -1127,9 +1163,25 @@ metadata/hp = 25
 [node name="monster" parent="Nivel_ZonaA/Enemigos/E1_LibroDebil" unique_id=1770858054 instance=ExtResource("17_book")]
 transform = Transform3D(0.9457159, 0, 0, 0, 0.9457159, 0, 0, 0, 0.9457159, 12.095241, 1.0146334, 0.003232956)
 
+[node name="Combate" type="Node" parent="Nivel_ZonaA/Enemigos/E1_LibroDebil" unique_id=1576314787]
+script = ExtResource("46_enemigo")
+nombre = "Libro débil"
+pesos = Array[int]([70, 20, 10])
+semilla = 3
+ritmo = 1.2
+lore = "Un herbario olvidado: sus hojas aún recuerdan qué plantas respiraban la tinta de los lectores."
+punto = NodePath("../monster")
+
 [node name="E2_LibroCorrupto" parent="Nivel_ZonaA/Enemigos" unique_id=705784812 instance=ExtResource("1_57wwi")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -1, 0, 10)
 metadata/hp = 50
+
+[node name="Combate" type="Node" parent="Nivel_ZonaA/Enemigos/E2_LibroCorrupto" unique_id=780771787]
+script = ExtResource("46_enemigo")
+vida = 50
+semilla = 7
+habilidad = "escudo"
+lore = "Un tratado de astronomía manchado de violeta: alguien tachó las estrellas una por una."
 
 [node name="E3_GuardianTinta" type="Node3D" parent="Nivel_ZonaA/Enemigos" unique_id=1969751778]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
@@ -1138,28 +1190,7 @@ metadata/hp = 50
 [node name="monster" parent="Nivel_ZonaA/Enemigos/E3_GuardianTinta" unique_id=619524932 instance=ExtResource("17_book")]
 transform = Transform3D(2.31175, 0, 0, 0, 2.31175, 0, 0, 0, 2.31175, 0.004516032, 1.0999999, 0.007901558)
 
-[node name="Combate" type="Node" parent="Nivel_ZonaA/Enemigos/E1_LibroDebil"]
-script = ExtResource("46_enemigo")
-nombre = "Libro débil"
-vida = 25
-pesos = Array[int]([70, 20, 10])
-semilla = 3
-ritmo = 1.2
-habilidad = "hoja"
-lore = "Un herbario olvidado: sus hojas aún recuerdan qué plantas respiraban la tinta de los lectores."
-punto = NodePath("../monster")
-
-[node name="Combate" type="Node" parent="Nivel_ZonaA/Enemigos/E2_LibroCorrupto"]
-script = ExtResource("46_enemigo")
-nombre = "Libro corrupto"
-vida = 50
-semilla = 7
-ritmo = 1.0
-habilidad = "escudo"
-lore = "Un tratado de astronomía manchado de violeta: alguien tachó las estrellas una por una."
-punto = NodePath("..")
-
-[node name="Combate" type="Node" parent="Nivel_ZonaA/Enemigos/E3_GuardianTinta"]
+[node name="Combate" type="Node" parent="Nivel_ZonaA/Enemigos/E3_GuardianTinta" unique_id=2119323864]
 script = ExtResource("46_enemigo")
 nombre = "Guardián de tinta"
 vida = 50

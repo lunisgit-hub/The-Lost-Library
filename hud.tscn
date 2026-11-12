@@ -1,14 +1,51 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://bejrng75pgwqi"]
 
-[ext_resource type="Script" path="res://hud.gd" id="1_hud"]
+[ext_resource type="Script" uid="uid://c5d0b4snbk3op" path="res://hud.gd" id="1_hud"]
+[ext_resource type="Texture2D" uid="uid://bjimklkrccsxf" path="res://assets/barra_de_vidsa-removebg-preview (1).png" id="2_64ctp"]
+[ext_resource type="FontFile" uid="uid://dvh1um7a5e84r" path="res://assets/Cinzel-VariableFont_wght.ttf" id="3_8sq4i"]
 
-[node name="HUD" type="CanvasLayer"]
+[sub_resource type="LabelSettings" id="LabelSettings_1dvwm"]
+font = ExtResource("3_8sq4i")
+outline_size = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uxa2c"]
+bg_color = Color(0.101960786, 0.09411765, 0.105882354, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hchaj"]
+bg_color = Color(0.72156864, 0.11372549, 0.14117648, 1)
+border_width_top = 2
+border_color = Color(1, 0.41960785, 0.41960785, 1)
+
+[node name="HUD" type="CanvasLayer" unique_id=524317411]
 script = ExtResource("1_hud")
 
-[node name="Texto" type="Label" parent="."]
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 216.0
-offset_bottom = 50.0
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1777210973]
+offset_left = -111.0
+offset_top = 24.0
+offset_right = 413.0
+offset_bottom = 197.0
+texture = ExtResource("2_64ctp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Texto" type="Label" parent="." unique_id=237251357]
+modulate = Color(1, 0.113333344, 0.050000012, 1)
+offset_left = 99.0
+offset_top = 66.0
+offset_right = 306.0
+offset_bottom = 101.0
 theme_override_font_sizes/font_size = 24
 text = "Vida: 100"
+label_settings = SubResource("LabelSettings_1dvwm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BarraVida" type="ProgressBar" parent="." unique_id=163062518]
+offset_left = 142.0
+offset_top = 98.0
+offset_right = 280.0
+offset_bottom = 125.0
+theme_override_styles/background = SubResource("StyleBoxFlat_uxa2c")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hchaj")
+value = 100.0
+show_percentage = false

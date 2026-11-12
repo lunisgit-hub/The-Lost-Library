@@ -374,3 +374,26 @@ func _refrescar() -> void:
 
 func _esperar(s: float) -> void:
 	await get_tree().create_timer(s, true, false, true).timeout
+	
+	
+	
+	# Variables para recordar dónde estaba la cámara antes del combate
+var _cam_largo_orig := 4.5
+var _cam_rot_x_orig := -15.0
+
+func _enfocar_camara_combate(activar: bool) -> void:
+	if pj == null:
+		return
+	var brazo := pj.get_node_or_null("BrazoCamara") as SpringArm3D
+	if brazo == null:
+		return
+	var tw := create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	if activar:
+		_cam_largo_orig = brazo.spring_length
+		_cam_rot_x_orig = brazo.rotation_degrees.x
+		# Zoom estilo Expedition 33: más cerca y a la altura del hombro
+		tw.tween_property(brazo, "spring_length", 2.6, 0.45)
+		tw.parallel().tween_property(brazo, "rotation_degrees:x", -8.0, 0.45)
+	else:
+		tw.tween_property(brazo, "spring_length", _cam_largo_orig, 0.4)
+		tw.parallel().tween_property(brazo, "rotation_degrees:x", _cam_rot_x_orig, 0.4)
