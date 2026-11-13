@@ -1,12 +1,12 @@
 78098b89c88a74ebe8c20117b8754620
-::res://::1794599831
+::res://::1794600399
 apuntar.gd::GDScript::8548917388061763902::1794237212::0::1::::<>Node<><>0<>0<><>::
 archivista.gd::GDScript::4521888783526596606::1794500800::0::1::::<>CharacterBody3D<><>0<>0<><>::
 archivista.tscn::PackedScene::-1::1794237212::0::1::::<><><>0<>0<><>::res://archivista.gd<>uid://btbidf61ylt57::::res://personaje/character-male-d.glb
 ataque_enemigo.gd::GDScript::8247380570915681954::1794244484::0::1::::<>CharacterBody3D<><>0<>0<><>::
 ataque_enemigo.tscn::PackedScene::-1::1794244484::0::1::::<><><>0<>0<><>::res://ataque_enemigo.gd<>uid://btbidf61ylt57::::res://personaje/character-male-d.glb
 camara_sigue.gd::GDScript::702496538308901254::1793884884::0::1::::<>Camera3D<><>0<>0<><>::
-camera_sigue.gd::GDScript::6867205998602844222::1794598412::0::1::::<>Camera3D<><>0<>0<><>::
+camera_sigue.gd::GDScript::6867205998602844222::1794600266::0::1::::<>CharacterBody3D<><>0<>0<><>::
 ciclo_dia.gd::GDScript::7329714390266908221::1794237212::0::1::::CicloDia<>Node<><>0<>0<><>::
 colision_cajas.gd::GDScript::7552976710824571766::1794237212::0::1::::<>Node3D<><>0<>0<><>::
 combate_manager.gd::GDScript::8386812177680394659::1794597852::0::1::::CombateManager<>Node<><>0<>0<><>::
