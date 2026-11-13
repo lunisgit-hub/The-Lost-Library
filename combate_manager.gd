@@ -324,6 +324,9 @@ func _parry(danio: int, texto: String) -> void:
 	var golpeo := false
 	var inicio := Time.get_ticks_msec()
 	var anim_e := enemigo.find_child("AnimationPlayer", true, false) as AnimationPlayer
+	var ap := _anim_caballero()
+	if ap != null:
+		ap.play("Charged_Slash")
 	if anim_e != null and anim_e.has_animation("Charged_Slash"):
 		anim_e.play("Charged_Slash")
 	# Se juzga con la hora de la tecla (parry_ms), así un tirón de FPS no
@@ -769,3 +772,15 @@ func _enfurecer() -> void:
 	hud.mensaje("¡%s se enfurece! Ataca más rápido y más fuerte" % enemigo.nombre, hud.c_error)
 	_refrescar()
 	await _esperar(pausa_mensaje * 1.6)
+
+
+func _anim_caballero() -> AnimationPlayer:
+	if enemigo == null:
+		return null
+	var raiz: Node = enemigo.get_parent() if enemigo.get_parent() != null else enemigo
+	for nodo in raiz.find_children("*", "AnimationPlayer", true, false):
+		var ap := nodo as AnimationPlayer
+		if ap != null and ap.has_animation("Charged_Slash"):
+			ap.process_mode = Node.PROCESS_MODE_ALWAYS
+			return ap
+	return null

@@ -22,4 +22,4 @@ visible = false
 [node name="Vision" type="RayCast3D" parent="." unique_id=219323924]
 
 [node name="animacion_caballero" parent="." unique_id=170464687 instance=ExtResource("3_dp6ho")]
-transform = Transform3D(-3, 0, -4.5298742e-07, 0, 3, 0, 4.5298742e-07, 0, -3, 0, -0.7071703, 0)
+transform = Transform3D(-2, 0, -3.019916e-07, 0, 2, 0, 3.019916e-07, 0, -2, 0, -1.2485055, 0)

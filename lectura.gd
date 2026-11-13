@@ -171,11 +171,6 @@ func barra(f):
 	return "▮".repeat(llenos) + "▯".repeat(10 - llenos)
 
 
-<<<<<<< HEAD
-func mostrar(t, color):
-	texto.text = t
-=======
 func mostrar(contenido, color):
 	texto.text = contenido
->>>>>>> 415c2f486c5282aaa527cec2dc2a1ba88139ec95
 	texto.modulate = color

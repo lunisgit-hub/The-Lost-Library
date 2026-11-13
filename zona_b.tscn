@@ -9,15 +9,15 @@
 [ext_resource type="AudioStream" uid="uid://diiv8d10aclwf" path="res://sonidos/perder.mp3" id="7_yaqui"]
 [ext_resource type="Script" uid="uid://c43r45xkk1kmo" path="res://camera_sigue.gd" id="8_n70iv"]
 [ext_resource type="PackedScene" uid="uid://b8wdrhbatx6mb" path="res://modelos_zona_A/muro.glb" id="9_eyatn"]
-[ext_resource type="PackedScene" uid="uid://ri8dm7idq8mw" path="res://modelos_zona_A/monster.glb" id="9_ydptd"]
-[ext_resource type="PackedScene" uid="uid://cee6dguq4vtga" path="res://modelos_zona_A/estanteria.glb" id="10_r0ps7"]
-[ext_resource type="PackedScene" uid="uid://bwf2mvswekjji" path="res://modelos_zona_A/puerta.glb" id="11_61dqb"]
+[ext_resource type="PackedScene" uid="uid://dupq0rswjd113" path="res://modelos_zona_A/monster.glb" id="9_ydptd"]
+[ext_resource type="PackedScene" uid="uid://c5t1s685hqs36" path="res://modelos_zona_A/estanteria.glb" id="10_r0ps7"]
+[ext_resource type="PackedScene" uid="uid://dgqxnukdip61o" path="res://modelos_zona_A/puerta.glb" id="11_61dqb"]
 [ext_resource type="AudioStream" uid="uid://blw4xx785sofv" path="res://sonidos/victoria.mp3" id="11_dpv7s"]
 [ext_resource type="PackedScene" path="res://archivista.tscn" id="12_61dqb"]
-[ext_resource type="PackedScene" uid="uid://cbaena11qw6rr" path="res://modelos_zona_A/lampara.glb" id="12_r0ps7"]
+[ext_resource type="PackedScene" uid="uid://vd5upj1g2bm1" path="res://modelos_zona_A/lampara.glb" id="12_r0ps7"]
 [ext_resource type="AudioStream" uid="uid://bvgdrcadnnags" path="res://sonidos/ataque.mp3" id="13_61dqb"]
 [ext_resource type="PackedScene" uid="uid://ck1wtf2olddg2" path="res://modelos_zona_A/brasero_violeta.glb" id="15_ayegb"]
-[ext_resource type="PackedScene" uid="uid://buedtbwfdxnwg" path="res://modelos_zona_A/libro_mesa.glb" id="17_6bod1"]
+[ext_resource type="PackedScene" uid="uid://bn2xii0n4nd31" path="res://modelos_zona_A/libro_mesa.glb" id="17_6bod1"]
 [ext_resource type="PackedScene" uid="uid://dyb2hnlweyccl" path="res://modelos_zona_A/farol_pared.glb" id="18_yaqui"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ydptd"]
@@ -141,12 +141,11 @@ transform = Transform3D(-2.6, 0, 0, 0, 2.6, 0, 0, 0, -2.6, 0, 0, 0)
 [node name="Rodar" type="Node" parent="Personaje" unique_id=2096378637]
 script = ExtResource("6_r8jko")
 
-[node name="Camera3D" type="Camera3D" parent="Personaje" unique_id=1182312154 node_paths=PackedStringArray("camara")]
+[node name="Camera3D" type="Camera3D" parent="Personaje" unique_id=1182312154]
 transform = Transform3D(1, 0, 0, 0, 0.9659259, 0.25881907, 0, -0.25881907, 0.9659258, 0, 1.8000002, 5.513615)
 cull_mask = 1048573
 current = true
 script = ExtResource("8_n70iv")
-camara = NodePath(".")
 
 [node name="Luz_Pluma" type="OmniLight3D" parent="Personaje" unique_id=719624385]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 1.4, 0.2)
