@@ -1,47 +1,47 @@
 extends CharacterBody3D
-
+ 
 enum Estado { QUIETO, CAMINAR, EN_COMBATE }
 const RAPIDEZ_ESTADO = [0.0, 4.0, 0.0] # Rapidez máxima en cada estado (m/s)
-
+ 
 @export var camara: Camera3D
 @export var speed_caminar = 4.0
 @export var speed_correr = 7.0
 @export var tiempo_arranque = 0.20
 @onready var anim = $Modelo/AnimationPlayer
-
+ 
 var multiplicador = 1.0
 var empuje = Vector3.ZERO
 var accion = ""
 var avance = Vector3.ZERO
-
+ 
 var estado = Estado.QUIETO
 var rapidez_max_estado = 0.0
-
+ 
 func _physics_process(delta):
 	velocity += get_gravity() * delta
 	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var entrada = Vector3(input_dir.x, 0.0, input_dir.y)
-
+ 
 	var giro_cam = camara.global_rotation.y
 	var direction = entrada.rotated(Vector3.UP, giro_cam).normalized()
-
+ 
 	var peleando = Input.is_action_pressed("combate") if InputMap.has_action("combate") else false
 	var mult_actual = 0.0 if peleando else multiplicador
-
+ 
 	var corre = Input.is_action_pressed("correr")
 	var speed = speed_correr if corre else speed_caminar
 	var objetivo = direction * speed * mult_actual
 	var paso = speed / tiempo_arranque * delta
-
+ 
 	avance = avance.move_toward(objetivo, paso)
 	velocity.x = avance.x + empuje.x
 	velocity.z = avance.z + empuje.z
-
+ 
 	if direction.length() > 0 and not peleando:
 		basis = Basis.looking_at(direction)
-
+ 
 	move_and_slide()
-
+ 
 	var antes = estado
 	estado = elegir_estado()
 	rapidez_max_estado = RAPIDEZ_ESTADO[estado]
@@ -49,7 +49,7 @@ func _physics_process(delta):
 		print("estado ", Estado.keys()[estado], " rapidez ", rapidez_max_estado, " m/s")
 	animar()
 	_prueba()
-
+ 
 func elegir_estado():
 	if InputMap.has_action("combate") and Input.is_action_pressed("combate"):
 		return Estado.EN_COMBATE
@@ -57,7 +57,7 @@ func elegir_estado():
 	if rapidez < 0.1:
 		return Estado.QUIETO
 	return Estado.CAMINAR
-
+ 
 func animar():
 	if accion != "":
 		anim.speed_scale = 1.0
@@ -77,8 +77,8 @@ func animar():
 		Estado.EN_COMBATE:
 			anim.speed_scale = 1.0
 			anim.play("idle")
-
-
+ 
+ 
 # ---------------------------------------------------------------------------
 # PRUEBAS AUTOMÁTICAS. No hace falta entender esta parte: en el Inspector del
 # Personaje elijan "Prueba" (y, si la prueba usa una acción, escriban su nombre
@@ -91,8 +91,8 @@ var _cuadro = 0
 var _termino = false
 var _y_max = 0.0
 var _cuadro_max = 0
-
-
+ 
+ 
 func _prueba():
 	if prueba == 0 or _termino:
 		return
@@ -137,8 +137,8 @@ func _prueba():
 		_termino = true
 		if _y_max > 0.01:
 			print("[prueba] altura máxima ", snappedf(_y_max, 0.01), " en el cuadro ", _cuadro_max)
-
-
+ 
+ 
 func _resumen():
 	var t = "posición " + str(global_position.snappedf(0.01))
 	t += " · rapidez " + str(snappedf(Vector2(velocity.x, velocity.z).length(), 0.01))
@@ -147,36 +147,36 @@ func _resumen():
 	for nodo in _con_estado():
 		t += " · " + str(nodo.name) + ".estado " + _nombre(nodo)
 	return t
-
-
+ 
+ 
 # Escribe el cuadro exacto en el que cambia cualquier variable "estado".
 var _antes = {}
-
-
+ 
+ 
 func _cambios(n):
 	for nodo in _con_estado():
 		var e = _nombre(nodo)
 		if _antes.has(nodo) and _antes[nodo] != e:
 			print("[prueba] cuadro ", n, ": ", nodo.name, ".estado cambia a ", e)
 		_antes[nodo] = e
-
-
+ 
+ 
 func _con_estado():
 	var lista = []
 	for nodo in [self] + get_children() + get_tree().get_nodes_in_group("probar"):
 		if nodo.get_script() != null and "estado" in nodo:
 			lista.append(nodo)
 	return lista
-
-
+ 
+ 
 func _nombre(nodo):
 	var nombres = nodo.get_script().get_script_constant_map().get("Estado", {})
 	for k in nombres:
 		if nombres[k] == nodo.estado:
 			return k
 	return str(nodo.estado)
-
-
+ 
+ 
 func _apretar(a):
 	if a == "":
 		print("[prueba] escriban el nombre de la acción en 'Accion Prueba'")
@@ -184,8 +184,8 @@ func _apretar(a):
 		print("[prueba] falta la acción '", a, "' en el Input Map")
 	else:
 		Input.action_press(a)
-
-
+ 
+ 
 func _soltar(a):
 	if a != "" and InputMap.has_action(a):
 		Input.action_release(a)
