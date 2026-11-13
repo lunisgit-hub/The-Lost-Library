@@ -20,6 +20,7 @@ extends Node
 @export var radio := 1.8                # metros para que empiece el combate
 @export var punto: NodePath = ^".."     # dónde está el enemigo que se ve
 @export var color_luz := Color(0.56, 0.26, 0.82)
+@export var es_jefe := false
 
 var turno: Node
 var luz: OmniLight3D

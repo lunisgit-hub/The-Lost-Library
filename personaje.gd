@@ -5,7 +5,7 @@ const RAPIDEZ_ESTADO = [0.0, 4.0, 0.0] # Rapidez máxima en cada estado (m/s)
 
 @export var camara: Camera3D
 @export var speed_caminar = 4.0
-@export var speed_correr = 4.0
+@export var speed_correr = 7.0
 @export var tiempo_arranque = 0.20
 @onready var anim = $Modelo/AnimationPlayer
 
@@ -68,8 +68,12 @@ func animar():
 			anim.speed_scale = 1.0
 			anim.play("idle")
 		Estado.CAMINAR:
-			anim.speed_scale = avance.length() / speed_caminar
-			anim.play("walk")
+			if avance.length() > speed_caminar + 0.5:
+				anim.speed_scale = avance.length() / speed_correr
+				anim.play("sprint")
+			else:
+				anim.speed_scale = avance.length() / speed_caminar
+				anim.play("walk")
 		Estado.EN_COMBATE:
 			anim.speed_scale = 1.0
 			anim.play("idle")

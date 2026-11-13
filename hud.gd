@@ -22,5 +22,6 @@ func mostrar(vida):
 	# Si existe BarraVida, la anima suavemente en 0.25 segundos hasta el nuevo valor
 	if barra_vida != null:
 		var tween = create_tween()
+		tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 		tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		tween.tween_property(barra_vida, "value", float(vida), 0.25)
