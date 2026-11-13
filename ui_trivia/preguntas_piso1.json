@@ -1,0 +1,22 @@
+{
+  "piso": 1,
+  "tema": "Ciencias naturales",
+  "preguntas": [
+    { "texto": "¿Qué gas absorben las plantas para hacer la fotosíntesis?", "opciones": ["Dióxido de carbono", "Oxígeno", "Nitrógeno", "Helio"], "correcta": 0 },
+    { "texto": "¿Cuál es el planeta más grande del sistema solar?", "opciones": ["Júpiter", "Saturno", "Neptuno", "La Tierra"], "correcta": 0 },
+    { "texto": "¿Cuántos huesos tiene el cuerpo humano adulto?", "opciones": ["206", "180", "250", "312"], "correcta": 0 },
+    { "texto": "¿Qué órgano bombea la sangre por todo el cuerpo?", "opciones": ["El corazón", "El hígado", "Los pulmones", "El riñón"], "correcta": 0 },
+    { "texto": "¿Cuál es el símbolo químico del oro?", "opciones": ["Au", "Ag", "Or", "Go"], "correcta": 0 },
+    { "texto": "¿A qué temperatura hierve el agua al nivel del mar?", "opciones": ["100 °C", "90 °C", "120 °C", "80 °C"], "correcta": 0 },
+    { "texto": "¿Qué parte de la célula guarda el ADN?", "opciones": ["El núcleo", "La membrana", "El citoplasma", "La pared celular"], "correcta": 0 },
+    { "texto": "¿Cuál es el animal terrestre más rápido?", "opciones": ["El guepardo", "El león", "El caballo", "El antílope"], "correcta": 0 },
+    { "texto": "¿Qué planeta es conocido como el planeta rojo?", "opciones": ["Marte", "Venus", "Mercurio", "Júpiter"], "correcta": 0 },
+    { "texto": "¿Cuál es la sustancia natural más dura?", "opciones": ["El diamante", "El hierro", "El cuarzo", "El oro"], "correcta": 0 },
+    { "texto": "¿Qué tipo de animal es la ballena?", "opciones": ["Un mamífero", "Un pez", "Un reptil", "Un anfibio"], "correcta": 0 },
+    { "texto": "¿Qué gas necesitamos respirar para vivir?", "opciones": ["Oxígeno", "Hidrógeno", "Dióxido de carbono", "Argón"], "correcta": 0 },
+    { "texto": "¿Cuál es la estrella más cercana a la Tierra?", "opciones": ["El Sol", "Sirio", "Alfa Centauri", "La Estrella Polar"], "correcta": 0 },
+    { "texto": "¿Qué fuerza nos mantiene pegados al suelo?", "opciones": ["La gravedad", "El magnetismo", "La fricción", "La inercia"], "correcta": 0 },
+    { "texto": "¿Cuántas patas tiene un insecto?", "opciones": ["Seis", "Ocho", "Cuatro", "Diez"], "correcta": 0 },
+    { "texto": "¿En qué estado está el agua cuando es hielo?", "opciones": ["Sólido", "Líquido", "Gaseoso", "Plasma"], "correcta": 0 }
+  ]
+}

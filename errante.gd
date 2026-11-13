@@ -153,7 +153,7 @@ func _moverse_hacia(destino: Vector3, factor: float, delta: float) -> void:
 	velocity.z = move_toward(velocity.z, objetivo.z, aceleracion * delta)
 
 	if objetivo.length() > 0.1:
-		basis = basis.slerp(
+		basis = basis.orthonormalized().slerp(
 			Basis.looking_at(objetivo),
 			delta * 8.0
 		).orthonormalized()

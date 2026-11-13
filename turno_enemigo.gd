@@ -15,6 +15,9 @@ enum Accion { ATACAR, CARGAR, DEFENDER, GOLPE_FUERTE, CURARSE }
 @export var pesos: Array[int] = [50, 30, 20]
 @export var semilla = 7
 @export var factor_acelera = 0.8
+# true: juega un turno solo cada "ritmo" segundos (la prueba del Taller 9).
+# false: espera a que el combate (combate_manager.gd) llame a jugar_turno().
+@export var automatico = true
 
 var indice = 0
 var turno_numero = 0
@@ -28,7 +31,7 @@ func _ready():
 	reloj = ritmo
 
 func _physics_process(delta):
-	if turno_numero >= cuantos_turnos:
+	if not automatico or turno_numero >= cuantos_turnos:
 		return
 	reloj -= delta
 	if reloj <= 0.001:
@@ -56,6 +59,7 @@ func jugar_turno():
 			curas -= 1
 			vida += cura
 			print(" se cura: vida ", vida)
+	return accion
 
 func decidir():
 	if cargado:

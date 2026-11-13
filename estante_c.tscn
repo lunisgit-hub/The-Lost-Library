@@ -1,0 +1,54 @@
+[gd_scene format=3]
+
+[sub_resource type="StandardMaterial3D" id="Madera"]
+albedo_color = Color(0.25, 0.15, 0.08, 1)
+
+[sub_resource type="BoxMesh" id="Marco"]
+material = SubResource("Madera")
+size = Vector3(2, 3, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="Rojo"]
+albedo_color = Color(0.45, 0.12, 0.1, 1)
+
+[sub_resource type="StandardMaterial3D" id="Ocre"]
+albedo_color = Color(0.6, 0.42, 0.18, 1)
+
+[sub_resource type="StandardMaterial3D" id="Verde"]
+albedo_color = Color(0.25, 0.3, 0.15, 1)
+
+[sub_resource type="BoxMesh" id="LibrosA"]
+material = SubResource("Rojo")
+size = Vector3(1.7, 0.6, 0.2)
+
+[sub_resource type="BoxMesh" id="LibrosB"]
+material = SubResource("Ocre")
+size = Vector3(1.5, 0.55, 0.2)
+
+[sub_resource type="BoxMesh" id="LibrosC"]
+material = SubResource("Verde")
+size = Vector3(1.6, 0.5, 0.2)
+
+[sub_resource type="BoxShape3D" id="Forma"]
+size = Vector3(2, 3, 0.5)
+
+[node name="Estante" type="StaticBody3D"]
+
+[node name="Marco" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("Marco")
+
+[node name="Libros1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.2)
+mesh = SubResource("LibrosA")
+
+[node name="Libros2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 1.4, 0.2)
+mesh = SubResource("LibrosB")
+
+[node name="Libros3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 2.3, 0.2)
+mesh = SubResource("LibrosC")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("Forma")

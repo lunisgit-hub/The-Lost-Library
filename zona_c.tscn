@@ -1,0 +1,139 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://zona_c.gd" id="1_zc"]
+[ext_resource type="Script" uid="uid://cchv43eug6720" path="res://personaje.gd" id="2_pj"]
+[ext_resource type="PackedScene" uid="uid://bkmexfnojlmxi" path="res://personaje/character-male-a.glb" id="3_mod"]
+[ext_resource type="Script" uid="uid://67g8ul8ywidy" path="res://rodar.gd" id="4_rod"]
+[ext_resource type="Script" uid="uid://c43r45xkk1kmo" path="res://camera_sigue.gd" id="5_cam"]
+[ext_resource type="Script" path="res://salud.gd" id="6_sal"]
+[ext_resource type="PackedScene" path="res://hud.tscn" id="7_hud"]
+[ext_resource type="Script" uid="uid://bedyj56pipani" path="res://partida.gd" id="8_par"]
+[ext_resource type="Script" uid="uid://drqvtol6v0bg2" path="res://combate_manager.gd" id="9_com"]
+[ext_resource type="PackedScene" path="res://hud_trivia.tscn" id="10_tri"]
+[ext_resource type="Script" uid="uid://hikg2st0bjcs" path="res://hud_combate.gd" id="11_hc"]
+[ext_resource type="Texture2D" uid="uid://boye42marj3xf" path="res://assets/wmremove-transformed (1).jpeg" id="12_fondo"]
+[ext_resource type="FontFile" uid="uid://dvh1um7a5e84r" path="res://assets/Cinzel-VariableFont_wght.ttf" id="13_fuente"]
+[ext_resource type="Texture2D" uid="uid://dqt6b7fgd2al1" path="res://assets/Hexagonal Shape Cleanup (2).png" id="14_hex"]
+[ext_resource type="Texture2D" uid="uid://f13sqpilalwt" path="res://assets/Captura de pantalla 2026-11-12 083257.png" id="15_btn"]
+[ext_resource type="Texture2D" uid="uid://det2ay6qfeaj5" path="res://assets/Hexagonal_Shape_Cleanup-removebg-preview.png" id="16_hex2"]
+[ext_resource type="Texture2D" uid="uid://b6tq8ejpbdlap" path="res://assets/image-removebg-preview (1).png" id="17_bfondo"]
+[ext_resource type="Texture2D" uid="uid://csu24ouogdot4" path="res://assets/image-removebg-preview (2).png" id="18_div"]
+[ext_resource type="Texture2D" uid="uid://bno6h4bb2arot" path="res://assets/upscalemedia-transformed.png" id="19_brell"]
+[ext_resource type="Texture2D" uid="uid://7o3v8isfk1se" path="res://assets/wmremove-transformed.webp" id="20_marco"]
+
+[sub_resource type="Environment" id="Entorno"]
+background_mode = 1
+background_color = Color(0.03, 0.018, 0.01, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.45, 0.3, 0.16, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 3
+tonemap_exposure = 1.1
+tonemap_white = 6.0
+glow_enabled = true
+glow_intensity = 1.2
+glow_strength = 1.15
+glow_bloom = 0.12
+glow_blend_mode = 0
+glow_hdr_threshold = 0.85
+fog_enabled = true
+fog_light_color = Color(0.42, 0.26, 0.1, 1)
+fog_light_energy = 0.9
+fog_density = 0.016
+fog_sky_affect = 0.0
+adjustment_enabled = true
+adjustment_contrast = 1.1
+adjustment_saturation = 1.1
+
+[sub_resource type="CapsuleShape3D" id="Capsula"]
+radius = 0.35
+height = 1.75
+
+[node name="zona_c" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Entorno")
+
+[node name="Sala" type="Node3D" parent="."]
+script = ExtResource("1_zc")
+
+[node name="Personaje" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camara") groups=["jugador"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 38)
+script = ExtResource("2_pj")
+camara = NodePath("Camera3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Personaje"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+shape = SubResource("Capsula")
+
+[node name="Modelo" parent="Personaje" instance=ExtResource("3_mod")]
+transform = Transform3D(-2.6, 0, 0, 0, 2.6, 0, 0, 0, -2.6, 0, 0, 0)
+
+[node name="Rodar" type="Node" parent="Personaje"]
+script = ExtResource("4_rod")
+
+[node name="Salud" type="Node" parent="Personaje"]
+process_mode = 3
+script = ExtResource("6_sal")
+vida = 100
+invulnerable = 0.3
+reapariciones = 0
+
+[node name="Camera3D" type="Camera3D" parent="Personaje" node_paths=PackedStringArray("objetivo")]
+transform = Transform3D(1, 0, 0, 0, 0.9659259, 0.25881907, 0, -0.25881907, 0.9659258, 0, 1.8, 0)
+current = true
+script = ExtResource("5_cam")
+objetivo = NodePath("..")
+inclinacion = 42.0
+distancia = 11.0
+distancia_max = 18.0
+limite_min = Vector2(-16, -56)
+limite_max = Vector2(16, 42)
+altura_max = 22.0
+techo_bajo = 0.0
+
+[node name="Luz_Pluma" type="OmniLight3D" parent="Personaje"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 1.4, 0.2)
+light_color = Color(1, 0.78, 0.5, 1)
+light_energy = 1.1
+omni_range = 4.5
+omni_attenuation = 1.6
+
+[node name="Partida" type="Node" parent="."]
+script = ExtResource("8_par")
+metas = 1
+
+[node name="HUD" parent="." instance=ExtResource("7_hud")]
+
+[node name="Combate" type="Node" parent="."]
+script = ExtResource("9_com")
+
+[node name="HudTrivia" parent="Combate" instance=ExtResource("10_tri")]
+tex_barra_fondo = ExtResource("16_hex2")
+tex_barra_relleno = ExtResource("14_hex")
+fuente_trivia = ExtResource("13_fuente")
+tex_fondo = ExtResource("12_fondo")
+tex_marco = ExtResource("20_marco")
+quitar_fondo_negro_marco = false
+tex_boton = ExtResource("16_hex2")
+alto_barra = 26.0
+tam_tarjeta = Vector2(800, 589)
+escala_marco_extra = Vector2(1.25, 1.25)
+tam_sello = Vector2(200, 118)
+
+[node name="HudCombate" type="CanvasLayer" parent="Combate"]
+script = ExtResource("11_hc")
+tex_barra_enemigo_fondo = ExtResource("17_bfondo")
+tex_barra_enemigo_relleno = ExtResource("19_brell")
+alto_barra_enemigo = 75.0
+fuente_combate = ExtResource("13_fuente")
+tex_boton_normal = ExtResource("15_btn")
+tex_boton_hover = ExtResource("16_hex2")
+usar_tex_panel_dilema = true
+tex_panel_dilema = ExtResource("12_fondo")
+quitar_fondo_negro_dilema = true
+tex_boton_leer = ExtResource("16_hex2")
+tex_boton_quemar = ExtResource("15_btn")
+tam_panel_dilema = Vector2(800, 230)
+tex_divisor = ExtResource("18_div")
+tex_sello = ExtResource("20_marco")

@@ -4,7 +4,7 @@ extends Node
 @export var alcance = 1.5
 @onready var pj = get_parent()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if Input.is_action_just_pressed(tecla):
 		var obj = mas_cercano()
 		if obj == null:
