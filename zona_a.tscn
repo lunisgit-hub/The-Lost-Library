@@ -923,7 +923,7 @@ transform = Transform3D(0.90630776, 0, 0.42261827, 0, 1, 0, -0.42261827, 0, 0.90
 transform = Transform3D(2.3105628, 0, -5.9604645e-08, 0, 2.3105626, 0, 5.9604645e-08, 0, 2.3105628, -7.076478, 0.65377665, -3.818452)
 
 [node name="mesa2" parent="Nivel_ZonaA/Props/O1_MesaCaida" unique_id=1278437917 instance=ExtResource("16_table")]
-transform = Transform3D(2.3105628, 0, -5.9604645e-08, 0, 2.3105626, 0, 5.9604645e-08, 0, 2.3105628, 9.859605, 0.65377665, 12.24413)
+transform = Transform3D(2.3105628, 0, -5.9604645e-08, 0, 2.3105626, 0, 5.9604645e-08, 0, 2.3105628, 9.878898, 0.50315595, 12.253127)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Nivel_ZonaA/Props/O1_MesaCaida/mesa2" unique_id=388138470]
 transform = Transform3D(0.43279505, 0, 1.4901161e-08, 0, 0.43279502, 0, -1.4901161e-08, 0, 0.43279505, -0.37966204, 0, -0.17703915)

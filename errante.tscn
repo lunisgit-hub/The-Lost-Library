@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cnnt7wud4jvbs" path="res://errante.gd" id="1_458f2"]
 [ext_resource type="PackedScene" uid="uid://btbidf61ylt57" path="res://personaje/character-male-d.glb" id="2_dp6ho"]
+[ext_resource type="PackedScene" uid="uid://c6yth0vvkn77e" path="res://assets/animacion_caballero.glb" id="3_dp6ho"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uxa2c"]
 radius = 0.35
@@ -16,5 +17,9 @@ shape = SubResource("CapsuleShape3D_uxa2c")
 
 [node name="Modelo" parent="." unique_id=318469135 instance=ExtResource("2_dp6ho")]
 transform = Transform3D(-1.5, 0, -1.3113416e-07, 0, 1.5, 0, 1.3113416e-07, 0, -1.5, 0, -0.5, 0)
+visible = false
 
 [node name="Vision" type="RayCast3D" parent="." unique_id=219323924]
+
+[node name="animacion_caballero" parent="." unique_id=170464687 instance=ExtResource("3_dp6ho")]
+transform = Transform3D(-3, 0, -4.5298742e-07, 0, 3, 0, 4.5298742e-07, 0, -3, 0, -0.7071703, 0)

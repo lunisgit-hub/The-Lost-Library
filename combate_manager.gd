@@ -122,6 +122,10 @@ func iniciar(e: EnemigoCombate) -> void:
 	trivia.enemigo = turno
 	get_tree().paused = true
 	enemigo.en_combate(true)
+	var anim_e := enemigo.find_child("AnimationPlayer", true, false) as AnimationPlayer
+	if anim_e != null:
+		anim_e.process_mode = Node.PROCESS_MODE_ALWAYS
+		anim_e.play("Walking", -1, 0.35) # Respira/camina lento en guardia
 	hud.abrir(e.nombre)
 	var cam := get_viewport().get_camera_3d()
 	if cam and cam.has_method("enfocar_combate"):
@@ -319,6 +323,9 @@ func _parry(danio: int, texto: String) -> void:
 	_anim(anim_e, "interact-right")
 	var golpeo := false
 	var inicio := Time.get_ticks_msec()
+	var anim_e := enemigo.find_child("AnimationPlayer", true, false) as AnimationPlayer
+	if anim_e != null and anim_e.has_animation("Charged_Slash"):
+		anim_e.play("Charged_Slash")
 	# Se juzga con la hora de la tecla (parry_ms), así un tirón de FPS no
 	# convierte un parry a tiempo en uno tarde.
 	while true:

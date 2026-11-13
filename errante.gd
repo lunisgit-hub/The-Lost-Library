@@ -22,10 +22,13 @@ var jugador: Node3D = null
 var puntos: Array[Vector3] = []
 
 @onready var vision: RayCast3D = $Vision
+@onready var anim: AnimationPlayer = find_child("AnimationPlayer", true, false)
 
 
 func _ready() -> void:
 	jugador = get_tree().get_first_node_in_group("jugador")
+	if anim != null and anim.has_animation("Walking"):
+		anim.play("Walking")
 
 	for desplazamiento in ruta:
 		puntos.append(global_position + desplazamiento)
@@ -62,6 +65,12 @@ func _tiene_linea_vision() -> bool:
 
 
 func _physics_process(delta: float) -> void:
+	if anim != null:
+		if velocity.length() > 0.1:
+			if anim.current_animation != "Walking":
+				anim.play("Walking")
+		elif anim.current_animation == "Walking":
+			anim.stop() # O anim.play("Walking", -1, 0.0) para que quede en pose de guardia
 	velocity += get_gravity() * delta
 
 	var distancia: float = INF
@@ -90,6 +99,7 @@ func _physics_process(delta: float) -> void:
 		Estado.HUIR:
 			if jugador != null:
 				_moverse_lejos_de(jugador.global_position, delta)
+				
 
 	move_and_slide()
 
@@ -141,3 +151,5 @@ func _moverse_lejos_de(amenaza: Vector3, delta: float) -> void:
 func _frenar(delta: float) -> void:
 	velocity.x = move_toward(velocity.x, 0.0, aceleracion * delta)
 	velocity.z = move_toward(velocity.z, 0.0, aceleracion * delta)
+	
+	
