@@ -21,9 +21,27 @@ const HABILIDADES = {
 
 @export var tinta_inicial := 1
 @export var tinta_max := 6
-@export var ventana_parry := 0.5
-@export var ventana_fallo := 0.25
+@export var ventana_parry := 0.3       # segundos para el parry (antes 0.5: muy fácil)
+@export var ventana_fallo := 0.18      # tras fallar la trivia
+@export var ventana_escudo := 0.5      # con «Página escudo»
 @export var aviso_min := 0.35          # el aviso del golpe nunca baja de esto
+@export_group("Dificultad")
+@export var multiplicador_danio := 1.3 # daño de los enemigos x esto
+@export var mostrar_ventana := false   # true = el anillo se ilumina al abrirse la ventana (modo fácil)
+@export var danio_contraataque := 10   # al parar TODOS los golpes de un combo: este + 4 por golpe
+@export var ventana_esquiva := 0.5     # esquivar (Ctrl / acción "rodar"): más fácil, pero sin Tinta ni contraataque
+@export var aviso_sonoro := 0.3        # el sonido de aviso suena esto antes del impacto (0 = sin aviso)
+@export_group("")
+
+const SONIDOS = {
+	"parry": "res://sonidos/parry.wav",
+	"aviso": "res://sonidos/aviso_golpe.wav",
+	"herida": "res://sonidos/herida.wav",
+	"esquiva": "res://sonidos/esquiva.wav",
+	"contra": "res://sonidos/contraataque.wav",
+}
+var altavoces := {}
+var esquiva_presionada := false
 @export var danio_hoja := 15
 @export var extra_llama := 10
 @export var danio_quema := 10
@@ -63,10 +81,22 @@ var alto_e := 2.0
 var vineta: CanvasLayer
 var es_jefe := false
 var enfurecido := false
+var azar := RandomNumberGenerator.new()   # tiempos del enemigo: distintos en cada partida
+var ultimo_patron := ""
 
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	azar.randomize()
+	for clave in SONIDOS:
+		var st := load(SONIDOS[clave]) as AudioStream
+		if st == null:
+			continue
+		var a := AudioStreamPlayer.new()
+		a.stream = st
+		a.process_mode = Node.PROCESS_MODE_ALWAYS
+		add_child(a)
+		altavoces[clave] = a
 	add_to_group("combate")
 	pj = get_tree().get_first_node_in_group("jugador")
 	if pj:
@@ -99,8 +129,10 @@ func _input(event: InputEvent) -> void:
 		return
 	var espacio: bool = event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_SPACE
 	var clic: bool = event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT
-	if (espacio or clic) and not parry_presionado:
+	var esquivar: bool = InputMap.has_action("rodar") and event.is_action_pressed("rodar") and not event.is_echo()
+	if (espacio or clic or esquivar) and not parry_presionado:
 		parry_presionado = true
+		esquiva_presionada = esquivar and not (espacio or clic)
 		parry_ms = Time.get_ticks_msec()     # la hora exacta de la tecla, no la del cuadro
 		get_viewport().set_input_as_handled()
 
@@ -290,10 +322,10 @@ func _turno_enemigo() -> void:
 	var A = turno.Accion
 	match accion:
 		A.ATACAR:
-			await _parry(enemigo.danio, "%s ataca" % enemigo.nombre)
+			await _ataque_enemigo(false)
 		A.GOLPE_FUERTE:
 			enemigo.cargando(false)
-			await _parry(enemigo.danio_fuerte, "¡Golpe fuerte!")
+			await _ataque_enemigo(true)
 		A.CARGAR:
 			enemigo.cargando(true)
 			hud.mensaje("%s carga tinta… su próximo golpe será fuerte" % enemigo.nombre, hud.c_magia)
@@ -310,74 +342,328 @@ func _turno_enemigo() -> void:
 	_refrescar()
 
 
-# El aviso dura turno.ritmo (más corto si fallaste trivias); luego se abre la
-# ventana. Presionar antes de tiempo cuenta como fallo, para que no se pueda
-# spamear el Espacio.
-func _parry(danio: int, texto: String) -> void:
-	fase = Fase.PARRY
-	var ventana := ventana_parry if (escudo or not fallo_trivia) else ventana_fallo
+# ------------------------------------------------------------- ataques y parry
+# Estilo Expedition 33: cada ataque es un patrón al azar (golpe rápido, normal,
+# retrasado con amago, combo de 2-3 golpes, furia del jefe). Cada golpe del
+# combo se para por separado y el momento exacto NO se muestra en pantalla:
+# hay que leer al enemigo (se echa atrás, tiembla y embiste). Presionar antes
+# de tiempo cuenta como fallo, para que no se pueda spamear.
+# Parar todos los golpes de un ataque da +1 Tinta; si era un combo, además un contraataque.
+
+const PATRONES_NIVEL = [
+	{"rapido": 30, "normal": 40, "retrasado": 15, "doble": 15},
+	{"rapido": 20, "normal": 20, "retrasado": 20, "doble": 25, "triple": 15},
+	{"rapido": 10, "normal": 10, "retrasado": 20, "doble": 25, "triple": 35},
+]
+const IMPACTO_SLASH := 1.25   # segundo de Charged_Slash (caballero) en el que cae el tajo
+
+
+func _nivel_enemigo() -> int:
+	if es_jefe:
+		return 2
+	if vida_max_enemigo >= 45 or turno.ritmo < 1.0:
+		return 1
+	return 0
+
+
+func _r(a: float, b: float) -> float:
+	return azar.randf_range(a, b)
+
+
+# Devuelve la lista de golpes del ataque: {espera (s hasta el impacto), amago, mult}
+func _elegir_patron(fuerte: bool) -> Array:
+	var a := maxf(turno.ritmo, aviso_min)
+	if fuerte:
+		var gf := [{"espera": a * _r(1.3, 1.9), "amago": azar.randf() < 0.5, "mult": 1.0}]
+		if es_jefe:
+			gf.append({"espera": a * _r(0.35, 0.6), "amago": false, "mult": 0.45})
+		ultimo_patron = "fuerte"
+		return gf
+	var pesos: Dictionary = PATRONES_NIVEL[_nivel_enemigo()].duplicate()
+	if enfurecido:
+		pesos["furia"] = 30
+	pesos.erase(ultimo_patron)              # nunca el mismo patrón dos veces seguidas
+	var total := 0
+	for k in pesos:
+		total += pesos[k]
+	var sale := azar.randi_range(1, total)
+	var nombre := "normal"
+	for k in pesos:
+		sale -= pesos[k]
+		if sale <= 0:
+			nombre = k
+			break
+	ultimo_patron = nombre
+	match nombre:
+		"rapido":
+			return [{"espera": a * _r(0.5, 0.75), "amago": false, "mult": 0.9}]
+		"retrasado":
+			return [{"espera": a * _r(1.6, 2.4), "amago": true, "mult": 1.1}]
+		"doble":
+			return [
+				{"espera": a * _r(0.8, 1.2), "amago": false, "mult": 0.7},
+				{"espera": a * _r(0.35, 0.7), "amago": false, "mult": 0.7},
+			]
+		"triple":
+			return [
+				{"espera": a * _r(0.8, 1.2), "amago": false, "mult": 0.6},
+				{"espera": a * _r(0.35, 0.55), "amago": false, "mult": 0.6},
+				{"espera": a * _r(0.7, 1.5), "amago": azar.randf() < 0.5, "mult": 0.7},
+			]
+		"furia":
+			var g := []
+			for k in 4:
+				g.append({"espera": a * (_r(0.9, 1.2) if k == 0 else _r(0.3, 0.8)), "amago": k == 3 and azar.randf() < 0.5, "mult": 0.5})
+			return g
+	return [{"espera": a * _r(0.9, 1.35), "amago": false, "mult": 1.0}]
+
+
+func _ataque_enemigo(fuerte: bool) -> void:
+	var patron := _elegir_patron(fuerte)
+	var base: int = enemigo.danio_fuerte if fuerte else enemigo.danio
+	var total := patron.size()
+	if fuerte:
+		hud.mensaje("¡Golpe fuerte!", hud.c_error)
+	elif total > 1:
+		hud.mensaje("¡%s encadena %d golpes!" % [enemigo.nombre, total], hud.c_error)
+	else:
+		hud.mensaje("%s ataca" % enemigo.nombre, hud.c_error)
+	var ventana := ventana_escudo if escudo else (ventana_fallo if fallo_trivia else ventana_parry)
 	escudo = false
-	var aviso := maxf(turno.ritmo, aviso_min)
-	hud.mensaje(texto, hud.c_error)
+	_flotar(false)
+	var parados := 0
+	var esquivados := 0
+	for i in total:
+		var g: Dictionary = patron[i]
+		var danio := maxi(int(round(base * g.mult * multiplicador_danio)), 1)
+		var r: int = await _parry_golpe(g.espera, g.amago, ventana, danio, i, total)
+		if r == 1:
+			parados += 1
+		elif r == 2:
+			esquivados += 1
+		if salud and salud.vida <= 0:
+			break
+	hud.parry("fin")
+	fase = Fase.ENEMIGO
+	_flotar(true)
+	_refrescar()
+	await _esperar(pausa_mensaje * 0.6)
+	if salud and salud.vida <= 0:
+		return
+	if parados == total:
+		tinta = mini(tinta + 1, tinta_max)
+		if total >= 2:
+			await _contraataque(total)
+		else:
+			hud.mensaje("¡Parry perfecto! 0 de daño · +1 Tinta", hud.c_sabiduria)
+			_refrescar()
+			await _esperar(pausa_mensaje * 0.6)
+	elif parados + esquivados == total:
+		hud.mensaje("Lo evitaste todo (esquivar no da Tinta)", hud.c_texto)
+		await _esperar(pausa_mensaje * 0.6)
+	elif parados + esquivados > 0:
+		hud.mensaje("Evitaste %d de %d golpes" % [parados + esquivados, total], hud.c_oro)
+		await _esperar(pausa_mensaje * 0.6)
+
+
+# Un golpe: el enemigo se prepara durante «espera» segundos y el impacto cae en
+# el centro de la ventana. Se juzga con la hora de la tecla (parry_ms), así un
+# tirón de FPS no convierte un parry a tiempo en uno tarde.
+# Devuelve 0 = te pegó, 1 = parry, 2 = esquiva.
+func _parry_golpe(espera: float, amago: bool, ventana: float, danio: int, i: int, total: int) -> int:
+	fase = Fase.PARRY
 	parry_presionado = false
-	_anim(anim_e, "interact-right")
+	esquiva_presionada = false
+	_telegrafiar(espera, amago)
 	var golpeo := false
+	var avisado := aviso_sonoro <= 0.0
 	var inicio := Time.get_ticks_msec()
-	var anim_e := enemigo.find_child("AnimationPlayer", true, false) as AnimationPlayer
-	var ap := _anim_caballero()
-	if ap != null:
-		ap.play("Charged_Slash")
-	if anim_e != null and anim_e.has_animation("Charged_Slash"):
-		anim_e.play("Charged_Slash")
-	# Se juzga con la hora de la tecla (parry_ms), así un tirón de FPS no
-	# convierte un parry a tiempo en uno tarde.
 	while true:
 		await get_tree().process_frame
 		var t := (Time.get_ticks_msec() - inicio) / 1000.0
-		if parry_presionado or t >= aviso + ventana:
+		if not avisado and t >= espera - aviso_sonoro:
+			avisado = true
+			_sonar("aviso")
+		if not golpeo and t >= espera - 0.12:
+			golpeo = true
+			_impacto_enemigo()
+		var v := ventana_esquiva if esquiva_presionada else ventana
+		if parry_presionado:
+			var tp_ := (parry_ms - inicio) / 1000.0
+			if tp_ >= espera - v * 0.5 or t >= espera:   # a tiempo, o muy pronto: el golpe cae igual
+				break
+		if t >= espera + maxf(ventana, ventana_esquiva) * 0.5:
 			break
-		if t < aviso:
-			hud.parry("aviso", t / aviso)
-		else:
+		if mostrar_ventana and t >= espera - ventana * 0.5:
 			hud.parry("ventana")
-			if not golpeo:
-				golpeo = true
-				_embestida_enemigo()
-	var bien := false
-	if parry_presionado:
-		var tp := (parry_ms - inicio) / 1000.0
-		bien = tp >= aviso and tp < aviso + ventana
-	hud.parry("fin")
-	fase = Fase.ENEMIGO
-	print("parry: ", "perfecto" if bien else "fallado", " (ventana ", ventana, " s, aviso ", snappedf(aviso, 0.01), " s)")
+		else:
+			hud.parry("atento", t)
 	if not golpeo:
-		_embestida_enemigo()
-	if bien:
-		_anim(anim_pj, "attack-melee-left")
-		_camara("golpe_fov", 7.0)
-		_camara("sacudir", 0.08)
-		_destello(Color(0.69, 0.6, 0.78, 0.35))
-		_numero("¡Parry!", _sobre_velam(), hud.c_magia, true)
-		tinta = mini(tinta + 1, tinta_max)
-		hud.mensaje("¡Parry perfecto! 0 de daño · +1 Tinta", hud.c_sabiduria)
-	else:
-		_retroceso(pj.get_node_or_null("Modelo"), cuerpo_e)
-		_camara("sacudir", 0.25)
-		_destello(Color(0.8, 0.1, 0.1, 0.35))
-		if salud:
-			salud.recibir_golpe(danio)
-		_numero("−%d" % danio, _sobre_velam(), hud.c_error, true)
-		hud.mensaje("−%d HP" % danio, hud.c_error)
+		_impacto_enemigo()
+	var tp := (parry_ms - inicio) / 1000.0
+	var vent := ventana_esquiva if esquiva_presionada else ventana
+	var a_tiempo := parry_presionado and absf(tp - espera) <= vent * 0.5
+	var resultado := 0
+	if a_tiempo:
+		resultado = 2 if esquiva_presionada else 1
+	fase = Fase.ENEMIGO
+	print("golpe %d/%d: %s (impacto a %s s%s, tecla a %s s)" % [i + 1, total,
+		["te pega", "parry", "esquiva"][resultado], snappedf(espera, 0.01),
+		", amago" if amago else "", str(snappedf(tp, 0.01)) if parry_presionado else "-"])
+	match resultado:
+		1:
+			_sonar("parry")
+			_anim(anim_pj, "attack-melee-left")
+			_camara("golpe_fov", 5.0)
+			_camara("sacudir", 0.08)
+			_destello(Color(0.69, 0.6, 0.78, 0.35))
+			_numero("¡Parry!" if total == 1 else "¡Parry %d/%d!" % [i + 1, total], _sobre_velam(), hud.c_magia, true)
+		2:
+			_sonar("esquiva")
+			_esquivar_visual()
+			_numero("Esquiva", _sobre_velam(), hud.c_texto)
+		_:
+			_sonar("herida")
+			var modelo_pj = pj.get_node_or_null("Heroe")
+			if modelo_pj == null:
+				modelo_pj = pj.get_node_or_null("Modelo")
+			_retroceso(modelo_pj, cuerpo_e)
+			_camara("sacudir", 0.25)
+			_destello(Color(0.8, 0.1, 0.1, 0.35))
+			if salud:
+				salud.recibir_golpe(danio, true)
+			_numero("−%d" % danio, _sobre_velam(), hud.c_error, true)
+			hud.mensaje("−%d HP" % danio + ("  (muy pronto)" if parry_presionado and tp < espera else ""), hud.c_error)
 	_refrescar()
+	return resultado
+
+
+func _sonar(clave: String) -> void:
+	var a: AudioStreamPlayer = altavoces.get(clave)
+	if a:
+		a.pitch_scale = azar.randf_range(0.95, 1.05)
+		a.play()
+
+
+# Velam se hace a un lado y vuelve.
+func _esquivar_visual() -> void:
+	var m := pj.get_node_or_null("Heroe") as Node3D
+	if m == null or not is_instance_valid(cuerpo_e):
+		return
+	var hacia := cuerpo_e.global_position - pj.global_position
+	hacia.y = 0.0
+	if hacia.length() < 0.05:
+		return
+	var lado := hacia.normalized().cross(Vector3.UP) * 0.7
+	var local := pj.global_basis.inverse() * lado
+	var origen := m.position
+	var tw := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tw.tween_property(m, "position", origen + local, 0.1)
+	tw.tween_interval(0.12)
+	tw.tween_property(m, "position", origen, 0.25).set_ease(Tween.EASE_IN_OUT)
+
+
+func _contraataque(golpes: int) -> void:
+	hud.mensaje("¡Contraataque! +1 Tinta", hud.c_oro)
+	_sonar("contra")
+	_anim(anim_pj, "attack-melee-right")
+	_camara("golpe_fov", 8.0)
+	_camara("sacudir", 0.2)
+	_destello(Color(0.83, 0.64, 0.35, 0.35))
+	_retroceso(cuerpo_e, pj)
+	_danar(danio_contraataque + 4 * golpes, hud.c_oro, true)
 	await _esperar(pausa_mensaje)
+
+
+# Lo que se ve antes del golpe. Caballero: su animación Charged_Slash ajustada
+# para que el tajo caiga justo en el impacto (con amago: se congela en alto).
+# Libros/jefe sin animación: se echan atrás, tiemblan y embisten; con amago
+# hacen una embestida falsa, se quedan quietos... y atacan.
+func _telegrafiar(espera: float, amago: bool) -> void:
+	var ap := _anim_caballero()
+	if ap != null:
+		ap.play("Charged_Slash", 0.1)
+		ap.seek(0.0, true)
+		var tw := create_tween()
+		if amago and espera > 0.6:
+			var alto := 0.75
+			ap.speed_scale = alto / (espera * 0.4)
+			tw.tween_interval(espera * 0.4)
+			tw.tween_callback(func(): ap.speed_scale = 0.0)
+			tw.tween_interval(maxf(espera * 0.6 - (IMPACTO_SLASH - alto) / 2.0, 0.0))
+			tw.tween_callback(func(): ap.speed_scale = 2.0)
+		else:
+			ap.speed_scale = clampf(IMPACTO_SLASH / espera, 0.3, 4.0)
+			tw.tween_interval(espera)
+		tw.tween_interval(0.7)
+		tw.tween_callback(func():
+			ap.speed_scale = 1.0
+			if ap.has_animation("Walking"):
+				ap.play("Walking", 0.2, 0.35))
+		return
+	if not is_instance_valid(cuerpo_e) or pj == null:
+		return
+	var atras := _hacia_pj_local(-0.45)
+	var arriba := Vector3(0, 0.3, 0)
+	var prep := maxf(espera - 0.12, 0.05)
+	var tw2 := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	if amago and prep > 0.7:
+		tw2.tween_property(cuerpo_e, "position", base_e + atras + arriba, prep * 0.3)
+		tw2.tween_property(cuerpo_e, "position", base_e + _hacia_pj_local(0.35), 0.12)
+		tw2.tween_property(cuerpo_e, "position", base_e + atras * 1.3 + arriba * 1.2, 0.25)
+		tw2.tween_interval(maxf(prep * 0.7 - 0.37, 0.0))
+	else:
+		tw2.tween_property(cuerpo_e, "position", base_e + atras + arriba, prep * 0.7)
+		for k in 4:   # temblor corto antes de embestir
+			tw2.tween_property(cuerpo_e, "position:y", base_e.y + arriba.y + (0.04 if k % 2 == 0 else -0.04), prep * 0.075)
+
+
+func _hacia_pj_local(metros: float) -> Vector3:
+	var hacia := pj.global_position - cuerpo_e.global_position
+	hacia.y = 0.0
+	if hacia.length() < 0.05:
+		return Vector3.ZERO
+	var padre := cuerpo_e.get_parent_node_3d()
+	var v := hacia.normalized() * metros
+	return padre.global_basis.inverse() * v if padre else v
+
+
+func _impacto_enemigo() -> void:
+	if _anim_caballero() == null:
+		_anim(anim_e, "attack-melee-right")
+	_embestida_enemigo()
+
+
+# Libros/jefe flotan entre ataques; mientras atacan, se quita el flote.
+func _flotar(si: bool) -> void:
+	if anim_e != null or not is_instance_valid(cuerpo_e) or _anim_caballero() != null:
+		return
+	if tw_flota:
+		tw_flota.kill()
+		tw_flota = null
+	if not si:
+		return
+	tw_flota = create_tween().set_loops()
+	tw_flota.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tw_flota.tween_property(cuerpo_e, "position", base_e + Vector3(0, 0.3, 0), 1.1)
+	tw_flota.tween_property(cuerpo_e, "position", base_e, 1.1)
 
 
 func _velam_cayo() -> void:
-	# salud.gd ya llamó a partida.perder("sin vida") (o hizo reaparecer a Velam).
-	_anim(anim_pj, "die")
+	# salud.gd reproduce la muerte (personaje.morir) y después hace reaparecer a
+	# Velam en el último descanso o llama a partida.perder("sin vida").
 	sin_idle.append(anim_pj)
 	hud.mensaje("Velam cae…", hud.c_error)
-	await _esperar(pausa_mensaje)
+	var partida := get_tree().get_first_node_in_group("partida")
+	while salud and salud.vida <= 0 and (partida == null or partida.estado == partida.Estado.JUGANDO):
+		await get_tree().process_frame
+	if salud and salud.vida > 0:
+		# Reapareció en un descanso: el enemigo se recompone (como en Expedition 33).
+		turno.vida = vida_max_enemigo
+		enemigo.enfriado = true
+		hud.mensaje("Velam despierta en el último descanso", hud.c_sabiduria)
+		await _esperar(pausa_mensaje)
+	sin_idle.erase(anim_pj)
 	await _cerrar()
 
 
@@ -479,7 +765,9 @@ func _enfocar_camara_combate(activar: bool) -> void:
 func _preparar_animaciones(e: EnemigoCombate) -> void:
 	sin_idle.clear()
 	modos_anim.clear()
-	anim_pj = pj.get_node_or_null("Modelo/AnimationPlayer") as AnimationPlayer
+	anim_pj = pj.get("anim") as AnimationPlayer
+	if anim_pj == null:
+		anim_pj = pj.get_node_or_null("Modelo/AnimationPlayer") as AnimationPlayer
 	cuerpo_e = e.get_node_or_null(e.punto) as Node3D
 	anim_e = null
 	alto_e = 2.0
@@ -530,9 +818,6 @@ func _golpe_de_velam() -> void:
 
 
 func _embestida_enemigo() -> void:
-	if anim_e:
-		_anim(anim_e, "attack-melee-right")
-		return
 	if not is_instance_valid(cuerpo_e) or pj == null:
 		return
 	var hacia := pj.global_position - cuerpo_e.global_position

@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://heroe.gd" id="1_heroe"]
+[ext_resource type="PackedScene" uid="uid://bn5idgow3vea6" path="res://assets/caminar.glb" id="2_malla"]
+
+[node name="Heroe" type="Node3D"]
+script = ExtResource("1_heroe")
+
+[node name="Malla" parent="." instance=ExtResource("2_malla")]
+transform = Transform3D(-1.05, 0, 0, 0, 1.05, 0, 0, 0, -1.05, 0, 0, 0)

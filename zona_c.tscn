@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://zona_c.gd" id="1_zc"]
 [ext_resource type="Script" uid="uid://cchv43eug6720" path="res://personaje.gd" id="2_pj"]
-[ext_resource type="PackedScene" uid="uid://bkmexfnojlmxi" path="res://personaje/character-male-a.glb" id="3_mod"]
 [ext_resource type="Script" uid="uid://67g8ul8ywidy" path="res://rodar.gd" id="4_rod"]
 [ext_resource type="Script" uid="uid://c43r45xkk1kmo" path="res://camera_sigue.gd" id="5_cam"]
 [ext_resource type="Script" path="res://salud.gd" id="6_sal"]
@@ -20,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://csu24ouogdot4" path="res://assets/image-removebg-preview (2).png" id="18_div"]
 [ext_resource type="Texture2D" uid="uid://bno6h4bb2arot" path="res://assets/upscalemedia-transformed.png" id="19_brell"]
 [ext_resource type="Texture2D" uid="uid://7o3v8isfk1se" path="res://assets/wmremove-transformed.webp" id="20_marco"]
+[ext_resource type="PackedScene" path="res://personaje/heroe.tscn" id="90_heroe"]
+[ext_resource type="PackedScene" path="res://descanso.tscn" id="91_desc"]
 
 [sub_resource type="Environment" id="Entorno"]
 background_mode = 1
@@ -66,8 +67,7 @@ camara = NodePath("Camera3D")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
 shape = SubResource("Capsula")
 
-[node name="Modelo" parent="Personaje" instance=ExtResource("3_mod")]
-transform = Transform3D(-2.6, 0, 0, 0, 2.6, 0, 0, 0, -2.6, 0, 0, 0)
+[node name="Heroe" parent="Personaje" instance=ExtResource("90_heroe")]
 
 [node name="Rodar" type="Node" parent="Personaje"]
 script = ExtResource("4_rod")
@@ -137,3 +137,6 @@ tex_boton_quemar = ExtResource("15_btn")
 tam_panel_dilema = Vector2(800, 230)
 tex_divisor = ExtResource("18_div")
 tex_sello = ExtResource("20_marco")
+
+[node name="Descanso" parent="." instance=ExtResource("91_desc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 33)
