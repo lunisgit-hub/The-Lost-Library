@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://dg84m1v6b8q3e" path="res://errante.tscn" id="1_57wwi"]
 [ext_resource type="PackedScene" uid="uid://d3bgnvswryoeg" path="res://modelos_zona_A/linterna.glb" id="3_5owue"]
 [ext_resource type="Script" uid="uid://cchv43eug6720" path="res://personaje.gd" id="3_evii1"]
-[ext_resource type="PackedScene" uid="uid://bkmexfnojlmxi" path="res://personaje/character-male-a.glb" id="4_cbh0l"]
 [ext_resource type="Script" uid="uid://67g8ul8ywidy" path="res://rodar.gd" id="5_tm4ya"]
 [ext_resource type="Script" uid="uid://c43r45xkk1kmo" path="res://camera_sigue.gd" id="5_v0myi"]
 [ext_resource type="Script" uid="uid://clxqrfqd6endu" path="res://sistema_sol.gd" id="6_evii1"]
@@ -52,6 +51,7 @@
 [ext_resource type="PackedScene" path="res://hud_trivia.tscn" id="44_trivia"]
 [ext_resource type="Script" uid="uid://hikg2st0bjcs" path="res://hud_combate.gd" id="45_hudcomb"]
 [ext_resource type="Script" uid="uid://d2oc7cwtpawe4" path="res://enemigo_combate.gd" id="46_enemigo"]
+[ext_resource type="PackedScene" path="res://personaje/heroe.tscn" id="90_heroe"]
 
 [sub_resource type="ProceduralSkyMaterial" id="CieloMat"]
 sky_top_color = Color(0.03, 0.04, 0.09, 1)
@@ -779,11 +779,12 @@ camara = NodePath("Camera3D")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
 shape = SubResource("Capsula")
 
-[node name="Modelo" parent="Personaje" unique_id=922134230 instance=ExtResource("4_cbh0l")]
-transform = Transform3D(-2.6, 0, 0, 0, 2.6, 0, 0, 0, -2.6, 0, 0, 0)
+[node name="Heroe" parent="Personaje" unique_id=2010114267 instance=ExtResource("90_heroe")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 
-[node name="linterna" parent="Personaje/Modelo" unique_id=286372243 instance=ExtResource("3_5owue")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6051021, 0.2390852)
+[node name="linterna" parent="Personaje" unique_id=286372243 instance=ExtResource("3_5owue")]
+transform = Transform3D(-2.6, 0, 0, 0, 2.6, 0, 0, 0, -2.6, 0, 1.5732656, -0.6216215)
+visible = false
 
 [node name="Rodar" type="Node" parent="Personaje" unique_id=1737267633]
 script = ExtResource("5_tm4ya")
@@ -1389,7 +1390,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.002, 27.5)
 mesh = SubResource("MallaLosa")
 
 [node name="Losa_2_6" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=1424877637]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.002, 27.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.002, 27.528967)
 mesh = SubResource("MallaLosa")
 
 [node name="Losa_3_6" type="MeshInstance3D" parent="Nivel_ZonaA/Baldosas" unique_id=94388149]

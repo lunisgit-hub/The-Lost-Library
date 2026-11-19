@@ -140,7 +140,7 @@ func _frenar(delta: float) -> void:
 	if anim.has_animation("idle"):
 		anim.play("idle")
 
-@onready var audio_ataque: AudioStreamPlayer = $AudioStreamPlayer 
+@onready var audio_ataque: AudioStreamPlayer = get_node_or_null("AudioStreamPlayer")
 
 func _verificar_colision_combate() -> void:
 	for i in range(get_slide_collision_count()):

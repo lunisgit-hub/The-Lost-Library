@@ -4,10 +4,10 @@
 [ext_resource type="Script" uid="uid://dqiq8snv1p4iq" path="res://luz_arcoiris.gd" id="2_7ijlv"]
 [ext_resource type="PackedScene" uid="uid://c5t1s685hqs36" path="res://modelos_zona_A/estanteria.glb" id="2_qt6nr"]
 [ext_resource type="Script" uid="uid://cchv43eug6720" path="res://personaje.gd" id="3_7ijlv"]
-[ext_resource type="PackedScene" uid="uid://bkmexfnojlmxi" path="res://personaje/character-male-a.glb" id="4_awkn3"]
 [ext_resource type="Script" uid="uid://67g8ul8ywidy" path="res://rodar.gd" id="5_iquii"]
 [ext_resource type="Script" uid="uid://bp17ynum7alra" path="res://salud.gd" id="6_xethn"]
 [ext_resource type="Script" uid="uid://c43r45xkk1kmo" path="res://camera_sigue.gd" id="7_i6nld"]
+[ext_resource type="PackedScene" path="res://personaje/heroe.tscn" id="90_heroe"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6gx7d"]
 albedo_color = Color(0.83514047, 0.5568067, 0.30193752, 1)
@@ -209,8 +209,7 @@ camara = NodePath("Camera3D")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
 shape = SubResource("CapsuleShape3D_lo1d8")
 
-[node name="Modelo" parent="Personaje" unique_id=308274698 instance=ExtResource("4_awkn3")]
-transform = Transform3D(-2.6, 0, 0, 0, 2.6, 0, 0, 0, -2.6, 0, 0, 0)
+[node name="Heroe" parent="Personaje" instance=ExtResource("90_heroe")]
 
 [node name="Rodar" type="Node" parent="Personaje" unique_id=1354398582]
 script = ExtResource("5_iquii")

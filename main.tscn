@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://dg84m1v6b8q3e" path="res://errante.tscn" id="1_lquwl"]
 [ext_resource type="Script" uid="uid://cchv43eug6720" path="res://personaje.gd" id="1_pj"]
-[ext_resource type="PackedScene" uid="uid://bkmexfnojlmxi" path="res://personaje/character-male-a.glb" id="2_modelo"]
 [ext_resource type="Script" uid="uid://c43r45xkk1kmo" path="res://camera_sigue.gd" id="3_dg77c"]
 [ext_resource type="Script" uid="uid://67g8ul8ywidy" path="res://rodar.gd" id="3_h2yge"]
 [ext_resource type="PackedScene" path="res://archivista.tscn" id="4_arch"]
@@ -12,6 +11,7 @@
 [ext_resource type="Script" uid="uid://bp17ynum7alra" path="res://salud.gd" id="8_sal"]
 [ext_resource type="PackedScene" uid="uid://bejrng75pgwqi" path="res://hud.tscn" id="9_hud"]
 [ext_resource type="Script" uid="uid://bedyj56pipani" path="res://partida.gd" id="10_par"]
+[ext_resource type="PackedScene" path="res://personaje/heroe.tscn" id="90_heroe"]
 
 [sub_resource type="ProceduralSkyMaterial" id="CieloMat"]
 
@@ -105,8 +105,7 @@ camara = NodePath("../Camera3D")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
 shape = SubResource("Capsula")
 
-[node name="Modelo" parent="Personaje" unique_id=922134230 instance=ExtResource("2_modelo")]
-transform = Transform3D(-2.6, 0, 0, 0, 2.6, 0, 0, 0, -2.6, 0, 0, 0)
+[node name="Heroe" parent="Personaje" instance=ExtResource("90_heroe")]
 
 [node name="Rodar" type="Node" parent="Personaje" unique_id=1737267633]
 script = ExtResource("3_h2yge")

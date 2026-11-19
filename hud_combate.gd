@@ -588,6 +588,13 @@ class AnilloParry extends Control:
 		if fase == "aviso":
 			var r := lerpf(150.0, r_meta, f)
 			draw_arc(c, r, 0, TAU, 64, Color(c_magia, 0.35 + 0.5 * f), 4.0, true)
+		elif fase == "atento":
+			# Sin cuenta regresiva: solo avisa que viene un golpe. El momento
+			# exacto hay que leerlo en el enemigo (como en Expedition 33).
+			var pulso := 0.5 + 0.5 * sin(f * 9.0)
+			draw_arc(c, r_meta + 6.0 + 8.0 * pulso, 0, TAU, 64, Color(c_magia, 0.25 + 0.35 * pulso), 3.0, true)
+			var fuente_a := get_theme_default_font()
+			draw_string(fuente_a, c + Vector2(-140, r_meta + 34), "PARRY: ESPACIO / CLIC DER.  ·  ESQUIVAR: CTRL", HORIZONTAL_ALIGNMENT_CENTER, 280, 14, Color(c_texto, 0.7))
 		elif fase == "ventana":
 			draw_circle(c, r_meta - 4.0, Color(c_magia, 0.35))
 			draw_arc(c, r_meta, 0, TAU, 64, c_magia, 8.0, true)
