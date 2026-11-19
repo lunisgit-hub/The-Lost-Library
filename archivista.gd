@@ -28,10 +28,13 @@ var puntos_absolutos: Array[Vector3] = []
 @onready var anim = $Modelo/AnimationPlayer
 
 func _ready() -> void:
-	# Busca automáticamente al jugador por grupo para evitar que sea null
 	jugador = get_tree().get_first_node_in_group("jugador")
 	
-	# Convierte la ruta en posiciones absolutas basadas en dónde se coloca el enemigo
+	# Crear el reproductor de audio por código
+	audio_ataque = AudioStreamPlayer.new()
+	audio_ataque.stream = sonido_ataque
+	add_child(audio_ataque)
+	
 	for desplazamiento in ruta:
 		puntos_absolutos.append(global_position + desplazamiento)
 		

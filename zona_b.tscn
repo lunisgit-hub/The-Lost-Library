@@ -141,19 +141,10 @@ transform = Transform3D(-2.6, 0, 0, 0, 2.6, 0, 0, 0, -2.6, 0, 0, 0)
 [node name="Rodar" type="Node" parent="Personaje" unique_id=2096378637]
 script = ExtResource("6_r8jko")
 
-<<<<<<< HEAD
 [node name="Camera3D" type="Camera3D" parent="Personaje" unique_id=1182312154 node_paths=PackedStringArray("objetivo")]
-=======
-[node name="Camera3D" type="Camera3D" parent="Personaje" unique_id=1182312154]
->>>>>>> 51859c7d7fe67e8e7ccd0e9156850fd786c3214f
-transform = Transform3D(1, 0, 0, 0, 0.9659259, 0.25881907, 0, -0.25881907, 0.9659258, 0, 1.8000002, 5.513615)
-cull_mask = 1048573
-current = true
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 4.8344874, 5.2578335)
 script = ExtResource("8_n70iv")
-<<<<<<< HEAD
 objetivo = NodePath("..")
-=======
->>>>>>> 51859c7d7fe67e8e7ccd0e9156850fd786c3214f
 
 [node name="Luz_Pluma" type="OmniLight3D" parent="Personaje" unique_id=719624385]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 1.4, 0.2)
@@ -405,6 +396,7 @@ transform = Transform3D(0.47493568, 0, 0, 0, 0.47493568, 0, 0, 0, 0.47493568, -0
 [node name="Disparador" type="Area3D" parent="puertas/puerta" unique_id=748871759]
 transform = Transform3D(0.2054442, 0, 0, 0, 0.2054442, 0, 0, 0, 0.2054442, -0.404818, -0.476318, 2.5056403)
 script = ExtResource("2_7ursy")
+escena_siguiente = "uid://b2i7bsna5aq1o"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="puertas/puerta/Disparador" unique_id=475158526]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0874653, 1.3627033, -13.564133)

@@ -41,7 +41,9 @@
 [ext_resource type="PackedScene" uid="uid://dyb2hnlweyccl" path="res://modelos_zona_A/farol_pared.glb" id="28_farol"]
 [ext_resource type="PackedScene" uid="uid://dfnwketm11mwh" path="res://modelos_zona_A/velas_libros.glb" id="29_velas"]
 [ext_resource type="PackedScene" uid="uid://ck1wtf2olddg2" path="res://modelos_zona_A/brasero_violeta.glb" id="30_bras"]
+[ext_resource type="Script" uid="uid://dithiye6ynd0n" path="res://disparador.gd" id="30_v8wf1"]
 [ext_resource type="Script" uid="uid://dfuyom5t84bes" path="res://colision_cajas.gd" id="31_col"]
+[ext_resource type="AudioStream" uid="uid://blw4xx785sofv" path="res://sonidos/victoria.mp3" id="31_lok1l"]
 [ext_resource type="PackedScene" uid="uid://b726q84gckgwm" path="res://modelos_zona_A/escalera.glb" id="32_g5tc1"]
 [ext_resource type="Script" uid="uid://bedyj56pipani" path="res://partida.gd" id="40_partida"]
 [ext_resource type="Script" uid="uid://bp17ynum7alra" path="res://salud.gd" id="41_salud"]
@@ -82,10 +84,10 @@ adjustment_contrast = 1.1
 adjustment_saturation = 1.08
 
 [sub_resource type="PlaneMesh" id="PisoMalla"]
-size = Vector2(30, 30)
+size = Vector2(30, 50)
 
 [sub_resource type="BoxShape3D" id="PisoForma"]
-size = Vector3(30, 1, 42)
+size = Vector3(30, 1, 50)
 
 [sub_resource type="CapsuleShape3D" id="Capsula"]
 radius = 0.35
@@ -338,6 +340,8 @@ albedo_color = Color(1, 0.7019608, 0.2784314, 1)
 material = SubResource("StandardMaterial3D_4v8bd")
 radius = 0.03
 height = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ais2y"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5qima"]
 albedo_color = Color(0.09803922, 0.12941177, 0.24313726, 1)
@@ -767,7 +771,7 @@ mesh = SubResource("PisoMalla")
 shape = SubResource("PisoForma")
 
 [node name="Personaje" type="CharacterBody3D" parent="." unique_id=1290957985 node_paths=PackedStringArray("camara") groups=["jugador"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.775, -0.5, 33.253334)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33067715, 0.15910888, 27.786129)
 script = ExtResource("3_evii1")
 camara = NodePath("Camera3D")
 
@@ -881,7 +885,7 @@ transform = Transform3D(1, 0, 0, 0, 0.9998759, 0.015752371, 0, -0.015752371, 0.9
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 28.4)
 
 [node name="puerta" parent="Nivel_ZonaA/Props/IN_ArcoEntrada" unique_id=731630473 instance=ExtResource("12_arch")]
-transform = Transform3D(4.867501, 0, 0, 0, 4.867501, 0, 0, 0, 4.867501, 0.16928625, 2.3184783, 8.068762)
+transform = Transform3D(4.867501, 0, 0, 0, 4.867501, 0, 0, 0, 4.867501, 0.124367714, 3.4093266, 8.083178)
 
 [node name="R0_Atril" type="StaticBody3D" parent="Nivel_ZonaA/Props" unique_id=1165896453]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 24)
@@ -1153,6 +1157,18 @@ semilla = 52
 
 [node name="puerta" parent="Nivel_ZonaA/Props/S1_ArcoSalida" unique_id=647745928 instance=ExtResource("12_arch")]
 transform = Transform3D(4.867501, 0, 0, 0, 4.867501, 0, 0, 0, 4.867501, 0, 2.3184783, -0.0023777247)
+
+[node name="Disparador" type="Area3D" parent="Nivel_ZonaA/Props/S1_ArcoSalida/puerta" unique_id=1134812464]
+transform = Transform3D(0.2054442, 0, 0, 0, 0.2054442, 0, 0, 0, 0.2054442, -0.404818, -0.476318, 2.5056403)
+script = ExtResource("30_v8wf1")
+escena_siguiente = "res://zona_c.tscn"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Nivel_ZonaA/Props/S1_ArcoSalida/puerta/Disparador" unique_id=446022359]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0874653, 1.3627033, -13.564133)
+shape = SubResource("BoxShape3D_ais2y")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Nivel_ZonaA/Props/S1_ArcoSalida/puerta/Disparador" unique_id=1541608485]
+stream = ExtResource("31_lok1l")
 
 [node name="Enemigos" type="Node3D" parent="Nivel_ZonaA" unique_id=2011305126]
 
