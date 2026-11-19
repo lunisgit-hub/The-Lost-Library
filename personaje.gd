@@ -13,6 +13,8 @@ const RAPIDEZ_ESTADO = [0.0, 3.2, 0.0] # Rapidez máxima en cada estado (m/s)
 @export var tecla_golpe = "elegir"
 ## Velocidad de reproducción del golpe (la animación dura 4.3 s a 1.0).
 @export var ritmo_golpe = 1.4
+## Velocidad de la animación de recibir daño (dura 1.6 s a 1.0). Mientras dura no te mueves.
+@export var ritmo_herida = 1.8
 ## Velocidad de la animación de caminar cuando vas a speed_caminar.
 @export var ritmo_caminar = 1.9
 ## Velocidad de la animación de correr cuando vas a speed_correr.
@@ -27,6 +29,7 @@ var empuje = Vector3.ZERO
 var accion = ""
 var avance = Vector3.ZERO
 var muerto = false
+var _vida_antes = -1
 
 var estado = Estado.QUIETO
 var rapidez_max_estado = 0.0
@@ -37,6 +40,10 @@ func _ready():
 	if anim != null:
 		print("Animaciones del personaje: ", anim.get_animation_list())
 		anim.animation_finished.connect(_al_terminar_anim)
+	var salud = get_node_or_null("Salud")
+	if salud != null:
+		_vida_antes = salud.vida
+		salud.cambio.connect(_al_cambiar_vida)
 
 
 func _buscar_anim() -> AnimationPlayer:
@@ -58,6 +65,21 @@ func golpear():
 	accion = "golpe"
 	anim.speed_scale = 1.0
 	anim.play("golpe", 0.1, ritmo_golpe)
+
+
+func _al_cambiar_vida(vida):
+	if vida < _vida_antes and vida > 0:
+		recibir_impacto()
+	_vida_antes = vida
+
+
+## Reacción al recibir daño (también en combate: salud.gd avisa con la señal cambio).
+func recibir_impacto():
+	if muerto or anim == null or not anim.has_animation("herida"):
+		return
+	accion = "herida"
+	anim.speed_scale = 1.0
+	anim.play("herida", 0.08, ritmo_herida)
 
 
 func _al_terminar_anim(nombre):
@@ -96,6 +118,9 @@ func revivir():
 
 func _physics_process(delta):
 	velocity += get_gravity() * delta
+	# Si otra animación reemplazó la acción (p. ej. el combate), soltarla.
+	if accion != "" and anim != null and (anim.current_animation != accion or not anim.is_playing()):
+		accion = ""
 	if muerto:
 		velocity.x = 0.0
 		velocity.z = 0.0

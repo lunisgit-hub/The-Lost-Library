@@ -10,6 +10,7 @@ const FUENTES = {
 	"correr": "res://assets/correr.glb",
 	"golpe": "res://assets/golpe.glb",
 	"muerte": "res://assets/muerte.glb",
+	"herida": "res://assets/recibir_daño.glb",
 }
 const EN_BUCLE = ["caminar", "correr", "quieto"]
 # Nombres que usan otros scripts (combate_manager.gd usa los del modelo viejo de Kenney)
@@ -20,6 +21,7 @@ const ALIAS = {
 	"attack-melee-right": "tajo",
 	"attack-melee-left": "parry",
 	"die": "muerte",
+	"hit": "herida",
 }
 
 ## Solo si falta quieto.glb: de qué animación se saca una pose de "quieto" de respaldo.
