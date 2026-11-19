@@ -6,11 +6,7 @@ extends Camera3D
 #             dos dedos arriba/abajo o pellizcar = zoom
 #   Táctil:   arrastrar un dedo = girar / inclinar
 # La cámara nunca sale de la caja del salón y siempre mira al personaje.
-<<<<<<< HEAD
  
-=======
-
->>>>>>> 51859c7d7fe67e8e7ccd0e9156850fd786c3214f
 @export var objetivo: Node3D
 @export var altura_foco := 1.0                 # mira al pecho, no a los pies
 @export_group("Vista inicial")
@@ -38,11 +34,7 @@ extends Camera3D
 @export var combate_altura := 2.8
 @export_range(0.0, 1.0) var combate_hacia_enemigo := 0.7
 @export var combate_suavizado := 4.0
-<<<<<<< HEAD
  
-=======
-
->>>>>>> 51859c7d7fe67e8e7ccd0e9156850fd786c3214f
 var arrastrando := false
 var dist_actual := 0.0
 var foco_suave := Vector3.ZERO
@@ -57,13 +49,8 @@ var centro_enemigo := Vector3(0, 1, 0)
 var ultimo_centro := Vector3.ZERO
 var sacudida := 0.0
 var fov_base := 75.0
-<<<<<<< HEAD
  
  
-=======
-
-
->>>>>>> 51859c7d7fe67e8e7ccd0e9156850fd786c3214f
 func _ready() -> void:
 	top_level = true                           # ignora la rotación del personaje
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -73,13 +60,8 @@ func _ready() -> void:
 		foco_suave = _foco()
 		global_position = _destino()
 		_mirar()
-<<<<<<< HEAD
  
  
-=======
-
-
->>>>>>> 51859c7d7fe67e8e7ccd0e9156850fd786c3214f
 func _unhandled_input(event: InputEvent) -> void:
 	if en_combate or get_tree().paused:
 		arrastrando = false
@@ -114,7 +96,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event is InputEventPanGesture:   # touchpads que mandan gestos (macOS y algunos Windows)
 		var p := event as InputEventPanGesture
 		_girar(-p.delta.x * sensibilidad_rueda, p.delta.y * sensibilidad_rueda)
-<<<<<<< HEAD
  
  
 func _girar(grados_giro: float, grados_inclinacion: float) -> void:
@@ -126,19 +107,6 @@ func _foco() -> Vector3:
 	return objetivo.global_position + Vector3(0, altura_foco, 0)
  
  
-=======
-
-
-func _girar(grados_giro: float, grados_inclinacion: float) -> void:
-	giro = fposmod(giro + grados_giro, 360.0)
-	inclinacion = clampf(inclinacion + grados_inclinacion, inclinacion_min, inclinacion_max)
-
-
-func _foco() -> Vector3:
-	return objetivo.global_position + Vector3(0, altura_foco, 0)
-
-
->>>>>>> 51859c7d7fe67e8e7ccd0e9156850fd786c3214f
 # Dónde quiere estar la cámara: en una esfera alrededor del foco, recortada a la
 # caja del salón. Si se recorta, se acerca (como un brazo que choca), sin
 # atravesar muros ni ver el vacío de afuera.
@@ -147,13 +115,8 @@ func _destino() -> Vector3:
 	var g := deg_to_rad(giro)
 	var dir := Vector3(sin(g) * cos(inc), sin(inc), cos(g) * cos(inc))
 	return _sin_chocar(_foco() + dir * dist_actual)
-<<<<<<< HEAD
  
  
-=======
-
-
->>>>>>> 51859c7d7fe67e8e7ccd0e9156850fd786c3214f
 func _sin_chocar(d: Vector3) -> Vector3:
 	d.x = clampf(d.x, limite_min.x, limite_max.x)
 	d.z = clampf(d.z, limite_min.y, limite_max.y)
@@ -168,7 +131,6 @@ func _sin_chocar(d: Vector3) -> Vector3:
 	if not golpe.is_empty():
 		d = golpe.position + golpe.normal * 0.3
 	return d
-<<<<<<< HEAD
  
  
 func _mirar() -> void:
@@ -176,15 +138,6 @@ func _mirar() -> void:
 		look_at(foco_suave, Vector3.UP)
  
  
-=======
-
-
-func _mirar() -> void:
-	if global_position.distance_to(foco_suave) > 0.05:
-		look_at(foco_suave, Vector3.UP)
-
-
->>>>>>> 51859c7d7fe67e8e7ccd0e9156850fd786c3214f
 func _process(delta: float) -> void:
 	if objetivo == null:
 		return
@@ -218,14 +171,8 @@ func _process(delta: float) -> void:
 		cull_mask |= bit
 	else:
 		cull_mask &= ~bit
-<<<<<<< HEAD
  
  
-=======
-
-
-
->>>>>>> 51859c7d7fe67e8e7ccd0e9156850fd786c3214f
 func enfocar_combate(enemigo: Node3D) -> void:
 	if objetivo == null or enemigo == null:
 		return
@@ -259,7 +206,6 @@ func enfocar_combate(enemigo: Node3D) -> void:
 	for c in cuerpos:
 		excluir_combate.append((c as CollisionObject3D).get_rid())
 	_elegir_toma(true)
-<<<<<<< HEAD
  
  
 func soltar_combate() -> void:
@@ -267,26 +213,12 @@ func soltar_combate() -> void:
 	enemigo_combate = null
  
  
-=======
-
-
-func soltar_combate() -> void:
-	en_combate = false
-	enemigo_combate = null
-
-
->>>>>>> 51859c7d7fe67e8e7ccd0e9156850fd786c3214f
 func _centro_enemigo() -> Vector3:
 	if is_instance_valid(enemigo_combate):
 		ultimo_centro = enemigo_combate.global_position + centro_enemigo
 	return ultimo_centro
-<<<<<<< HEAD
  
  
-=======
-
-
->>>>>>> 51859c7d7fe67e8e7ccd0e9156850fd786c3214f
 func _destino_combate(s: float, recortar := true, giro_extra := INF) -> Vector3:
 	if is_inf(giro_extra):
 		giro_extra = giro_combate
@@ -302,32 +234,18 @@ func _destino_combate(s: float, recortar := true, giro_extra := INF) -> Vector3:
 		+ derecha * (combate_lado * s) \
 		+ Vector3.UP * (combate_altura + alto_enemigo * 0.2)
 	return _sin_chocar(d) if recortar else d
-<<<<<<< HEAD
  
  
 func _foco_combate() -> Vector3:
 	return _foco().lerp(_centro_enemigo(), combate_hacia_enemigo)
  
  
-=======
-
-
-func _foco_combate() -> Vector3:
-	return _foco().lerp(_centro_enemigo(), combate_hacia_enemigo)
-
-
->>>>>>> 51859c7d7fe67e8e7ccd0e9156850fd786c3214f
 func _se_ve(desde: Vector3, hasta: Vector3) -> bool:
 	var consulta := PhysicsRayQueryParameters3D.create(desde, hasta)
 	consulta.exclude = excluir_combate
 	return get_world_3d().direct_space_state.intersect_ray(consulta).is_empty()
-<<<<<<< HEAD
  
  
-=======
-
-
->>>>>>> 51859c7d7fe67e8e7ccd0e9156850fd786c3214f
 func _puntaje(s: float, g: float) -> float:
 	var d := _destino_combate(s, true, g)
 	var p := combate_hacia_enemigo
@@ -342,13 +260,8 @@ func _puntaje(s: float, g: float) -> float:
 	if s < 0.0:
 		puntos += 0.2
 	return puntos
-<<<<<<< HEAD
  
  
-=======
-
-
->>>>>>> 51859c7d7fe67e8e7ccd0e9156850fd786c3214f
 func _elegir_toma(forzar := false) -> void:
 	var actual := _puntaje(lado, giro_combate)
 	var mejor := actual
@@ -364,13 +277,8 @@ func _elegir_toma(forzar := false) -> void:
 	if forzar or mejor < actual - 1.0:
 		lado = mejor_s
 		giro_combate = mejor_g
-<<<<<<< HEAD
  
  
-=======
-
-
->>>>>>> 51859c7d7fe67e8e7ccd0e9156850fd786c3214f
 func _caja_visual(n: Node) -> AABB:
 	var caja := AABB()
 	var hay := false
@@ -385,22 +293,12 @@ func _caja_visual(n: Node) -> AABB:
 		caja = c if not hay else caja.merge(c)
 		hay = true
 	return caja
-<<<<<<< HEAD
  
  
 func sacudir(fuerza: float) -> void:
 	sacudida = maxf(sacudida, fuerza)
  
  
-=======
-
-
-
-func sacudir(fuerza: float) -> void:
-	sacudida = maxf(sacudida, fuerza)
-
-
->>>>>>> 51859c7d7fe67e8e7ccd0e9156850fd786c3214f
 func golpe_fov(cuanto: float) -> void:
 	var tw := create_tween()
 	tw.tween_property(self, "fov", fov_base - cuanto, 0.06).set_ease(Tween.EASE_OUT)

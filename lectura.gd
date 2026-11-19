@@ -170,11 +170,6 @@ func barra(f):
 	var llenos = int(round(f * 10))
 	return "▮".repeat(llenos) + "▯".repeat(10 - llenos)
 
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> 51859c7d7fe67e8e7ccd0e9156850fd786c3214f
 func mostrar(contenido, color):
 	texto.text = contenido
 	texto.modulate = color
