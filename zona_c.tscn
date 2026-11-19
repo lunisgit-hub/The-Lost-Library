@@ -1,12 +1,12 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cknm4y8ene6r1"]
 
-[ext_resource type="Script" path="res://zona_c.gd" id="1_zc"]
+[ext_resource type="Script" uid="uid://buh4jhbwudbrl" path="res://zona_c.gd" id="1_zc"]
 [ext_resource type="Script" uid="uid://cchv43eug6720" path="res://personaje.gd" id="2_pj"]
 [ext_resource type="PackedScene" uid="uid://bkmexfnojlmxi" path="res://personaje/character-male-a.glb" id="3_mod"]
 [ext_resource type="Script" uid="uid://67g8ul8ywidy" path="res://rodar.gd" id="4_rod"]
 [ext_resource type="Script" uid="uid://c43r45xkk1kmo" path="res://camera_sigue.gd" id="5_cam"]
-[ext_resource type="Script" path="res://salud.gd" id="6_sal"]
-[ext_resource type="PackedScene" path="res://hud.tscn" id="7_hud"]
+[ext_resource type="Script" uid="uid://bp17ynum7alra" path="res://salud.gd" id="6_sal"]
+[ext_resource type="PackedScene" uid="uid://bejrng75pgwqi" path="res://hud.tscn" id="7_hud"]
 [ext_resource type="Script" uid="uid://bedyj56pipani" path="res://partida.gd" id="8_par"]
 [ext_resource type="Script" uid="uid://drqvtol6v0bg2" path="res://combate_manager.gd" id="9_com"]
 [ext_resource type="PackedScene" path="res://hud_trivia.tscn" id="10_tri"]
@@ -20,6 +20,8 @@
 [ext_resource type="Texture2D" uid="uid://csu24ouogdot4" path="res://assets/image-removebg-preview (2).png" id="18_div"]
 [ext_resource type="Texture2D" uid="uid://bno6h4bb2arot" path="res://assets/upscalemedia-transformed.png" id="19_brell"]
 [ext_resource type="Texture2D" uid="uid://7o3v8isfk1se" path="res://assets/wmremove-transformed.webp" id="20_marco"]
+[ext_resource type="Script" uid="uid://dithiye6ynd0n" path="res://disparador.gd" id="21_8rmer"]
+[ext_resource type="AudioStream" uid="uid://blw4xx785sofv" path="res://sonidos/victoria.mp3" id="22_x5c3r"]
 
 [sub_resource type="Environment" id="Entorno"]
 background_mode = 1
@@ -49,66 +51,68 @@ adjustment_saturation = 1.1
 radius = 0.35
 height = 1.75
 
-[node name="zona_c" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_gcnhg"]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="zona_c" type="Node3D" unique_id=1046784894]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=241529982]
 environment = SubResource("Entorno")
 
-[node name="Sala" type="Node3D" parent="."]
+[node name="Sala" type="Node3D" parent="." unique_id=449902877]
+process_mode = 3
 script = ExtResource("1_zc")
 
-[node name="Personaje" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camara") groups=["jugador"]]
+[node name="Personaje" type="CharacterBody3D" parent="." unique_id=1622784705 node_paths=PackedStringArray("camara") groups=["jugador"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 38)
 script = ExtResource("2_pj")
 camara = NodePath("Camera3D")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Personaje"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Personaje" unique_id=621134971]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
 shape = SubResource("Capsula")
 
-[node name="Modelo" parent="Personaje" instance=ExtResource("3_mod")]
+[node name="Modelo" parent="Personaje" unique_id=883880138 instance=ExtResource("3_mod")]
 transform = Transform3D(-2.6, 0, 0, 0, 2.6, 0, 0, 0, -2.6, 0, 0, 0)
 
-[node name="Rodar" type="Node" parent="Personaje"]
+[node name="Rodar" type="Node" parent="Personaje" unique_id=727263611]
 script = ExtResource("4_rod")
 
-[node name="Salud" type="Node" parent="Personaje"]
+[node name="Salud" type="Node" parent="Personaje" unique_id=2130199397]
 process_mode = 3
 script = ExtResource("6_sal")
 vida = 100
 invulnerable = 0.3
 reapariciones = 0
 
-[node name="Camera3D" type="Camera3D" parent="Personaje" node_paths=PackedStringArray("objetivo")]
+[node name="Camera3D" type="Camera3D" parent="Personaje" unique_id=575250407 node_paths=PackedStringArray("objetivo")]
 transform = Transform3D(1, 0, 0, 0, 0.9659259, 0.25881907, 0, -0.25881907, 0.9659258, 0, 1.8, 0)
 current = true
 script = ExtResource("5_cam")
 objetivo = NodePath("..")
 inclinacion = 42.0
-distancia = 11.0
 distancia_max = 18.0
 limite_min = Vector2(-16, -56)
 limite_max = Vector2(16, 42)
 altura_max = 22.0
 techo_bajo = 0.0
 
-[node name="Luz_Pluma" type="OmniLight3D" parent="Personaje"]
+[node name="Luz_Pluma" type="OmniLight3D" parent="Personaje" unique_id=77470674]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 1.4, 0.2)
 light_color = Color(1, 0.78, 0.5, 1)
 light_energy = 1.1
 omni_range = 4.5
 omni_attenuation = 1.6
 
-[node name="Partida" type="Node" parent="."]
+[node name="Partida" type="Node" parent="." unique_id=1218940114]
 script = ExtResource("8_par")
 metas = 1
 
-[node name="HUD" parent="." instance=ExtResource("7_hud")]
+[node name="HUD" parent="." unique_id=261869986 instance=ExtResource("7_hud")]
 
-[node name="Combate" type="Node" parent="."]
+[node name="Combate" type="Node" parent="." unique_id=872127951]
 script = ExtResource("9_com")
 
-[node name="HudTrivia" parent="Combate" instance=ExtResource("10_tri")]
+[node name="HudTrivia" parent="Combate" unique_id=1044941047 instance=ExtResource("10_tri")]
 tex_barra_fondo = ExtResource("16_hex2")
 tex_barra_relleno = ExtResource("14_hex")
 fuente_trivia = ExtResource("13_fuente")
@@ -121,7 +125,7 @@ tam_tarjeta = Vector2(800, 589)
 escala_marco_extra = Vector2(1.25, 1.25)
 tam_sello = Vector2(200, 118)
 
-[node name="HudCombate" type="CanvasLayer" parent="Combate"]
+[node name="HudCombate" type="CanvasLayer" parent="Combate" unique_id=730761779]
 script = ExtResource("11_hc")
 tex_barra_enemigo_fondo = ExtResource("17_bfondo")
 tex_barra_enemigo_relleno = ExtResource("19_brell")
@@ -137,3 +141,15 @@ tex_boton_quemar = ExtResource("15_btn")
 tam_panel_dilema = Vector2(800, 230)
 tex_divisor = ExtResource("18_div")
 tex_sello = ExtResource("20_marco")
+
+[node name="Disparador" type="Area3D" parent="." unique_id=1985597669]
+transform = Transform3D(0.2054442, 0, 0, 0, 0.2054442, 0, 0, 0, 0.2054442, -0.404818, -0.476318, -48.158653)
+script = ExtResource("21_8rmer")
+escena_siguiente = "uid://cqrcvxherom08"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Disparador" unique_id=432703952]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9333509, 1.3627034, -13.564133)
+shape = SubResource("BoxShape3D_gcnhg")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Disparador" unique_id=1768524659]
+stream = ExtResource("22_x5c3r")

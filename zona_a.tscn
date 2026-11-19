@@ -1164,7 +1164,7 @@ script = ExtResource("30_v8wf1")
 escena_siguiente = "res://zona_c.tscn"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Nivel_ZonaA/Props/S1_ArcoSalida/puerta/Disparador" unique_id=446022359]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0874653, 1.3627033, -13.564133)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9491935, 1.1217225, -11.869755)
 shape = SubResource("BoxShape3D_ais2y")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Nivel_ZonaA/Props/S1_ArcoSalida/puerta/Disparador" unique_id=1541608485]

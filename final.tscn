@@ -1,0 +1,242 @@
+[gd_scene format=3 uid="uid://cqrcvxherom08"]
+
+[ext_resource type="Texture2D" uid="uid://dtc455bbyu5ge" path="res://assets/piso final.jpeg" id="1_bhfh8"]
+[ext_resource type="Script" uid="uid://dqiq8snv1p4iq" path="res://luz_arcoiris.gd" id="2_7ijlv"]
+[ext_resource type="PackedScene" uid="uid://c5t1s685hqs36" path="res://modelos_zona_A/estanteria.glb" id="2_qt6nr"]
+[ext_resource type="Script" uid="uid://cchv43eug6720" path="res://personaje.gd" id="3_7ijlv"]
+[ext_resource type="PackedScene" uid="uid://bkmexfnojlmxi" path="res://personaje/character-male-a.glb" id="4_awkn3"]
+[ext_resource type="Script" uid="uid://67g8ul8ywidy" path="res://rodar.gd" id="5_iquii"]
+[ext_resource type="Script" uid="uid://bp17ynum7alra" path="res://salud.gd" id="6_xethn"]
+[ext_resource type="Script" uid="uid://c43r45xkk1kmo" path="res://camera_sigue.gd" id="7_i6nld"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6gx7d"]
+albedo_color = Color(0.83514047, 0.5568067, 0.30193752, 1)
+albedo_texture = ExtResource("1_bhfh8")
+
+[sub_resource type="BoxMesh" id="BoxMesh_7678y"]
+material = SubResource("StandardMaterial3D_6gx7d")
+size = Vector3(30, 1, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fp1em"]
+size = Vector3(30, 1, 50)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lo1d8"]
+radius = 0.35
+height = 1.75
+
+[node name="Final" type="Node3D" unique_id=354453976]
+
+[node name="suelo" type="StaticBody3D" parent="." unique_id=815777661]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="suelo" unique_id=292187152]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.549901)
+mesh = SubResource("BoxMesh_7678y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="suelo" unique_id=1847301709]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.564644)
+shape = SubResource("BoxShape3D_fp1em")
+debug_color = Color(0.7109369, 0.43890822, 0.56127, 0.41960785)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="suelo" unique_id=61986731]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.3232327, 9.627215)
+light_color = Color(1, 1, 0.05490196, 1)
+light_energy = 10.0
+light_size = 0.425
+omni_range = 15.838
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="suelo" unique_id=921748272]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.3232327, 0.5487404)
+light_color = Color(1, 1, 0.05490196, 1)
+light_energy = 10.0
+light_size = 0.425
+omni_range = 15.838
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="suelo" unique_id=1553522618]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.3232327, 17.333431)
+light_color = Color(1, 1, 0.05490196, 1)
+light_energy = 10.0
+light_size = 0.425
+omni_range = 15.838
+
+[node name="Estantes" type="Node3D" parent="." unique_id=696740793]
+
+[node name="estanteria" parent="Estantes" unique_id=167267752 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(-1.0069997, 0, 6.9271894, 0, 3.9852815, 0, -6.9271894, 0, -1.0069997, -12.557913, 1.7273707, 9.542051)
+
+[node name="estanteria4" parent="Estantes" unique_id=1405549047 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(-1.0069997, 0, 6.9271894, 0, 3.9852815, 0, -6.9271894, 0, -1.0069997, -12.980094, 2.0632753, 6.0930176)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Estantes/estanteria4" unique_id=770838030]
+transform = Transform3D(0.14285713, 0, 1.8626451e-09, 0, 0.25092328, 0, -1.8626451e-09, 0, 0.14285713, -0.011191845, 0, 0.076989174)
+light_color = Color(0.98, 0.47285002, 0.30380002, 1)
+light_energy = 8.327
+omni_range = 3.664
+omni_attenuation = 0.813
+script = ExtResource("2_7ijlv")
+
+[node name="estanteria5" parent="Estantes" unique_id=944369885 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(-1.0069997, 0, 6.9271894, 0, 3.9852815, 0, -6.9271894, 0, -1.0069997, -13.76958, 1.9560637, 2.1298409)
+
+[node name="estanteria10" parent="Estantes" unique_id=1183524643 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(-0.7197383, -0.0011585575, -6.962899, -0.23890619, 3.9829388, 0.022650557, 6.9588003, 0.1366205, -0.7193846, 13.581813, 1.9560637, -4.0821705)
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Estantes/estanteria10" unique_id=833101946]
+transform = Transform3D(-0.1384261, -0.004875636, -0.034965813, -0.008502003, 0.2507758, -0.0013096415, 0.034970712, 0.00046225623, -0.13850993, 0.034194708, 0.027996242, 0.1710763)
+light_color = Color(0.98, 0.47285002, 0.30380002, 1)
+light_energy = 8.327
+omni_range = 3.664
+omni_attenuation = 0.813
+script = ExtResource("2_7ijlv")
+
+[node name="estanteria21" parent="Estantes" unique_id=1539033891 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(-0.7197383, -0.0011585575, -6.962899, -0.23890619, 3.9829388, 0.022650557, 6.9588003, 0.1366205, -0.7193846, 13.581813, 1.9560637, -0.80146694)
+
+[node name="estanteria22" parent="Estantes" unique_id=648948993 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(-0.7197383, -0.0011585575, -6.962899, -0.23890619, 3.9829388, 0.022650557, 6.9588003, 0.1366205, -0.7193846, 13.581813, 1.9560637, 2.8657055)
+
+[node name="estanteria23" parent="Estantes" unique_id=1376021951 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(-0.7197383, -0.0011585575, -6.962899, -0.23890619, 3.9829388, 0.022650557, 6.9588003, 0.1366205, -0.7193846, 13.581813, 1.9560637, 10.190834)
+
+[node name="estanteria24" parent="Estantes" unique_id=1861943726 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(-0.7197383, -0.0011585575, -6.962899, -0.23890619, 3.9829388, 0.022650557, 6.9588003, 0.1366205, -0.7193846, 13.581813, 1.9560637, 13.720667)
+
+[node name="estanteria25" parent="Estantes" unique_id=574413331 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(-0.31588176, -0.0011363159, -6.499746, -0.104852155, 3.9064755, 0.021143902, 3.0541074, 0.13399772, -0.67153305, 13.342872, 1.9560637, 21.683098)
+
+[node name="estanteria26" parent="Estantes" unique_id=949768071 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(-0.7197383, -0.0011585575, -6.962899, -0.23890619, 3.9829388, 0.022650557, 6.9588003, 0.1366205, -0.7193846, 13.356095, 1.9560637, 17.336292)
+
+[node name="estanteria27" parent="Estantes" unique_id=1461531426 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(-0.7197383, -0.0011585575, -6.962899, -0.23890619, 3.9829388, 0.022650557, 6.9588003, 0.1366205, -0.7193846, 13.3844, 1.9560637, 19.90363)
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Estantes/estanteria27" unique_id=500483200]
+transform = Transform3D(-0.1384261, -0.004875636, -0.034965813, -0.008502003, 0.2507758, -0.0013096415, 0.034970712, 0.00046225623, -0.13850993, 0.0093483925, 0.026129484, 0.23723912)
+light_color = Color(0.98, 0.47285002, 0.30380002, 1)
+light_energy = 8.327
+omni_range = 3.664
+omni_attenuation = 0.813
+script = ExtResource("2_7ijlv")
+
+[node name="estanteria28" parent="Estantes" unique_id=360693331 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(-0.7197383, -0.0011585575, -6.962899, -0.23890619, 3.9829388, 0.022650557, 6.9588003, 0.1366205, -0.7193846, 13.597028, 1.9560637, 6.676586)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Estantes/estanteria28" unique_id=1034764465]
+transform = Transform3D(-0.1384261, -0.004875636, -0.034965813, -0.008502003, 0.2507758, -0.0013096414, 0.034970712, 0.00046225626, -0.13850993, -0.07452917, 0.021910429, 0.09442568)
+light_color = Color(0.98, 0.47285002, 0.30380002, 1)
+light_energy = 8.327
+omni_range = 3.664
+omni_attenuation = 0.813
+script = ExtResource("2_7ijlv")
+
+[node name="estanteria6" parent="Estantes" unique_id=569783672 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(-1.0069997, 0, 6.9271894, 0, 3.9852815, 0, -6.9271894, 0, -1.0069997, -14.462626, 1.914906, -1.7877865)
+
+[node name="estanteria7" parent="Estantes" unique_id=308741698 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(-1.0069997, 0, 6.9271894, 0, 3.9852815, 0, -6.9271894, 0, -1.0069997, -14.4189205, 1.914906, -4.4251995)
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Estantes/estanteria7" unique_id=772114225]
+transform = Transform3D(0.14285713, -1.9125372e-10, 1.8626451e-09, 3.3593012e-10, 0.25092328, 4.168315e-12, -1.8626451e-09, -2.373126e-12, 0.14285713, 0.14961338, 0.03722942, 0.104551554)
+light_color = Color(0.98, 0.47285002, 0.30380002, 1)
+light_energy = 8.327
+omni_range = 3.664
+omni_attenuation = 0.813
+script = ExtResource("2_7ijlv")
+
+[node name="estanteria2" parent="Estantes" unique_id=396683634 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(-1.0069997, 0, 6.9271894, 0, 3.9852815, 0, -6.9271894, 0, -1.0069997, -12.069177, 1.8772087, 13.124813)
+
+[node name="estanteria3" parent="Estantes" unique_id=330293158 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(-1.0069997, 0, 6.9271894, 0, 3.9852815, 0, -6.9271894, 0, -1.0069997, -11.921939, 1.8772087, 15.285734)
+
+[node name="estanteria8" parent="Estantes" unique_id=501181916 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(-1.0069997, 0, 6.9271894, 0, 3.9852815, 0, -6.9271894, 0, -1.0069997, -11.921939, 1.8772087, 18.461287)
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Estantes/estanteria8" unique_id=979342321]
+transform = Transform3D(0.14285713, -1.9125372e-10, 1.8626451e-09, 3.3593012e-10, 0.25092328, 4.168315e-12, -1.8626451e-09, -2.373126e-12, 0.14285713, 0.037645817, 0.046688557, 0.104516506)
+light_color = Color(0.98, 0.47285002, 0.30380002, 1)
+light_energy = 8.327
+omni_range = 3.664
+omni_attenuation = 0.813
+script = ExtResource("2_7ijlv")
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="Estantes/estanteria8" unique_id=2131714253]
+transform = Transform3D(0.14285713, -1.9125372e-10, 1.8626451e-09, 3.3593012e-10, 0.25092328, 4.168315e-12, -1.8626451e-09, -2.373126e-12, 0.14285713, -0.9306617, 0.70301294, 1.5998552)
+light_color = Color(0.98, 0.47285002, 0.30380002, 1)
+light_energy = 9.822
+omni_range = 3.664
+omni_attenuation = 0.813
+script = ExtResource("2_7ijlv")
+
+[node name="estanteria9" parent="Estantes" unique_id=435958111 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(-1.0069997, 0, 6.9271894, 0, 3.9852815, 0, -6.9271894, 0, -1.0069997, -11.921939, 1.8772087, 20.454247)
+
+[node name="estanteria11" parent="Estantes" unique_id=2116319305 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(-6.995736, -0.13908431, -6.119556e-07, -0.24429499, 3.9828293, 0.024434557, -0.0008521422, 0.013902766, -6.9999566, 5.159342, 1.9560637, 25.966076)
+
+[node name="estanteria12" parent="Estantes" unique_id=864843840 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(-6.995736, -0.13908431, -6.119556e-07, -0.24429499, 3.9828293, 0.024434557, -0.0008521422, 0.013902766, -6.9999566, 8.594274, 1.9560637, 25.966076)
+
+[node name="estanteria13" parent="Estantes" unique_id=70711910 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(-6.995736, -0.13908431, -6.119556e-07, -0.24429499, 3.9828293, 0.024434557, -0.0008521422, 0.013902766, -6.9999566, -1.2399254, 1.9560637, 25.966076)
+
+[node name="estanteria14" parent="Estantes" unique_id=1001275276 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(-6.995736, -0.13908431, -6.119556e-07, -0.24429499, 3.9828293, 0.024434557, -0.0008521422, 0.013902766, -6.9999566, -4.86516, 1.9560637, 25.966076)
+
+[node name="estanteria15" parent="Estantes" unique_id=1777646494 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(6.995736, 0.13908431, 0, -0.244295, 3.9828293, 0.024434557, 0.0008527538, -0.013902753, 6.999957, 5.159342, 1.9560637, -10.160503)
+
+[node name="estanteria16" parent="Estantes" unique_id=153057594 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(6.995736, 0.13908431, 0, -0.244295, 3.9828293, 0.024434557, 0.0008527538, -0.013902753, 6.999957, 8.594274, 1.9560637, -10.160503)
+
+[node name="estanteria17" parent="Estantes" unique_id=341042289 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(6.995736, 0.13908431, 0, -0.244295, 3.9828293, 0.024434557, 0.0008527538, -0.013902753, 6.999957, -1.2399254, 1.9560637, -10.160503)
+
+[node name="estanteria18" parent="Estantes" unique_id=40642195 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(6.995736, 0.13908431, 0, -0.244295, 3.9828293, 0.024434557, 0.0008527538, -0.013902753, 6.999957, -4.86516, 1.9560637, -10.160503)
+
+[node name="estanteria19" parent="Estantes" unique_id=2126964298 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(6.995736, 0.13908431, 0, -0.244295, 3.9828293, 0.024434557, 0.0008527538, -0.013902753, 6.999957, -1.2399254, 1.9560637, -10.160503)
+
+[node name="estanteria20" parent="Estantes" unique_id=1296031807 instance=ExtResource("2_qt6nr")]
+transform = Transform3D(6.995736, 0.13908431, 0, -0.244295, 3.9828293, 0.024434557, 0.0008527538, -0.013902753, 6.999957, -4.86516, 1.9560637, -10.160503)
+
+[node name="Personaje" type="CharacterBody3D" parent="." unique_id=46726790 node_paths=PackedStringArray("camara") groups=["jugador"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.6421356)
+script = ExtResource("3_7ijlv")
+camara = NodePath("Camera3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Personaje" unique_id=365290252]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+shape = SubResource("CapsuleShape3D_lo1d8")
+
+[node name="Modelo" parent="Personaje" unique_id=308274698 instance=ExtResource("4_awkn3")]
+transform = Transform3D(-2.6, 0, 0, 0, 2.6, 0, 0, 0, -2.6, 0, 0, 0)
+
+[node name="Rodar" type="Node" parent="Personaje" unique_id=1354398582]
+script = ExtResource("5_iquii")
+
+[node name="Salud" type="Node" parent="Personaje" unique_id=1219956378]
+process_mode = 3
+script = ExtResource("6_xethn")
+vida = 100
+invulnerable = 0.3
+reapariciones = 0
+
+[node name="Camera3D" type="Camera3D" parent="Personaje" unique_id=433505273 node_paths=PackedStringArray("objetivo")]
+transform = Transform3D(1, 0, 0, 0, 0.9659259, 0.25881907, 0, -0.25881907, 0.9659258, 0, 1.8, 0)
+current = true
+script = ExtResource("7_i6nld")
+objetivo = NodePath("..")
+inclinacion = 42.0
+distancia_max = 18.0
+limite_min = Vector2(-16, -56)
+limite_max = Vector2(16, 42)
+altura_max = 22.0
+techo_bajo = 0.0
+
+[node name="Luz_Pluma" type="OmniLight3D" parent="Personaje" unique_id=194480574]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 1.4, 0.2)
+light_color = Color(1, 0.78, 0.5, 1)
+light_energy = 1.1
+omni_range = 4.5
+omni_attenuation = 1.6

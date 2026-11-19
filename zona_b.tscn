@@ -35,12 +35,12 @@ size = Vector3(0.8, 6, 30)
 [sub_resource type="BoxShape3D" id="BoxShape3D_r0ps7"]
 size = Vector3(0.8, 6, 30)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_272bh"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yaqui"]
 albedo_color = Color(0, 0.61448836, 0.6211069, 1)
 albedo_texture = ExtResource("2_dpv7s")
 
 [sub_resource type="BoxMesh" id="BoxMesh_r6318"]
-material = SubResource("StandardMaterial3D_272bh")
+material = SubResource("StandardMaterial3D_yaqui")
 size = Vector3(30, 1, 50)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hchaj"]
@@ -399,7 +399,7 @@ script = ExtResource("2_7ursy")
 escena_siguiente = "uid://b2i7bsna5aq1o"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="puertas/puerta/Disparador" unique_id=475158526]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0874653, 1.3627033, -13.564133)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9333509, 1.3627034, -13.564133)
 shape = SubResource("BoxShape3D_r6318")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="puertas/puerta/Disparador" unique_id=345767733]
