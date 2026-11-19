@@ -72,7 +72,7 @@ camara = NodePath("Camera3D")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
 shape = SubResource("Capsula")
 
-[node name="Heroe" parent="Personaje" instance=ExtResource("90_heroe")]
+[node name="Heroe" parent="Personaje" unique_id=1304984011 instance=ExtResource("90_heroe")]
 
 [node name="Rodar" type="Node" parent="Personaje" unique_id=727263611]
 script = ExtResource("4_rod")
@@ -143,7 +143,7 @@ tex_divisor = ExtResource("18_div")
 tex_sello = ExtResource("20_marco")
 
 [node name="Disparador" type="Area3D" parent="." unique_id=1985597669]
-transform = Transform3D(0.2054442, 0, 0, 0, 0.2054442, 0, 0, 0, 0.2054442, -0.404818, -0.476318, -48.158653)
+transform = Transform3D(0.2054442, 0, 0, 0, 0.2054442, 0, 0, 0, 0.2054442, 7.7786818, -0.476318, -3.2292747)
 script = ExtResource("21_8rmer")
 escena_siguiente = "uid://cqrcvxherom08"
 

@@ -2,11 +2,13 @@
 
 [ext_resource type="Texture2D" uid="uid://b8tule7junme3" path="res://assets/piso final.jpeg" id="1_bhfh8"]
 [ext_resource type="Script" uid="uid://dqiq8snv1p4iq" path="res://luz_arcoiris.gd" id="2_7ijlv"]
+[ext_resource type="Script" uid="uid://dfube0o7q837r" path="res://luz_parpadeante.gd" id="2_iquii"]
 [ext_resource type="PackedScene" uid="uid://c5t1s685hqs36" path="res://modelos_zona_A/estanteria.glb" id="2_qt6nr"]
 [ext_resource type="Script" uid="uid://cchv43eug6720" path="res://personaje.gd" id="3_7ijlv"]
 [ext_resource type="Script" uid="uid://67g8ul8ywidy" path="res://rodar.gd" id="5_iquii"]
 [ext_resource type="Script" uid="uid://bp17ynum7alra" path="res://salud.gd" id="6_xethn"]
 [ext_resource type="Script" uid="uid://c43r45xkk1kmo" path="res://camera_sigue.gd" id="7_i6nld"]
+[ext_resource type="Script" uid="uid://cwuuc77ctuqjg" path="res://texto_arcoiris.gd" id="9_awkn3"]
 [ext_resource type="PackedScene" path="res://personaje/heroe.tscn" id="90_heroe"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6gx7d"]
@@ -43,6 +45,7 @@ light_color = Color(1, 1, 0.05490196, 1)
 light_energy = 10.0
 light_size = 0.425
 omni_range = 15.838
+script = ExtResource("2_iquii")
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="suelo" unique_id=921748272]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.3232327, 0.5487404)
@@ -50,6 +53,7 @@ light_color = Color(1, 1, 0.05490196, 1)
 light_energy = 10.0
 light_size = 0.425
 omni_range = 15.838
+script = ExtResource("2_iquii")
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="suelo" unique_id=1553522618]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.3232327, 17.333431)
@@ -57,6 +61,7 @@ light_color = Color(1, 1, 0.05490196, 1)
 light_energy = 10.0
 light_size = 0.425
 omni_range = 15.838
+script = ExtResource("2_iquii")
 
 [node name="Estantes" type="Node3D" parent="." unique_id=696740793]
 
@@ -249,3 +254,4 @@ Un juego creado por:
 Luna Cubillos
 Brayan Fonseca
 Juan Bonilla"
+script = ExtResource("9_awkn3")
