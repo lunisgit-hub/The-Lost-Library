@@ -651,17 +651,17 @@ func _flotar(si: bool) -> void:
 
 func _velam_cayo() -> void:
 	# salud.gd reproduce la muerte (personaje.morir) y después hace reaparecer a
-	# Velam en el último descanso o llama a partida.perder("sin vida").
+	# Velam (si le quedan reapariciones) o llama a partida.perder("sin vida").
 	sin_idle.append(anim_pj)
 	hud.mensaje("Velam cae…", hud.c_error)
 	var partida := get_tree().get_first_node_in_group("partida")
 	while salud and salud.vida <= 0 and (partida == null or partida.estado == partida.Estado.JUGANDO):
 		await get_tree().process_frame
 	if salud and salud.vida > 0:
-		# Reapareció en un descanso: el enemigo se recompone (como en Expedition 33).
+		# Reapareció: el enemigo se recompone (como en Expedition 33).
 		turno.vida = vida_max_enemigo
 		enemigo.enfriado = true
-		hud.mensaje("Velam despierta en el último descanso", hud.c_sabiduria)
+		hud.mensaje("Velam vuelve a levantarse", hud.c_sabiduria)
 		await _esperar(pausa_mensaje)
 	sin_idle.erase(anim_pj)
 	await _cerrar()

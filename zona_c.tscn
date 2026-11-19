@@ -20,7 +20,6 @@
 [ext_resource type="Texture2D" uid="uid://bno6h4bb2arot" path="res://assets/upscalemedia-transformed.png" id="19_brell"]
 [ext_resource type="Texture2D" uid="uid://7o3v8isfk1se" path="res://assets/wmremove-transformed.webp" id="20_marco"]
 [ext_resource type="PackedScene" path="res://personaje/heroe.tscn" id="90_heroe"]
-[ext_resource type="PackedScene" path="res://descanso.tscn" id="91_desc"]
 
 [sub_resource type="Environment" id="Entorno"]
 background_mode = 1
@@ -137,6 +136,3 @@ tex_boton_quemar = ExtResource("15_btn")
 tam_panel_dilema = Vector2(800, 230)
 tex_divisor = ExtResource("18_div")
 tex_sello = ExtResource("20_marco")
-
-[node name="Descanso" parent="." instance=ExtResource("91_desc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 33)

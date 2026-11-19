@@ -96,22 +96,9 @@ def contra():
     return s
 
 
-def descanso():
-    # campanitas suaves (Do-Mi-Sol-Do)
-    n = int(SR * 1.8)
-    notas = [(523.25, 0.0), (659.25, 0.18), (783.99, 0.36), (1046.5, 0.54)]
-    s = [0.0] * n
-    for f, ini in notas:
-        for i in range(int(ini * SR), n):
-            t = i / SR - ini
-            s[i] += (math.sin(2 * math.pi * f * t) + 0.3 * math.sin(2 * math.pi * f * 2.01 * t)) * math.exp(-t * 2.5)
-    return s
-
-
 if __name__ == "__main__":
     guardar("parry.wav", parry())
     guardar("aviso_golpe.wav", aviso())
     guardar("herida.wav", herida())
     guardar("esquiva.wav", esquiva())
     guardar("contraataque.wav", contra())
-    guardar("descanso.wav", descanso())

@@ -50,7 +50,6 @@
 [ext_resource type="Script" uid="uid://hikg2st0bjcs" path="res://hud_combate.gd" id="45_hudcomb"]
 [ext_resource type="Script" uid="uid://d2oc7cwtpawe4" path="res://enemigo_combate.gd" id="46_enemigo"]
 [ext_resource type="PackedScene" path="res://personaje/heroe.tscn" id="90_heroe"]
-[ext_resource type="PackedScene" path="res://descanso.tscn" id="91_desc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="CieloMat"]
 sky_top_color = Color(0.03, 0.04, 0.09, 1)
@@ -2560,6 +2559,3 @@ transform = Transform3D(-0.51234305, -1.2686813, 3.2214825, -0.19926643, 3.26197
 
 [node name="escalera2" parent="." unique_id=1012708777 instance=ExtResource("32_g5tc1")]
 transform = Transform3D(-0.51234305, -1.2686813, 3.2214825, -0.19926643, 3.26197, 1.2529349, -3.4565597, -3.4257926e-07, -0.5497296, -13.241724, 1.8168254, 7.723957)
-
-[node name="Descanso" parent="." instance=ExtResource("91_desc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 15.5)
