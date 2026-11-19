@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cqrcvxherom08"]
 
-[ext_resource type="Texture2D" uid="uid://dtc455bbyu5ge" path="res://assets/piso final.jpeg" id="1_bhfh8"]
+[ext_resource type="Texture2D" uid="uid://b8tule7junme3" path="res://assets/piso final.jpeg" id="1_bhfh8"]
 [ext_resource type="Script" uid="uid://dqiq8snv1p4iq" path="res://luz_arcoiris.gd" id="2_7ijlv"]
 [ext_resource type="PackedScene" uid="uid://c5t1s685hqs36" path="res://modelos_zona_A/estanteria.glb" id="2_qt6nr"]
 [ext_resource type="Script" uid="uid://cchv43eug6720" path="res://personaje.gd" id="3_7ijlv"]
@@ -209,7 +209,7 @@ camara = NodePath("Camera3D")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
 shape = SubResource("CapsuleShape3D_lo1d8")
 
-[node name="Heroe" parent="Personaje" instance=ExtResource("90_heroe")]
+[node name="Heroe" parent="Personaje" unique_id=1858103993 instance=ExtResource("90_heroe")]
 
 [node name="Rodar" type="Node" parent="Personaje" unique_id=1354398582]
 script = ExtResource("5_iquii")
@@ -239,3 +239,13 @@ light_color = Color(1, 0.78, 0.5, 1)
 light_energy = 1.1
 omni_range = 4.5
 omni_attenuation = 1.6
+
+[node name="Label3D" type="Label3D" parent="." unique_id=372252127]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.055578, 0)
+pixel_size = 0.02
+text = "¡GRACIAS POR JUGAR!
+♡
+Un juego creado por:
+Luna Cubillos
+Brayan Fonseca
+Juan Bonilla"
