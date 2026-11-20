@@ -105,7 +105,7 @@ omni_attenuation = 1.6
 
 [node name="Partida" type="Node" parent="." unique_id=1218940114]
 script = ExtResource("8_par")
-metas = 1
+metas = 0
 
 [node name="HUD" parent="." unique_id=261869986 instance=ExtResource("7_hud")]
 
@@ -113,6 +113,8 @@ metas = 1
 script = ExtResource("9_com")
 
 [node name="HudTrivia" parent="Combate" unique_id=1044941047 instance=ExtResource("10_tri")]
+banco = "res://ui_trivia/preguntas_piso3.json"
+titulo = "Enigma de tinta · Piso 3"
 tex_barra_fondo = ExtResource("16_hex2")
 tex_barra_relleno = ExtResource("14_hex")
 fuente_trivia = ExtResource("13_fuente")

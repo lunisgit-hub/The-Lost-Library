@@ -22,6 +22,19 @@
 [ext_resource type="Script" path="res://salud.gd" id="92_salud"]
 [ext_resource type="PackedScene" path="res://hud.tscn" id="93_hud"]
 
+[ext_resource type="Script" uid="uid://drqvtol6v0bg2" path="res://combate_manager.gd" id="zc_com"]
+[ext_resource type="PackedScene" path="res://hud_trivia.tscn" id="zc_tri"]
+[ext_resource type="Script" uid="uid://hikg2st0bjcs" path="res://hud_combate.gd" id="zc_hc"]
+[ext_resource type="Script" uid="uid://d2oc7cwtpawe4" path="res://enemigo_combate.gd" id="zc_enem"]
+[ext_resource type="Texture2D" uid="uid://boye42marj3xf" path="res://assets/wmremove-transformed (1).jpeg" id="zc_fondo"]
+[ext_resource type="FontFile" uid="uid://dvh1um7a5e84r" path="res://assets/Cinzel-VariableFont_wght.ttf" id="zc_fuente"]
+[ext_resource type="Texture2D" uid="uid://dqt6b7fgd2al1" path="res://assets/Hexagonal Shape Cleanup (2).png" id="zc_hex"]
+[ext_resource type="Texture2D" uid="uid://f13sqpilalwt" path="res://assets/Captura de pantalla 2026-11-12 083257.png" id="zc_btn"]
+[ext_resource type="Texture2D" uid="uid://det2ay6qfeaj5" path="res://assets/Hexagonal_Shape_Cleanup-removebg-preview.png" id="zc_hex2"]
+[ext_resource type="Texture2D" uid="uid://b6tq8ejpbdlap" path="res://assets/image-removebg-preview (1).png" id="zc_bfondo"]
+[ext_resource type="Texture2D" uid="uid://csu24ouogdot4" path="res://assets/image-removebg-preview (2).png" id="zc_div"]
+[ext_resource type="Texture2D" uid="uid://bno6h4bb2arot" path="res://assets/upscalemedia-transformed.png" id="zc_brell"]
+[ext_resource type="Texture2D" uid="uid://7o3v8isfk1se" path="res://assets/wmremove-transformed.webp" id="zc_marco"]
 [sub_resource type="BoxShape3D" id="BoxShape3D_ydptd"]
 size = Vector3(12.5, 6, 0.8)
 
@@ -404,7 +417,7 @@ transform = Transform3D(0.47493568, 0, 0, 0, 0.47493568, 0, 0, 0, 0.47493568, -0
 [node name="Disparador" type="Area3D" parent="puertas/puerta" unique_id=748871759]
 transform = Transform3D(0.2054442, 0, 0, 0, 0.2054442, 0, 0, 0, 0.2054442, -0.404818, -0.476318, 2.5056403)
 script = ExtResource("2_7ursy")
-escena_siguiente = "uid://b2i7bsna5aq1o"
+escena_siguiente = "res://zona_c.tscn"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="puertas/puerta/Disparador" unique_id=475158526]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9333509, 1.3627034, -13.564133)
@@ -457,3 +470,52 @@ light_color = Color(1, 1, 0.07450981, 1)
 light_energy = 4.29
 
 [node name="HUD" parent="." instance=ExtResource("93_hud")]
+
+[node name="Combate" type="Node" parent="Archivista"]
+script = ExtResource("zc_enem")
+nombre = "El Archivista"
+vida = 60
+pesos = Array[int]([50, 30, 20])
+curas = 1
+vida_baja = 20
+semilla = 13
+ritmo = 0.95
+habilidad = "escudo"
+lore = "Catalogaba cada visitante de la torre. Cuando la tinta lo alcanzó, siguió archivando… pero ahora archiva a los que no salen."
+radio = 2.2
+color_luz = Color(0.85, 0.45, 0.2, 1)
+
+[node name="Combate" type="Node" parent="."]
+script = ExtResource("zc_com")
+
+[node name="HudTrivia" parent="Combate" instance=ExtResource("zc_tri")]
+banco = "res://ui_trivia/preguntas_piso2.json"
+titulo = "Enigma de tinta · Piso 2"
+tex_barra_fondo = ExtResource("zc_hex2")
+tex_barra_relleno = ExtResource("zc_hex")
+fuente_trivia = ExtResource("zc_fuente")
+tex_fondo = ExtResource("zc_fondo")
+tex_marco = ExtResource("zc_marco")
+quitar_fondo_negro_marco = false
+tex_boton = ExtResource("zc_hex2")
+alto_barra = 26.0
+tam_tarjeta = Vector2(800, 589)
+escala_marco_extra = Vector2(1.25, 1.25)
+tam_sello = Vector2(200, 118)
+
+[node name="HudCombate" type="CanvasLayer" parent="Combate"]
+script = ExtResource("zc_hc")
+tex_barra_enemigo_fondo = ExtResource("zc_bfondo")
+tex_barra_enemigo_relleno = ExtResource("zc_brell")
+alto_barra_enemigo = 75.0
+fuente_combate = ExtResource("zc_fuente")
+tex_boton_normal = ExtResource("zc_btn")
+tex_boton_hover = ExtResource("zc_hex2")
+usar_tex_panel_dilema = true
+tex_panel_dilema = ExtResource("zc_fondo")
+quitar_fondo_negro_dilema = true
+tex_boton_leer = ExtResource("zc_hex2")
+tex_boton_quemar = ExtResource("zc_btn")
+tam_panel_dilema = Vector2(800, 230)
+tex_divisor = ExtResource("zc_div")
+tex_sello = ExtResource("zc_marco")

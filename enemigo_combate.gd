@@ -97,9 +97,69 @@ func en_combate(si: bool) -> void:
 	# El Errante deja de moverse mientras pelea (el mundo está en pausa igual).
 	var cuerpo := get_parent()
 	if cuerpo.has_method("set_physics_process"):
-		cuerpo.set_physics_process(not si)
+		cuerpo.set_physics_process(not si and not vencido)
 
 
 func vencer() -> void:
 	vencido = true
-	get_parent().queue_free()
+	var cuerpo := get_parent() as Node3D
+	if cuerpo == null:
+		get_parent().queue_free()
+		return
+	if cuerpo.has_method("set_physics_process"):
+		cuerpo.set_physics_process(false)
+	for c in cuerpo.find_children("*", "CollisionShape3D", true, false):
+		c.set_deferred("disabled", true)
+	_estallido(posicion() + Vector3(0, 1.2, 0))
+	var tw := create_tween()
+	tw.tween_property(cuerpo, "scale", cuerpo.scale * 1.15, 0.15).set_trans(Tween.TRANS_SINE)
+	tw.tween_property(cuerpo, "scale", cuerpo.scale * 0.01, 0.6).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	tw.tween_callback(cuerpo.queue_free)
+
+
+func _estallido(donde: Vector3) -> void:
+	var escena := get_tree().current_scene
+	if escena == null:
+		return
+	var p := CPUParticles3D.new()
+	p.process_mode = Node.PROCESS_MODE_ALWAYS
+	p.one_shot = true
+	p.explosiveness = 0.9
+	p.amount = 70
+	p.lifetime = 1.4
+	p.emission_shape = CPUParticles3D.EMISSION_SHAPE_SPHERE
+	p.emission_sphere_radius = 0.6 if not es_jefe else 2.5
+	p.direction = Vector3.UP
+	p.spread = 180.0
+	p.initial_velocity_min = 1.5
+	p.initial_velocity_max = 4.5 if not es_jefe else 7.0
+	p.gravity = Vector3(0, -3.0, 0)
+	p.scale_amount_min = 0.6
+	p.scale_amount_max = 1.4
+	var gota := SphereMesh.new()
+	gota.radius = 0.06
+	gota.height = 0.12
+	gota.radial_segments = 6
+	gota.rings = 3
+	var m := StandardMaterial3D.new()
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	m.albedo_color = color_luz
+	m.emission_enabled = true
+	m.emission = color_luz
+	m.emission_energy_multiplier = 3.0
+	gota.material = m
+	p.mesh = gota
+	escena.add_child(p)
+	p.global_position = donde
+	p.emitting = true
+	var destello := OmniLight3D.new()
+	destello.process_mode = Node.PROCESS_MODE_ALWAYS
+	destello.light_color = color_luz
+	destello.light_energy = 6.0
+	destello.omni_range = 6.0 if not es_jefe else 14.0
+	escena.add_child(destello)
+	destello.global_position = donde
+	var tw := destello.create_tween()
+	tw.tween_property(destello, "light_energy", 0.0, 1.0)
+	tw.tween_callback(destello.queue_free)
+	get_tree().create_timer(p.lifetime + 0.5, true, false, true).timeout.connect(p.queue_free)
