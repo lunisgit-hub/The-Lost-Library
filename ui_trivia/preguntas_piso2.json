@@ -1,0 +1,156 @@
+{
+  "piso": 2,
+  "tema": "Historia y geografía",
+  "preguntas": [
+    {
+      "texto": "¿En qué año llegó Cristóbal Colón a América?",
+      "opciones": [
+        "1492",
+        "1500",
+        "1453",
+        "1810"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿Cuál es el río más caudaloso del mundo?",
+      "opciones": [
+        "El Amazonas",
+        "El Nilo",
+        "El Misisipi",
+        "El Danubio"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿En qué año fue el Grito de Independencia de Colombia?",
+      "opciones": [
+        "1810",
+        "1819",
+        "1830",
+        "1492"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿Cuál es la capital de Australia?",
+      "opciones": [
+        "Canberra",
+        "Sídney",
+        "Melbourne",
+        "Perth"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿Qué civilización construyó Machu Picchu?",
+      "opciones": [
+        "Los incas",
+        "Los mayas",
+        "Los aztecas",
+        "Los muiscas"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿Cuál es el océano más grande del planeta?",
+      "opciones": [
+        "El Pacífico",
+        "El Atlántico",
+        "El Índico",
+        "El Ártico"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿Quién fue el primer ser humano en pisar la Luna?",
+      "opciones": [
+        "Neil Armstrong",
+        "Yuri Gagarin",
+        "Buzz Aldrin",
+        "Michael Collins"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿En qué país estaba la antigua Biblioteca de Alejandría?",
+      "opciones": [
+        "Egipto",
+        "Grecia",
+        "Italia",
+        "Turquía"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿Cuál es el país más grande del mundo por superficie?",
+      "opciones": [
+        "Rusia",
+        "Canadá",
+        "China",
+        "Estados Unidos"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿En qué año cayó el Muro de Berlín?",
+      "opciones": [
+        "1989",
+        "1991",
+        "1945",
+        "1975"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿Cuál es la montaña más alta del mundo?",
+      "opciones": [
+        "El Everest",
+        "El K2",
+        "El Aconcagua",
+        "El Kilimanjaro"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿Qué imperio construyó el Coliseo?",
+      "opciones": [
+        "El romano",
+        "El griego",
+        "El otomano",
+        "El persa"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿Cuál es la capital de Canadá?",
+      "opciones": [
+        "Ottawa",
+        "Toronto",
+        "Montreal",
+        "Vancouver"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿En qué continente está el desierto del Sahara?",
+      "opciones": [
+        "África",
+        "Asia",
+        "Oceanía",
+        "América"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿Quién creó la imprenta de tipos móviles en Europa?",
+      "opciones": [
+        "Johannes Gutenberg",
+        "Leonardo da Vinci",
+        "Galileo Galilei",
+        "Isaac Newton"
+      ],
+      "correcta": 0
+    }
+  ]
+}

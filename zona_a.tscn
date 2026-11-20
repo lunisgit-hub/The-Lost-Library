@@ -812,6 +812,7 @@ omni_attenuation = 1.6
 
 [node name="Partida" type="Node" parent="." unique_id=1781402432]
 script = ExtResource("40_partida")
+metas = 0
 
 [node name="HUD" parent="." unique_id=1201245542 instance=ExtResource("42_hudvida")]
 
@@ -1162,7 +1163,7 @@ transform = Transform3D(4.867501, 0, 0, 0, 4.867501, 0, 0, 0, 4.867501, 0, 2.318
 [node name="Disparador" type="Area3D" parent="Nivel_ZonaA/Props/S1_ArcoSalida/puerta" unique_id=1134812464]
 transform = Transform3D(0.2054442, 0, 0, 0, 0.2054442, 0, 0, 0, 0.2054442, -0.404818, -0.476318, 2.5056403)
 script = ExtResource("30_v8wf1")
-escena_siguiente = "res://zona_c.tscn"
+escena_siguiente = "res://zona_b.tscn"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Nivel_ZonaA/Props/S1_ArcoSalida/puerta/Disparador" unique_id=446022359]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9491935, 1.1217225, -11.869755)

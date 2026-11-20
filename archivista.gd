@@ -80,7 +80,7 @@ func _physics_process(delta: float) -> void:
 					if audio_ataque and not audio_ataque.playing:
 						audio_ataque.play()
 						
-					if jugador.has_method("recibir_danio"):
+					if jugador.has_method("recibir_danio") and not has_node("Combate"):
 						jugador.recibir_danio(10.0)
 				
 				if distancia > rango_ataque:
@@ -155,7 +155,7 @@ func _verificar_colision_combate() -> void:
 					audio_ataque.play()
 			else:
 				print("Audio ataque no existe")	
-			if collider.has_method("recibir_danio"):
+			if collider.has_method("recibir_danio") and not has_node("Combate"):
 				collider.recibir_danio(10.0)
 			break
 

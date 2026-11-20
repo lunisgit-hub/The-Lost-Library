@@ -33,11 +33,92 @@ var jefe_libros: Node3D
 var jefe_halo: Node3D
 var mat_ojos: StandardMaterial3D
 var t = 0.0
+var disparador: Area3D
+var esperando_salida = false
 
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	construir()
+	if not Engine.is_editor_hint():
+		preparar_salida()
+
+
+func preparar_salida():
+	disparador = get_node_or_null("Disparador")
+	if disparador == null:
+		return
+	disparador.set_deferred("monitoring", false)
+	esperando_salida = true
+
+
+func abrir_salida():
+	esperando_salida = false
+	if not is_instance_valid(disparador):
+		return
+	disparador.set_deferred("monitoring", true)
+	var forma = disparador.get_node_or_null("CollisionShape3D")
+	var p = forma.global_position if forma != null else disparador.global_position
+	p.y = 0.0
+	var salida = Node3D.new()
+	salida.name = "Salida"
+	add_child(salida)
+	salida.global_position = p
+	var luz = OmniLight3D.new()
+	luz.light_color = ORO
+	luz.light_energy = 0.0
+	luz.omni_range = 8.0
+	luz.position = Vector3(0, 2.0, 0)
+	salida.add_child(luz)
+	create_tween().tween_property(luz, "light_energy", 5.0, 1.5)
+	var columna = CPUParticles3D.new()
+	columna.amount = 90
+	columna.lifetime = 3.0
+	columna.emission_shape = CPUParticles3D.EMISSION_SHAPE_RING
+	columna.emission_ring_axis = Vector3.UP
+	columna.emission_ring_radius = 1.4
+	columna.emission_ring_inner_radius = 1.0
+	columna.emission_ring_height = 0.1
+	columna.direction = Vector3.UP
+	columna.spread = 8.0
+	columna.gravity = Vector3(0, 0.6, 0)
+	columna.initial_velocity_min = 0.6
+	columna.initial_velocity_max = 1.6
+	var chispa = SphereMesh.new()
+	chispa.radius = 0.04
+	chispa.height = 0.08
+	chispa.radial_segments = 6
+	chispa.rings = 3
+	chispa.material = material_aditivo(Color(1.0, 0.8, 0.4, 0.9))
+	columna.mesh = chispa
+	salida.add_child(columna)
+	var aro = TorusMesh.new()
+	aro.inner_radius = 1.3
+	aro.outer_radius = 1.45
+	aro.rings = 64
+	var mi = MeshInstance3D.new()
+	mi.mesh = aro
+	mi.material_override = material_brillo(ORO, 3.0)
+	mi.position = Vector3(0, 0.03, 0)
+	mi.scale = Vector3(0.01, 0.15, 0.01)
+	salida.add_child(mi)
+	create_tween().tween_property(mi, "scale", Vector3(1, 0.15, 1), 1.2).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	var aviso = Label3D.new()
+	aviso.text = "La última página te espera"
+	aviso.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	aviso.pixel_size = 0.012
+	aviso.font_size = 64
+	aviso.outline_size = 12
+	aviso.modulate = Color(1.0, 0.85, 0.55, 0.0)
+	aviso.outline_modulate = Color(0.1, 0.05, 0.0, 0.0)
+	aviso.position = Vector3(0, 3.2, 0)
+	salida.add_child(aviso)
+	var tw = create_tween()
+	tw.tween_property(aviso, "modulate:a", 1.0, 1.0)
+	tw.parallel().tween_property(aviso, "outline_modulate:a", 0.8, 1.0)
+	tw.tween_interval(3.5)
+	tw.tween_property(aviso, "modulate:a", 0.0, 1.5)
+	tw.parallel().tween_property(aviso, "outline_modulate:a", 0.0, 1.5)
 
 
 func construir():
@@ -80,6 +161,8 @@ func construir():
 
 func _process(delta):
 	t += delta
+	if esperando_salida and not is_instance_valid(jefe):
+		abrir_salida()
 	for i in range(estrellas.size()):
 		var e = estrellas[i]
 		e.rotation.y = sin(t * 0.4 + i * 1.7) * 0.5

@@ -1,0 +1,156 @@
+[gd_scene format=3]
+
+[ext_resource type="FontFile" path="res://assets/CormorantGaramond-SemiBold.woff2" id="1_fuente"]
+[ext_resource type="FontFile" path="res://assets/CormorantGaramond-MediumItalic.woff2" id="3_cursiva"]
+
+[sub_resource type="FontVariation" id="TituloEspaciado"]
+base_font = ExtResource("1_fuente")
+spacing_glyph = 10
+
+[sub_resource type="FontVariation" id="BotonEspaciado"]
+base_font = ExtResource("1_fuente")
+spacing_glyph = 5
+
+[sub_resource type="StyleBoxEmpty" id="BotonNormal"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="BotonHover"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.784, 0.631, 0.353, 0.07)
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(0.784, 0.631, 0.353, 0.75)
+
+[sub_resource type="StyleBoxFlat" id="BotonPresionado"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.784, 0.631, 0.353, 0.16)
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(0.95, 0.82, 0.55, 1)
+
+[sub_resource type="Theme" id="TemaMenu"]
+default_font = ExtResource("1_fuente")
+Button/colors/font_color = Color(0.91, 0.863, 0.753, 0.82)
+Button/colors/font_hover_color = Color(0.784, 0.631, 0.353, 1)
+Button/colors/font_focus_color = Color(0.784, 0.631, 0.353, 1)
+Button/colors/font_pressed_color = Color(0.95, 0.82, 0.55, 1)
+Button/font_sizes/font_size = 30
+Button/fonts/font = SubResource("BotonEspaciado")
+Button/styles/normal = SubResource("BotonNormal")
+Button/styles/hover = SubResource("BotonHover")
+Button/styles/pressed = SubResource("BotonPresionado")
+Button/styles/focus = SubResource("BotonHover")
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.7)
+Label/constants/shadow_offset_x = 0
+Label/constants/shadow_offset_y = 3
+Label/constants/outline_size = 0
+
+[node name="Pausa" type="CanvasLayer"]
+process_mode = 3
+layer = 30
+visible = false
+
+[node name="Panel" type="ColorRect" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("TemaMenu")
+color = Color(0.015, 0.01, 0.006, 0.84)
+
+[node name="Titulo" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 150.0
+offset_bottom = 250.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.91, 0.863, 0.753, 1)
+theme_override_fonts/font = SubResource("TituloEspaciado")
+theme_override_font_sizes/font_size = 68
+text = "PAUSA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Divisor" type="Control" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 256.0
+offset_right = 200.0
+offset_bottom = 268.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="LineaIzq" type="ColorRect" parent="Panel/Divisor"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 5.5
+offset_right = 186.0
+offset_bottom = 6.5
+mouse_filter = 2
+color = Color(0.784, 0.631, 0.353, 0.7)
+
+[node name="LineaDer" type="ColorRect" parent="Panel/Divisor"]
+layout_mode = 0
+offset_left = 214.0
+offset_top = 5.5
+offset_right = 400.0
+offset_bottom = 6.5
+mouse_filter = 2
+color = Color(0.784, 0.631, 0.353, 0.7)
+
+[node name="Rombo" type="ColorRect" parent="Panel/Divisor"]
+layout_mode = 0
+offset_left = 195.0
+offset_top = 1.0
+offset_right = 205.0
+offset_bottom = 11.0
+rotation = 0.785398
+pivot_offset = Vector2(5, 5)
+mouse_filter = 2
+color = Color(0.784, 0.631, 0.353, 1)
+
+[node name="Botones" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -30.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Continuar" type="Button" parent="Panel/Botones"]
+custom_minimum_size = Vector2(400, 58)
+layout_mode = 2
+text = "CONTINUAR"
+
+[node name="Reiniciar" type="Button" parent="Panel/Botones"]
+custom_minimum_size = Vector2(400, 58)
+layout_mode = 2
+text = "REINICIAR"
+
+[node name="Menu" type="Button" parent="Panel/Botones"]
+custom_minimum_size = Vector2(400, 58)
+layout_mode = 2
+text = "MENÚ PRINCIPAL"

@@ -1,0 +1,156 @@
+{
+  "piso": 3,
+  "tema": "Literatura y arte",
+  "preguntas": [
+    {
+      "texto": "¿Quién escribió «Cien años de soledad»?",
+      "opciones": [
+        "Gabriel García Márquez",
+        "Mario Vargas Llosa",
+        "Julio Cortázar",
+        "Pablo Neruda"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿Quién escribió «Don Quijote de la Mancha»?",
+      "opciones": [
+        "Miguel de Cervantes",
+        "Lope de Vega",
+        "Federico García Lorca",
+        "Francisco de Quevedo"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿Quién pintó la «Mona Lisa»?",
+      "opciones": [
+        "Leonardo da Vinci",
+        "Miguel Ángel",
+        "Rafael",
+        "Botticelli"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿Quién escribió «Romeo y Julieta»?",
+      "opciones": [
+        "William Shakespeare",
+        "Charles Dickens",
+        "Oscar Wilde",
+        "Jane Austen"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿Qué escritor argentino imaginó «La biblioteca de Babel»?",
+      "opciones": [
+        "Jorge Luis Borges",
+        "Julio Cortázar",
+        "Ernesto Sabato",
+        "Adolfo Bioy Casares"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿A quién se le atribuye «La Odisea»?",
+      "opciones": [
+        "Homero",
+        "Virgilio",
+        "Sófocles",
+        "Platón"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿En qué ciudad está el museo del Louvre?",
+      "opciones": [
+        "París",
+        "Londres",
+        "Roma",
+        "Madrid"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿Quién pintó la bóveda de la Capilla Sixtina?",
+      "opciones": [
+        "Miguel Ángel",
+        "Leonardo da Vinci",
+        "Rafael",
+        "Caravaggio"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿Quién escribió «La metamorfosis»?",
+      "opciones": [
+        "Franz Kafka",
+        "Friedrich Nietzsche",
+        "Thomas Mann",
+        "Hermann Hesse"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿Qué escritor creó a Sherlock Holmes?",
+      "opciones": [
+        "Arthur Conan Doyle",
+        "Agatha Christie",
+        "Edgar Allan Poe",
+        "Julio Verne"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿Quién escribió la novela colombiana «María»?",
+      "opciones": [
+        "Jorge Isaacs",
+        "José Asunción Silva",
+        "Rafael Pombo",
+        "Tomás Carrasquilla"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿Qué artista colombiano es famoso por sus figuras voluminosas?",
+      "opciones": [
+        "Fernando Botero",
+        "Débora Arango",
+        "Alejandro Obregón",
+        "Omar Rayo"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿Quién escribió «Veinte mil leguas de viaje submarino»?",
+      "opciones": [
+        "Julio Verne",
+        "H. G. Wells",
+        "Mark Twain",
+        "Robert L. Stevenson"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿Quién compuso la Novena Sinfonía, con el «Himno a la alegría»?",
+      "opciones": [
+        "Ludwig van Beethoven",
+        "Wolfgang A. Mozart",
+        "Johann S. Bach",
+        "Antonio Vivaldi"
+      ],
+      "correcta": 0
+    },
+    {
+      "texto": "¿Quién escribió «El principito»?",
+      "opciones": [
+        "Antoine de Saint-Exupéry",
+        "Victor Hugo",
+        "Albert Camus",
+        "Alejandro Dumas"
+      ],
+      "correcta": 0
+    }
+  ]
+}

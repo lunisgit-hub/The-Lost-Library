@@ -1,0 +1,189 @@
+[gd_scene format=3 uid="uid://cm31pnnewdkpy"]
+
+[ext_resource type="FontFile" path="res://assets/CormorantGaramond-SemiBold.woff2" id="1_fuente"]
+[ext_resource type="FontFile" path="res://assets/CormorantGaramond-MediumItalic.woff2" id="3_cursiva"]
+[ext_resource type="Texture2D" uid="uid://boye42marj3xf" path="res://assets/wmremove-transformed (1).jpeg" id="2_fondo"]
+[ext_resource type="Script" uid="uid://li26fxn6djby" path="res://menu.gd" id="2_mae5d"]
+
+[sub_resource type="FontVariation" id="TituloEspaciado"]
+base_font = ExtResource("1_fuente")
+spacing_glyph = 10
+
+[sub_resource type="FontVariation" id="BotonEspaciado"]
+base_font = ExtResource("1_fuente")
+spacing_glyph = 5
+
+[sub_resource type="StyleBoxEmpty" id="BotonNormal"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="BotonHover"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.784, 0.631, 0.353, 0.07)
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(0.784, 0.631, 0.353, 0.75)
+
+[sub_resource type="StyleBoxFlat" id="BotonPresionado"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.784, 0.631, 0.353, 0.16)
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(0.95, 0.82, 0.55, 1)
+
+[sub_resource type="Theme" id="TemaMenu"]
+default_font = ExtResource("1_fuente")
+Button/colors/font_color = Color(0.91, 0.863, 0.753, 0.82)
+Button/colors/font_hover_color = Color(0.784, 0.631, 0.353, 1)
+Button/colors/font_focus_color = Color(0.784, 0.631, 0.353, 1)
+Button/colors/font_pressed_color = Color(0.95, 0.82, 0.55, 1)
+Button/font_sizes/font_size = 30
+Button/fonts/font = SubResource("BotonEspaciado")
+Button/styles/normal = SubResource("BotonNormal")
+Button/styles/hover = SubResource("BotonHover")
+Button/styles/pressed = SubResource("BotonPresionado")
+Button/styles/focus = SubResource("BotonHover")
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.7)
+Label/constants/shadow_offset_x = 0
+Label/constants/shadow_offset_y = 3
+Label/constants/outline_size = 0
+
+[node name="Menu" type="Control" unique_id=523814131]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("TemaMenu")
+script = ExtResource("2_mae5d")
+
+[node name="Fondo" type="TextureRect" parent="." unique_id=1512619715]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+modulate = Color(0.55, 0.47, 0.4, 1)
+texture = ExtResource("2_fondo")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Velo" type="ColorRect" parent="." unique_id=2121175256]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.02, 0.012, 0.008, 0.62)
+
+[node name="Titulo" type="Label" parent="." unique_id=585821873]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 120.0
+offset_bottom = 230.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.91, 0.863, 0.753, 1)
+theme_override_fonts/font = SubResource("TituloEspaciado")
+theme_override_font_sizes/font_size = 84
+text = "THE LOST LIBRARY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Divisor" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 236.0
+offset_right = 200.0
+offset_bottom = 248.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="LineaIzq" type="ColorRect" parent="Divisor"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 5.5
+offset_right = 186.0
+offset_bottom = 6.5
+mouse_filter = 2
+color = Color(0.784, 0.631, 0.353, 0.7)
+
+[node name="LineaDer" type="ColorRect" parent="Divisor"]
+layout_mode = 0
+offset_left = 214.0
+offset_top = 5.5
+offset_right = 400.0
+offset_bottom = 6.5
+mouse_filter = 2
+color = Color(0.784, 0.631, 0.353, 0.7)
+
+[node name="Rombo" type="ColorRect" parent="Divisor"]
+layout_mode = 0
+offset_left = 195.0
+offset_top = 1.0
+offset_right = 205.0
+offset_bottom = 11.0
+rotation = 0.785398
+pivot_offset = Vector2(5, 5)
+mouse_filter = 2
+color = Color(0.784, 0.631, 0.353, 1)
+
+[node name="Subtitulo" type="Label" parent="." unique_id=558569164]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 256.0
+offset_bottom = 296.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.62, 0.5, 0.3, 1)
+theme_override_fonts/font = ExtResource("3_cursiva")
+theme_override_font_sizes/font_size = 26
+text = "La biblioteca que olvidó a sus lectores"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Botones" type="VBoxContainer" parent="." unique_id=536157734]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -10.0
+offset_right = 200.0
+offset_bottom = 220.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Jugar" type="Button" parent="Botones" unique_id=994762891]
+custom_minimum_size = Vector2(400, 58)
+layout_mode = 2
+text = "JUGAR"
+
+[node name="Creditos" type="Button" parent="Botones" unique_id=1168146479]
+custom_minimum_size = Vector2(400, 58)
+layout_mode = 2
+text = "OPCIONES"
+
+[node name="Salir" type="Button" parent="Botones" unique_id=561211203]
+custom_minimum_size = Vector2(400, 58)
+layout_mode = 2
+text = "SALIR"

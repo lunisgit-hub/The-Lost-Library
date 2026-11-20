@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bp17ynum7alra" path="res://salud.gd" id="6_xethn"]
 [ext_resource type="Script" uid="uid://c43r45xkk1kmo" path="res://camera_sigue.gd" id="7_i6nld"]
 [ext_resource type="PackedScene" path="res://personaje/heroe.tscn" id="90_heroe"]
+[ext_resource type="Script" path="res://final.gd" id="91_final"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6gx7d"]
 albedo_color = Color(0.83514047, 0.5568067, 0.30193752, 1)
@@ -25,6 +26,7 @@ radius = 0.35
 height = 1.75
 
 [node name="Final" type="Node3D" unique_id=354453976]
+script = ExtResource("91_final")
 
 [node name="suelo" type="StaticBody3D" parent="." unique_id=815777661]
 
@@ -39,22 +41,22 @@ debug_color = Color(0.7109369, 0.43890822, 0.56127, 0.41960785)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="suelo" unique_id=61986731]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.3232327, 9.627215)
-light_color = Color(1, 1, 0.05490196, 1)
-light_energy = 10.0
+light_color = Color(1, 0.72, 0.38, 1)
+light_energy = 3.5
 light_size = 0.425
 omni_range = 15.838
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="suelo" unique_id=921748272]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.3232327, 0.5487404)
-light_color = Color(1, 1, 0.05490196, 1)
-light_energy = 10.0
+light_color = Color(1, 0.72, 0.38, 1)
+light_energy = 3.5
 light_size = 0.425
 omni_range = 15.838
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="suelo" unique_id=1553522618]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.3232327, 17.333431)
-light_color = Color(1, 1, 0.05490196, 1)
-light_energy = 10.0
+light_color = Color(1, 0.72, 0.38, 1)
+light_energy = 3.5
 light_size = 0.425
 omni_range = 15.838
 

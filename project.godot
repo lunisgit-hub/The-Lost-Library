@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="Juego del equipo (3D)"
-run/main_scene="res://main.tscn"
+run/main_scene="uid://cm31pnnewdkpy"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Musica="*res://musica.gd"
+Transicion="*res://transicion.gd"
 
 [input]
 
