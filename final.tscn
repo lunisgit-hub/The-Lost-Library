@@ -9,8 +9,13 @@
 [ext_resource type="Script" uid="uid://bp17ynum7alra" path="res://salud.gd" id="6_xethn"]
 [ext_resource type="Script" uid="uid://c43r45xkk1kmo" path="res://camera_sigue.gd" id="7_i6nld"]
 [ext_resource type="Script" uid="uid://cwuuc77ctuqjg" path="res://texto_arcoiris.gd" id="9_awkn3"]
+[ext_resource type="Script" uid="uid://bylh5217rak2e" path="res://herramientas/techo_oculta_cerca.gd" id="12_572a1"]
+[ext_resource type="PackedScene" uid="uid://byu6eegfbr4iu" path="res://modelos_zona_A/techo.glb" id="13_m4l06"]
+[ext_resource type="PackedScene" uid="uid://cg16o6i2l2ro8" path="res://modelos_zona_A/techogood.glb" id="14_3fwds"]
+[ext_resource type="PackedScene" uid="uid://bn2xii0n4nd31" path="res://modelos_zona_A/libro_mesa.glb" id="15_m4l06"]
+[ext_resource type="PackedScene" uid="uid://cwg01j32i8xh2" path="res://modelos_zona_A/Meshy_AI_Gothic_Ceiling_Chande_1109160622_texture.glb" id="16_3fwds"]
 [ext_resource type="PackedScene" path="res://personaje/heroe.tscn" id="90_heroe"]
-[ext_resource type="Script" path="res://final.gd" id="91_final"]
+[ext_resource type="Script" uid="uid://ddgug2dvd7ute" path="res://final.gd" id="91_final"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6gx7d"]
 albedo_color = Color(0.83514047, 0.5568067, 0.30193752, 1)
@@ -26,6 +31,9 @@ size = Vector3(30, 1, 50)
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lo1d8"]
 radius = 0.35
 height = 1.75
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uxa2c"]
+size = Vector3(30, 1, 50)
 
 [node name="Final" type="Node3D" unique_id=354453976]
 script = ExtResource("91_final")
@@ -247,9 +255,9 @@ light_energy = 1.1
 omni_range = 4.5
 omni_attenuation = 1.6
 
-[node name="Label3D" type="Label3D" parent="." unique_id=372252127]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.055578, 0)
-pixel_size = 0.02
+[node name="agradecimientos" type="Label3D" parent="." unique_id=372252127]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.899146, 0)
+pixel_size = 0.015
 text = "¡GRACIAS POR JUGAR!
 ♡
 Un juego creado por:
@@ -257,3 +265,125 @@ Luna Cubillos
 Brayan Fonseca
 Juan Bonilla"
 script = ExtResource("9_awkn3")
+
+[node name="Techo" type="Node3D" parent="." unique_id=439855720]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1059837, -10.810226)
+script = ExtResource("12_572a1")
+
+[node name="techogood" parent="Techo" unique_id=131154542 instance=ExtResource("14_3fwds")]
+transform = Transform3D(32.41547, 0, 0, 0, 10.684694, 0, 0, 0, 96.43021, 0.09213257, 7.5989714, 20.369574)
+
+[node name="techogood2" parent="Techo" unique_id=485470783 instance=ExtResource("14_3fwds")]
+transform = Transform3D(32.41547, 0, 0, 0, 10.684694, 0, 0, 0, 98.52311, 0.09213257, 7.5989714, 26.0413)
+
+[node name="techogood4" parent="Techo" unique_id=51326451 instance=ExtResource("14_3fwds")]
+transform = Transform3D(32.41547, 0, 0, 0, 10.684694, 0, 0, 0, 98.52311, 0.09213257, 7.5989714, 14.653758)
+
+[node name="techogood5" parent="Techo" unique_id=1501168450 instance=ExtResource("14_3fwds")]
+transform = Transform3D(32.41547, 0, 0, 0, 10.684694, 0, 0, 0, 98.52311, 0.09213257, 6.6622458, 8.82837)
+
+[node name="techogood3" parent="Techo" unique_id=1659012151 instance=ExtResource("14_3fwds")]
+transform = Transform3D(32.41547, 0, 0, 0, 10.684694, 0, 0, 0, 66.58239, 0.09213257, 7.327508, 30.526583)
+
+[node name="techogood6" parent="Techo" unique_id=56186739 instance=ExtResource("14_3fwds")]
+transform = Transform3D(32.41547, 0, 0, 0, 10.684694, 0, 0, 0, 66.58239, 0.09213257, 5.5790157, 3.1746292)
+
+[node name="techogood7" parent="Techo" unique_id=1900744571 instance=ExtResource("14_3fwds")]
+transform = Transform3D(32.41547, 0, 0, 0, 10.684694, 0, 0, 0, 66.58239, 0.09213257, 5.5790157, 35.614994)
+
+[node name="Arco_0" type="Node3D" parent="Techo" unique_id=445096590]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 5.35)
+
+[node name="techo" parent="Techo/Arco_0" unique_id=1519838565 instance=ExtResource("13_m4l06")]
+transform = Transform3D(29.766241, 0, 0, 0, 7.427978, 0, 0, 0, 4.14336, 0.021804107, 3.4836771, 0.0030349963)
+
+[node name="Arco_1" type="Node3D" parent="Techo" unique_id=515395343]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 11)
+
+[node name="techo" parent="Techo/Arco_1" unique_id=1706510471 instance=ExtResource("13_m4l06")]
+transform = Transform3D(29.766241, 0, 0, 0, 7.427978, 0, 0, 0, 4.14336, 0.021804107, 3.4836771, 0.0030349963)
+
+[node name="Arco_2" type="Node3D" parent="Techo" unique_id=647867661]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 17)
+
+[node name="techo" parent="Techo/Arco_2" unique_id=61318304 instance=ExtResource("13_m4l06")]
+transform = Transform3D(29.766241, 0, 0, 0, 7.427978, 0, 0, 0, 4.14336, 0.021804107, 3.4836771, 0.0030349963)
+
+[node name="Arco_3" type="Node3D" parent="Techo" unique_id=238935002]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 23)
+
+[node name="techo" parent="Techo/Arco_3" unique_id=229338208 instance=ExtResource("13_m4l06")]
+transform = Transform3D(29.766241, 0, 0, 0, 7.427978, 0, 0, 0, 4.14336, 0.021804107, 3.4836771, 0.0030349963)
+
+[node name="Arco_4" type="Node3D" parent="Techo" unique_id=37897644]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 29)
+
+[node name="techo" parent="Techo/Arco_4" unique_id=1195310344 instance=ExtResource("13_m4l06")]
+transform = Transform3D(29.766241, 0, 0, 0, 7.427978, 0, 0, 0, 4.14336, 0.021804107, 3.4836771, 0.0030349963)
+
+[node name="Arco_5" type="Node3D" parent="Techo" unique_id=1006693274]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 34.65)
+
+[node name="techo" parent="Techo/Arco_5" unique_id=909380087 instance=ExtResource("13_m4l06")]
+transform = Transform3D(29.766241, 0, 0, 0, 7.427978, 0, 0, 0, 28.06614, 0.021804107, 2.03203, -1.5529175)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Techo" unique_id=1739159232]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.804844, 20.322342)
+shape = SubResource("BoxShape3D_uxa2c")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1004003771]
+
+[node name="libro_mesa" parent="Node3D" unique_id=79160262 instance=ExtResource("15_m4l06")]
+transform = Transform3D(1.363235, 0, 0, 0, 1.363235, 0, 0, 0, 1.363235, -4.807782, 1.1490992, 1.0424304)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Node3D/libro_mesa" unique_id=877031427]
+transform = Transform3D(0.73354924, 0, 0, 0, 0.73354924, 0, 0, 0, 0.73354924, 0, 0.44211334, 0)
+light_color = Color(1, 0.92156863, 0, 1)
+light_energy = 7.0
+
+[node name="libro_mesa2" parent="Node3D" unique_id=386926858 instance=ExtResource("15_m4l06")]
+transform = Transform3D(1.363235, 0, 0, 0, 1.363235, 0, 0, 0, 1.363235, 5.540247, 1.1490992, 1.0424304)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Node3D/libro_mesa2" unique_id=988048922]
+transform = Transform3D(0.73354924, 0, 0, 0, 0.73354924, 0, 0, 0, 0.73354924, 0, 0.5427354, 0)
+light_color = Color(1, 0.92156863, 0, 1)
+light_energy = 7.0
+
+[node name="libro_mesa3" parent="Node3D" unique_id=122075173 instance=ExtResource("15_m4l06")]
+transform = Transform3D(-1.363235, 0, -1.1917779e-07, 0, 1.363235, 0, 1.1917779e-07, 0, -1.363235, -4.807782, 1.1490992, 16.298443)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Node3D/libro_mesa3" unique_id=26682222]
+transform = Transform3D(0.73354924, 0, 0, 0, 0.73354924, 0, 0, 0, 0.73354924, 0, 0.3687138, 0)
+light_color = Color(1, 0.92156863, 0, 1)
+light_energy = 7.0
+
+[node name="libro_mesa4" parent="Node3D" unique_id=1949393083 instance=ExtResource("15_m4l06")]
+transform = Transform3D(-1.363235, 0, -1.1917779e-07, 0, 1.363235, 0, 1.1917779e-07, 0, -1.363235, 5.540247, 1.1490992, 16.298443)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Node3D/libro_mesa4" unique_id=1949910048]
+transform = Transform3D(0.73354924, 0, 0, 0, 0.73354924, 0, 0, 0, 0.73354924, 0, 0.49061817, 0)
+light_color = Color(1, 0.92156863, 0, 1)
+light_energy = 7.0
+
+[node name="candelabros" type="Node3D" parent="." unique_id=638067464]
+
+[node name="Meshy_AI_Gothic_Ceiling_Chande_1109160622_texture6" parent="candelabros" unique_id=265790618 instance=ExtResource("16_3fwds")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.27661473, 5.1633744, 17.136248)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="candelabros/Meshy_AI_Gothic_Ceiling_Chande_1109160622_texture6" unique_id=908458275]
+light_color = Color(1, 1, 0.52156866, 1)
+light_energy = 10.0
+
+[node name="Meshy_AI_Gothic_Ceiling_Chande_1109160622_texture7" parent="candelabros" unique_id=24328436 instance=ExtResource("16_3fwds")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.27661473, 5.1633744, 9.990946)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="candelabros/Meshy_AI_Gothic_Ceiling_Chande_1109160622_texture7" unique_id=1070874109]
+light_color = Color(1, 1, 0.52156866, 1)
+light_energy = 10.0
+
+[node name="Meshy_AI_Gothic_Ceiling_Chande_1109160622_texture8" parent="candelabros" unique_id=1280716809 instance=ExtResource("16_3fwds")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.27661473, 5.1633744, 0.8253641)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="candelabros/Meshy_AI_Gothic_Ceiling_Chande_1109160622_texture8" unique_id=1284608797]
+light_color = Color(1, 1, 0.52156866, 1)
+light_energy = 10.0
