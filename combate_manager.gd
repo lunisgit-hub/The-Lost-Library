@@ -84,10 +84,17 @@ var enfurecido := false
 var azar := RandomNumberGenerator.new()   # tiempos del enemigo: distintos en cada partida
 var ultimo_patron := ""
 
+var cam_combate: Camera3D
+var cam_anterior: Camera3D
+
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	azar.randomize()
+	cam_combate = Camera3D.new()
+	cam_combate.name = "CamaraCombate"
+	cam_combate.process_mode = Node.PROCESS_MODE_ALWAYS
+	add_child(cam_combate)
 	for clave in SONIDOS:
 		var st := load(SONIDOS[clave]) as AudioStream
 		if st == null:
@@ -154,14 +161,12 @@ func iniciar(e: EnemigoCombate) -> void:
 	trivia.enemigo = turno
 	get_tree().paused = true
 	enemigo.en_combate(true)
-	var anim_e := enemigo.find_child("AnimationPlayer", true, false) as AnimationPlayer
-	if anim_e != null:
-		anim_e.process_mode = Node.PROCESS_MODE_ALWAYS
-		anim_e.play("Walking", -1, 0.35) # Respira/camina lento en guardia
+	var anim_cab := enemigo.find_child("AnimationPlayer", true, false) as AnimationPlayer
+	if anim_cab != null:
+		anim_cab.process_mode = Node.PROCESS_MODE_ALWAYS
+		anim_cab.play("Walking", -1, 0.35) # Respira/camina lento en guardia
 	hud.abrir(e.nombre)
-	var cam := get_viewport().get_camera_3d()
-	if cam and cam.has_method("enfocar_combate"):
-		cam.call("enfocar_combate", e.get_node_or_null(e.punto))
+	_activar_camara_combate(e.get_node_or_null(e.punto) as Node3D)
 	_preparar_animaciones(e)
 	_refrescar()
 	print("combate: empieza contra ", e.nombre, " (", turno.vida, " HP)")
@@ -201,15 +206,61 @@ func _cerrar() -> void:
 	Engine.time_scale = 1.0
 	_quitar_vineta()
 	_soltar_animaciones()
-	var cam := get_viewport().get_camera_3d()
-	if cam and cam.has_method("soltar_combate"):
-		cam.call("soltar_combate")
+	_desactivar_camara_combate()
 	enemigo.en_combate(false)
 	await hud.cerrar()
 	var partida := get_tree().get_first_node_in_group("partida")
 	# Si la partida terminó (ganó o perdió), ella maneja la pausa y el reinicio.
 	if partida == null or partida.estado == partida.Estado.JUGANDO:
 		get_tree().paused = false
+
+
+# ------------------------------------------------------------- cámara de combate
+
+func _activar_camara_combate(objetivo: Node3D) -> void:
+	# Hacer que Velam y el enemigo se miren de frente (sin inclinarse arriba/abajo)
+	var pos_enemigo_plana := Vector3(objetivo.global_position.x, pj.global_position.y, objetivo.global_position.z)
+	if pj.global_position.distance_to(pos_enemigo_plana) > 0.05:
+		pj.look_at(pos_enemigo_plana, Vector3.UP)
+
+	var pos_pj_plana := Vector3(pj.global_position.x, objetivo.global_position.y, pj.global_position.z)
+	if objetivo.global_position.distance_to(pos_pj_plana) > 0.05:
+		objetivo.look_at(pos_pj_plana, Vector3.UP)
+	if pj == null or objetivo == null:
+		return
+	cam_anterior = get_viewport().get_camera_3d()
+	if cam_anterior != null and cam_anterior != cam_combate:
+		cam_combate.global_transform = cam_anterior.global_transform
+		cam_combate.fov = cam_anterior.fov
+	cam_combate.current = true
+
+	var dir_hacia_pj := pj.global_position - objetivo.global_position
+	dir_hacia_pj.y = 0.0
+	if dir_hacia_pj.length() < 0.01:
+		dir_hacia_pj = Vector3.BACK
+	dir_hacia_pj = dir_hacia_pj.normalized()
+
+	var derecha := Vector3.UP.cross(dir_hacia_pj).normalized()
+
+	# Encuadre estilo Expedition 33: sobre el hombro derecho, bajo y cercano
+	var pos_final := pj.global_position \
+		+ (dir_hacia_pj * 2.2) \
+		+ (derecha * 0.95) \
+		+ Vector3(0, 1.35, 0)
+
+	var mira := objetivo.global_position + Vector3(0, 1.25, 0)
+	var transform_final := Transform3D(Basis(), pos_final).looking_at(mira, Vector3.UP)
+
+	var tw := create_tween().set_parallel(true)
+	tw.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tw.tween_property(cam_combate, "fov", 50.0, 0.45).set_trans(Tween.TRANS_SINE)
+	tw.tween_property(cam_combate, "global_transform", transform_final, 0.45).set_trans(Tween.TRANS_SINE)
+
+
+func _desactivar_camara_combate() -> void:
+	if is_instance_valid(cam_anterior):
+		cam_anterior.current = true
+	cam_anterior = null
 
 
 # ------------------------------------------------------------- turno de Velam
@@ -343,12 +394,6 @@ func _turno_enemigo() -> void:
 
 
 # ------------------------------------------------------------- ataques y parry
-# Estilo Expedition 33: cada ataque es un patrón al azar (golpe rápido, normal,
-# retrasado con amago, combo de 2-3 golpes, furia del jefe). Cada golpe del
-# combo se para por separado y el momento exacto NO se muestra en pantalla:
-# hay que leer al enemigo (se echa atrás, tiembla y embiste). Presionar antes
-# de tiempo cuenta como fallo, para que no se pueda spamear.
-# Parar todos los golpes de un ataque da +1 Tinta; si era un combo, además un contraataque.
 
 const PATRONES_NIVEL = [
 	{"rapido": 30, "normal": 40, "retrasado": 15, "doble": 15},
@@ -370,7 +415,6 @@ func _r(a: float, b: float) -> float:
 	return azar.randf_range(a, b)
 
 
-# Devuelve la lista de golpes del ataque: {espera (s hasta el impacto), amago, mult}
 func _elegir_patron(fuerte: bool) -> Array:
 	var a := maxf(turno.ritmo, aviso_min)
 	if fuerte:
@@ -382,7 +426,7 @@ func _elegir_patron(fuerte: bool) -> Array:
 	var pesos: Dictionary = PATRONES_NIVEL[_nivel_enemigo()].duplicate()
 	if enfurecido:
 		pesos["furia"] = 30
-	pesos.erase(ultimo_patron)              # nunca el mismo patrón dos veces seguidas
+	pesos.erase(ultimo_patron)
 	var total := 0
 	for k in pesos:
 		total += pesos[k]
@@ -466,10 +510,6 @@ func _ataque_enemigo(fuerte: bool) -> void:
 		await _esperar(pausa_mensaje * 0.6)
 
 
-# Un golpe: el enemigo se prepara durante «espera» segundos y el impacto cae en
-# el centro de la ventana. Se juzga con la hora de la tecla (parry_ms), así un
-# tirón de FPS no convierte un parry a tiempo en uno tarde.
-# Devuelve 0 = te pegó, 1 = parry, 2 = esquiva.
 func _parry_golpe(espera: float, amago: bool, ventana: float, danio: int, i: int, total: int) -> int:
 	fase = Fase.PARRY
 	parry_presionado = false
@@ -490,7 +530,7 @@ func _parry_golpe(espera: float, amago: bool, ventana: float, danio: int, i: int
 		var v := ventana_esquiva if esquiva_presionada else ventana
 		if parry_presionado:
 			var tp_ := (parry_ms - inicio) / 1000.0
-			if tp_ >= espera - v * 0.5 or t >= espera:   # a tiempo, o muy pronto: el golpe cae igual
+			if tp_ >= espera - v * 0.5 or t >= espera:
 				break
 		if t >= espera + maxf(ventana, ventana_esquiva) * 0.5:
 			break
@@ -545,7 +585,6 @@ func _sonar(clave: String) -> void:
 		a.play()
 
 
-# Velam se hace a un lado y vuelve.
 func _esquivar_visual() -> void:
 	var m := pj.get_node_or_null("Heroe") as Node3D
 	if m == null or not is_instance_valid(cuerpo_e):
@@ -575,10 +614,6 @@ func _contraataque(golpes: int) -> void:
 	await _esperar(pausa_mensaje)
 
 
-# Lo que se ve antes del golpe. Caballero: su animación Charged_Slash ajustada
-# para que el tajo caiga justo en el impacto (con amago: se congela en alto).
-# Libros/jefe sin animación: se echan atrás, tiemblan y embisten; con amago
-# hacen una embestida falsa, se quedan quietos... y atacan.
 func _telegrafiar(espera: float, amago: bool) -> void:
 	var ap := _anim_caballero()
 	if ap != null:
@@ -614,7 +649,7 @@ func _telegrafiar(espera: float, amago: bool) -> void:
 		tw2.tween_interval(maxf(prep * 0.7 - 0.37, 0.0))
 	else:
 		tw2.tween_property(cuerpo_e, "position", base_e + atras + arriba, prep * 0.7)
-		for k in 4:   # temblor corto antes de embestir
+		for k in 4:
 			tw2.tween_property(cuerpo_e, "position:y", base_e.y + arriba.y + (0.04 if k % 2 == 0 else -0.04), prep * 0.075)
 
 
@@ -634,7 +669,6 @@ func _impacto_enemigo() -> void:
 	_embestida_enemigo()
 
 
-# Libros/jefe flotan entre ataques; mientras atacan, se quita el flote.
 func _flotar(si: bool) -> void:
 	if anim_e != null or not is_instance_valid(cuerpo_e) or _anim_caballero() != null:
 		return
@@ -650,15 +684,12 @@ func _flotar(si: bool) -> void:
 
 
 func _velam_cayo() -> void:
-	# salud.gd reproduce la muerte (personaje.morir) y después hace reaparecer a
-	# Velam (si le quedan reapariciones) o llama a partida.perder("sin vida").
 	sin_idle.append(anim_pj)
 	hud.mensaje("Velam cae…", hud.c_error)
 	var partida := get_tree().get_first_node_in_group("partida")
 	while salud and salud.vida <= 0 and (partida == null or partida.estado == partida.Estado.JUGANDO):
 		await get_tree().process_frame
 	if salud and salud.vida > 0:
-		# Reapareció: el enemigo se recompone (como en Expedition 33).
 		turno.vida = vida_max_enemigo
 		enemigo.enfriado = true
 		hud.mensaje("Velam vuelve a levantarse", hud.c_sabiduria)
@@ -686,7 +717,7 @@ func _dilema() -> void:
 	hud.mostrar_dilema(enemigo.nombre, enemigo.lore, HABILIDADES[h].nombre)
 	var op: String = await hud.dilema_elegido
 	var clave := enemigo.clave()
-	var repetido := tomos.has(clave)          # ya decidido en un intento anterior
+	var repetido := tomos.has(clave)
 	if op == "leer":
 		if not repetido:
 			Lectura.bono += 1.0
@@ -735,31 +766,6 @@ func _refrescar() -> void:
 
 func _esperar(s: float) -> void:
 	await get_tree().create_timer(s, true, false, true).timeout
-	
-	
-	
-	# Variables para recordar dónde estaba la cámara antes del combate
-var _cam_largo_orig := 4.5
-var _cam_rot_x_orig := -15.0
-
-func _enfocar_camara_combate(activar: bool) -> void:
-	if pj == null:
-		return
-	var brazo := pj.get_node_or_null("BrazoCamara") as SpringArm3D
-	if brazo == null:
-		return
-	var tw := create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	if activar:
-		_cam_largo_orig = brazo.spring_length
-		_cam_rot_x_orig = brazo.rotation_degrees.x
-		# Zoom estilo Expedition 33: más cerca y a la altura del hombro
-		tw.tween_property(brazo, "spring_length", 2.6, 0.45)
-		tw.parallel().tween_property(brazo, "rotation_degrees:x", -8.0, 0.45)
-	else:
-		tw.tween_property(brazo, "spring_length", _cam_largo_orig, 0.4)
-		tw.parallel().tween_property(brazo, "rotation_degrees:x", _cam_rot_x_orig, 0.4)
-
-
 
 
 func _preparar_animaciones(e: EnemigoCombate) -> void:
@@ -868,10 +874,24 @@ func _enemigo_cae() -> void:
 		tw.parallel().tween_property(cuerpo_e, "rotation_degrees:z", cuerpo_e.rotation_degrees.z + 80.0, 0.5)
 
 
-
 func _camara(metodo: String, valor: float) -> void:
 	var cam := get_viewport().get_camera_3d()
-	if cam and cam.has_method(metodo):
+	if cam == null:
+		return
+	if cam == cam_combate:
+		if metodo == "sacudir":
+			var tw := create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+			for i in 4:
+				tw.tween_property(cam_combate, "h_offset", randf_range(-valor, valor) * 0.4, 0.04)
+				tw.parallel().tween_property(cam_combate, "v_offset", randf_range(-valor, valor) * 0.4, 0.04)
+			tw.tween_property(cam_combate, "h_offset", 0.0, 0.05)
+			tw.parallel().tween_property(cam_combate, "v_offset", 0.0, 0.05)
+		elif metodo == "golpe_fov":
+			var tw := create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+			tw.tween_property(cam_combate, "fov", 50.0 - valor, 0.08).set_trans(Tween.TRANS_QUAD)
+			tw.tween_property(cam_combate, "fov", 50.0, 0.22).set_trans(Tween.TRANS_SINE)
+		return
+	if cam.has_method(metodo):
 		cam.call(metodo, valor)
 
 
@@ -888,7 +908,6 @@ func _destello(color: Color) -> void:
 	var tw := create_tween()
 	tw.tween_property(rect, "modulate:a", 0.0, 0.25)
 	tw.tween_callback(capa.queue_free)
-
 
 
 func _caja_visual(n: Node) -> AABB:
@@ -1039,7 +1058,6 @@ func _entrada(subtitulo: String, encabezado := "¡ENCUENTRO!", color := Color(0,
 	tw.tween_property(banda, "position:x", tam.x, 0.3).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
 	tw.tween_callback(capa.queue_free)
 	await tw.finished
-
 
 
 func _enfurecer() -> void:

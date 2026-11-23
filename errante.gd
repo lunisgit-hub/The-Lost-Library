@@ -79,8 +79,8 @@ func _physics_process(delta: float) -> void:
 			pass
 		elif Vector2(velocity.x, velocity.z).length() > 0.1:
 			var anim_usar := "Running" if (estado_actual in [Estado.PERSEGUIR, Estado.HUIR] and anim.has_animation("Running")) else "Walking"
-			if anim.current_animation != anim_usar:
-				anim.play(anim_usar)
+			if anim.current_animation != anim_usar or anim.get_playing_speed() == 0.0:
+				anim.play(anim_usar, -1, 1.0)
 		elif anim.current_animation in ["Walking", "Running"]:
 			anim.play("Walking", -1, 0.0)
 

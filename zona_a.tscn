@@ -51,7 +51,7 @@
 [ext_resource type="PackedScene" path="res://hud_trivia.tscn" id="44_trivia"]
 [ext_resource type="Script" uid="uid://hikg2st0bjcs" path="res://hud_combate.gd" id="45_hudcomb"]
 [ext_resource type="Script" uid="uid://d2oc7cwtpawe4" path="res://enemigo_combate.gd" id="46_enemigo"]
-[ext_resource type="PackedScene" path="res://personaje/heroe.tscn" id="90_heroe"]
+[ext_resource type="PackedScene" uid="uid://dpl87g27knomp" path="res://personaje/heroe.tscn" id="90_heroe"]
 
 [sub_resource type="ProceduralSkyMaterial" id="CieloMat"]
 sky_top_color = Color(0.03, 0.04, 0.09, 1)
@@ -1158,7 +1158,7 @@ semilla = 52
 [node name="S1_ArcoSalida" type="Node3D" parent="Nivel_ZonaA/Props" unique_id=602162812]
 
 [node name="puerta" parent="Nivel_ZonaA/Props/S1_ArcoSalida" unique_id=647745928 instance=ExtResource("12_arch")]
-transform = Transform3D(4.867501, 0, 0, 0, 4.867501, 0, 0, 0, 4.867501, 0, 2.3184783, -0.0023777247)
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -0.554554, 2.303838, -0.038579203)
 
 [node name="Disparador" type="Area3D" parent="Nivel_ZonaA/Props/S1_ArcoSalida/puerta" unique_id=1134812464]
 transform = Transform3D(0.2054442, 0, 0, 0, 0.2054442, 0, 0, 0, 0.2054442, -0.404818, -0.476318, 2.5056403)
@@ -1198,6 +1198,7 @@ omni_range = 3.15
 
 [node name="E2_LibroCorrupto" parent="Nivel_ZonaA/Enemigos" unique_id=705784812 instance=ExtResource("1_57wwi")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -1, 0, 10)
+ruta = Array[Vector3]([Vector3(0, 0, 0), Vector3(10, 0, 0)])
 metadata/hp = 50
 
 [node name="Combate" type="Node" parent="Nivel_ZonaA/Enemigos/E2_LibroCorrupto" unique_id=780771787]
@@ -1525,6 +1526,30 @@ transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -4.7277746, 0.6467391, 36.212
 
 [node name="pasto5" parent="Nivel_ZonaA/Baldosas" unique_id=1710964668 instance=ExtResource("18_inamy")]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -4.7277746, 0.6467391, 41.411404)
+
+[node name="pasto9" parent="Nivel_ZonaA/Baldosas" unique_id=2020277103 instance=ExtResource("18_inamy")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -11.605168, 0.39087784, 2.777235)
+
+[node name="pasto10" parent="Nivel_ZonaA/Baldosas" unique_id=91803561 instance=ExtResource("18_inamy")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -11.605168, 0.39087784, -2.107462)
+
+[node name="pasto11" parent="Nivel_ZonaA/Baldosas" unique_id=1968134079 instance=ExtResource("18_inamy")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -5.507904, 0.39087784, -2.3971634)
+
+[node name="pasto13" parent="Nivel_ZonaA/Baldosas" unique_id=1392423326 instance=ExtResource("18_inamy")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 11.236932, 0.39087784, 0.38708305)
+
+[node name="pasto14" parent="Nivel_ZonaA/Baldosas" unique_id=1273657056 instance=ExtResource("18_inamy")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 11.236932, 0.39087784, -1.7652187)
+
+[node name="pasto15" parent="Nivel_ZonaA/Baldosas" unique_id=904244129 instance=ExtResource("18_inamy")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 4.3378716, 0.39087784, 1.1969166)
+
+[node name="pasto16" parent="Nivel_ZonaA/Baldosas" unique_id=1721800089 instance=ExtResource("18_inamy")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 4.3378716, 0.39087784, -1.7065563)
+
+[node name="pasto12" parent="Nivel_ZonaA/Baldosas" unique_id=1780364309 instance=ExtResource("18_inamy")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -5.507904, 0.39087784, 1.8358002)
 
 [node name="pasto6" parent="Nivel_ZonaA/Baldosas" unique_id=2114379883 instance=ExtResource("18_inamy")]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -10.320747, 0.6467391, 41.411404)
@@ -2086,7 +2111,7 @@ velocidad = 8.0
 semilla = 50
 
 [node name="Modelo" parent="Luces/Luminarias/Brasero_E2_izq" unique_id=1019377936 instance=ExtResource("30_bras")]
-transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0.45, 0)
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 1.6127651, -1.8357601)
 
 [node name="Brasero_E2_der" type="Node3D" parent="Luces/Luminarias" unique_id=319430313]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2, 0, 9.6)
@@ -2102,7 +2127,7 @@ velocidad = 8.0
 semilla = 51
 
 [node name="Modelo" parent="Luces/Luminarias/Brasero_E2_der" unique_id=447314684 instance=ExtResource("30_bras")]
-transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0.45, 0)
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0.8118088, -1.2579126)
 
 [node name="Luna" type="Node3D" parent="Luces" unique_id=253716302]
 
@@ -2298,6 +2323,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.425, -0.5, 5.4)
 
 [node name="muro" parent="Estructura/Muro_salida_izq_1" unique_id=461733051 instance=ExtResource("20_em801")]
 transform = Transform3D(6.295738, 0, 0, 0, 6.2854214, 0, 0, 0, 2.879438, 0, 2.996933, -0.0014051603)
+
+[node name="muro2" parent="Estructura/Muro_salida_izq_1" unique_id=546873544 instance=ExtResource("20_em801")]
+transform = Transform3D(4, 0, 0, 0, 3.993, 0, 0, 0, 1.829, 4.51095, 2.121079, -9.150599)
 
 [node name="Muro_salida_der_0" type="Node3D" parent="Estructura" unique_id=1180973242]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.425, -0.5, 5.4)

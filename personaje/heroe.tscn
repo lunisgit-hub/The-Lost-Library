@@ -1,10 +1,10 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dpl87g27knomp"]
 
-[ext_resource type="Script" path="res://heroe.gd" id="1_heroe"]
-[ext_resource type="PackedScene" path="res://assets/caminar.glb" id="2_malla"]
+[ext_resource type="Script" uid="uid://d0aqaa5hip3hx" path="res://heroe.gd" id="1_heroe"]
+[ext_resource type="PackedScene" uid="uid://behtkmifgx44v" path="res://assets/caminar.glb" id="2_malla"]
 
-[node name="Heroe" type="Node3D"]
+[node name="Heroe" type="Node3D" unique_id=192517628]
 script = ExtResource("1_heroe")
 
-[node name="Malla" parent="." instance=ExtResource("2_malla")]
+[node name="Malla" parent="." unique_id=545977177 instance=ExtResource("2_malla")]
 transform = Transform3D(-1.05, 0, 0, 0, 1.05, 0, 0, 0, -1.05, 0, 0, 0)

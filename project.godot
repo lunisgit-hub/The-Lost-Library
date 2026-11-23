@@ -20,6 +20,11 @@ config/icon="res://icon.svg"
 Musica="*res://musica.gd"
 Transicion="*res://transicion.gd"
 
+[display]
+
+window/size/mode=3
+window/stretch/mode="canvas_items"
+
 [input]
 
 move_left={
