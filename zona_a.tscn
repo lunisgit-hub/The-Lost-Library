@@ -1208,7 +1208,7 @@ habilidad = "escudo"
 lore = "Un tratado de astronomía manchado de violeta: alguien tachó las estrellas una por una."
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Nivel_ZonaA/Enemigos/E2_LibroCorrupto" unique_id=1527449816]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.1894867, 0.8737321, 0.3369577)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.015212253, 0.8737321, 0.3369577)
 light_color = Color(0.73128664, 0.22244859, 0.99999994, 1)
 light_energy = 16.0
 omni_range = 6.0
