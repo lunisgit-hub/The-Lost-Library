@@ -1190,6 +1190,12 @@ ritmo = 1.2
 lore = "Un herbario olvidado: sus hojas aún recuerdan qué plantas respiraban la tinta de los lectores."
 punto = NodePath("../monster")
 
+[node name="OmniLight3D" type="OmniLight3D" parent="Nivel_ZonaA/Enemigos/E1_LibroDebil" unique_id=1066679991]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.011341, 1.2020802, 0.21562386)
+light_color = Color(0.73128664, 0.22244859, 0.99999994, 1)
+light_energy = 7.0
+omni_range = 3.15
+
 [node name="E2_LibroCorrupto" parent="Nivel_ZonaA/Enemigos" unique_id=705784812 instance=ExtResource("1_57wwi")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -1, 0, 10)
 metadata/hp = 50
@@ -1200,6 +1206,12 @@ vida = 50
 semilla = 7
 habilidad = "escudo"
 lore = "Un tratado de astronomía manchado de violeta: alguien tachó las estrellas una por una."
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Nivel_ZonaA/Enemigos/E2_LibroCorrupto" unique_id=1527449816]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.1894867, 0.8737321, 0.3369577)
+light_color = Color(0.73128664, 0.22244859, 0.99999994, 1)
+light_energy = 16.0
+omni_range = 6.0
 
 [node name="E3_GuardianTinta" type="Node3D" parent="Nivel_ZonaA/Enemigos" unique_id=1969751778]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
@@ -1220,6 +1232,12 @@ ritmo = 0.85
 habilidad = "llama"
 lore = "El diario del último bibliotecario: «Si alguien llega hasta aquí, que no queme lo que no entiende»."
 punto = NodePath("../monster")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Nivel_ZonaA/Enemigos/E3_GuardianTinta" unique_id=1286370576]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18948668, 1.4814472, 0.06866789)
+light_color = Color(0.73128664, 0.22244859, 0.99999994, 1)
+light_energy = 16.0
+omni_range = 3.15
 
 [node name="Suelo" type="StaticBody3D" parent="Nivel_ZonaA" unique_id=1048279986]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 14)
